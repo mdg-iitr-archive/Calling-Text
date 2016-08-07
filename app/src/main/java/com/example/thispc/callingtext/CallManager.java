@@ -4,8 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
@@ -16,10 +22,13 @@ public class CallManager extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
         Log.e("pulkit", "in received");
+        String caller="7248187747";
+        String receiver="7248187747";
+        BackGroundWorker b=new BackGroundWorker(context,1);
+        b.execute(caller,receiver);
         PackageManager pm = context.getPackageManager();
-        Intent launchIntent = pm.getLaunchIntentForPackage("com.example.thispc.calling_app");
+        Intent launchIntent = pm.getLaunchIntentForPackage("com.example.thispc.callingtext");
         launchIntent.putExtra("some_data", "value");
         context.startActivity(launchIntent);
-        Toast.makeText(context, "received", Toast.LENGTH_SHORT).show();
     }
 }
