@@ -23,6 +23,7 @@ import java.net.URLEncoder;
 public class BackGroundWorker extends AsyncTask<String,Void,String> {
     private Context context;
     AlertDialog a;
+    String caller,receiver,msg;
     int n1;
     public BackGroundWorker(Context context1,int n) {
         context = context1;n1=n;
@@ -32,14 +33,19 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
         HttpURLConnection h=null;
         String postdata=null;
         BufferedWriter br=null;
-        String caller = params[0];
-        String receiver = params[1];
         URL url= null;
         try {
             if(n1!=1)
+            {
                 url = new URL("http://pulkit123.coolpage.biz/saveMsg.php");
+                caller = params[0];}
             else
+            {
                 url=new URL("http://pulkit123.coolpage.biz/sendMsg.php");
+               caller = params[0];
+              receiver = params[1];
+               msg= params[2];
+            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -61,6 +67,8 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
             br =new BufferedWriter(new OutputStreamWriter(wr,"UTF-8"));
             if(n1!=1)
             postdata= URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8");
+            else
+            postdata=URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8")+"="+URLEncoder.encode(receiver,"UTF-8")+"&"+URLEncoder.encode("msg", "UTF-8")+"="+URLEncoder.encode(msg,"UTF-8");
             br.write(postdata);
             br.flush();
             br.close();
@@ -78,8 +86,6 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return  null;
     }
 

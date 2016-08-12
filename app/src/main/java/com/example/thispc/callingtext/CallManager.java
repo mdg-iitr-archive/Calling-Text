@@ -25,7 +25,7 @@ public class CallManager extends BroadcastReceiver {
         String caller="7248187747";
         String receiver="7248187747";
         BackGroundWorker b=new BackGroundWorker(context,1);
-        b.execute(caller,receiver);
+        b.execute(caller);
         PackageManager pm = context.getPackageManager();
         Intent launchIntent = pm.getLaunchIntentForPackage("com.example.thispc.callingtext");
         launchIntent.putExtra("some_data", "value");
