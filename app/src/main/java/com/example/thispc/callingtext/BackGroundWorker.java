@@ -16,17 +16,22 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Observable;
 
 /**
  * Created by this pc on 08-08-2016.
  */
 public class BackGroundWorker extends AsyncTask<String,Void,String> {
     private Context context;
-    AlertDialog a;
     String caller,receiver,msg;
     int n1;
+    CallManager cm;
+    result r;
     public BackGroundWorker(Context context1,int n) {
         context = context1;n1=n;
+        r=new result();
+        cm=new CallManager();
+        r.addObserver(cm);
     }
     @Override
     protected String doInBackground(String... params) {
@@ -91,17 +96,29 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        a.setMessage(result);
-        a.show();
+     r.call(result);
     }
 
     @Override
     protected void onPreExecute() {
-        a=new AlertDialog.Builder(context).create();
+
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
+    }
+}
+class result extends Observable
+{
+    String s1;
+    public void call(String s)
+    {
+        this.s1=s;
+        setChanged();
+        notifyObservers(s);
+    }
+    public synchronized String getContent() {
+        return s1;
     }
 }
