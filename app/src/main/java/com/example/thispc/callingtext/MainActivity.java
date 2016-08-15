@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Iterator;
@@ -28,11 +29,13 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 private final int REQUEST_CODE=1;
+    EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        editText=(EditText)findViewById(R.id.editText2);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -69,6 +72,23 @@ public void OK(View v)
             super.onBackPressed();
         }
     }
+    public void call(View v)
+    {
+        if(editText.getText().toString()!=null)
+        {
+            call(editText.getText().toString());
+        }else
+            Toast.makeText(getApplicationContext(),"Please Enter Number",Toast.LENGTH_SHORT).show();
+    }
+    private void call(String s) {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:"+s));
+        try{
+        startActivity(callIntent);}
+        catch (android.content.ActivityNotFoundException ex){
+            Toast.makeText(getApplicationContext(),"yourActivity is not founded",Toast.LENGTH_SHORT).show();}
+
+    }
    /* @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent intent) {
@@ -94,25 +114,6 @@ public void OK(View v)
     };*/
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
-      /*  if (data != null) {
-            Uri uri = data.getData();
-            if (uri != null) {
-                Cursor c = null;
-                try {
-                    c = getContentResolver().query(uri, new String[] { BaseColumns._ID },
-                            null, null, null);
-                    if (c != null && c.moveToFirst()) {
-                        Log.e("pulkit", "ZZZ number");
-                        int id = c.getInt(0);
-
-                        Toast.makeText(this,id+" ", Toast.LENGTH_LONG).show();
-
-                    }
-                } finally {
-                    if (c != null) {
-                        c.close();
-                    }
-                }}}*/
       super.onActivityResult(reqCode, resultCode, data);
         switch (reqCode) {
             case (REQUEST_CODE) :
