@@ -18,6 +18,11 @@ TextView t;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         t=(TextView)findViewById(R.id.textView2);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle.getString("msg")!= null)
+        {
+            t.setText(bundle.getString("msg"));
+        }
     }
     public void Next(View v)
     {

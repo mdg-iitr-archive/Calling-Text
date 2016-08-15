@@ -40,10 +40,11 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
         BufferedWriter br=null;
         URL url= null;
         try {
-            if(n1!=1)
+            if(n1==1)
             {
                 url = new URL("http://pulkit123.coolpage.biz/saveMsg.php");
-                caller = params[0];}
+                caller = params[0];
+            receiver=params[1];}
             else
             {
                 url=new URL("http://pulkit123.coolpage.biz/sendMsg.php");
@@ -70,8 +71,8 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
         try {
             wr = h.getOutputStream();
             br =new BufferedWriter(new OutputStreamWriter(wr,"UTF-8"));
-            if(n1!=1)
-            postdata= URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8");
+            if(n1==1)
+            postdata= URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8");
             else
             postdata=URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8")+"="+URLEncoder.encode(receiver,"UTF-8")+"&"+URLEncoder.encode("msg", "UTF-8")+"="+URLEncoder.encode(msg,"UTF-8");
             br.write(postdata);

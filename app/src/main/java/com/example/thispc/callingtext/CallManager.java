@@ -33,7 +33,7 @@ public class CallManager extends BroadcastReceiver implements Observer{
         String receiver="7248187747";
         if(haveNetworkConnection()==true){
         BackGroundWorker b=new BackGroundWorker(context,1);
-        b.execute(caller);}
+        b.execute(caller,receiver);}
     }
     @Override
     public void update(Observable observable, Object data) {
