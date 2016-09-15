@@ -10,6 +10,7 @@ import android.graphics.PixelFormat;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -35,17 +36,26 @@ public class CallManager extends BroadcastReceiver implements Observer{
         Log.e("pulkit", "in received");
         String caller="724818774";
         String receiver="724818774";
-     if(haveNetworkConnection()==true){
-      BackGroundWorker b=new BackGroundWorker(context,1);
-      b.execute(caller,receiver);
+        String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+        if(state.equals(TelephonyManager.EXTRA_STATE_RINGING))
+        {
+            caller=intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            caller=caller.substring(caller.length()-11);
+            if(haveNetworkConnection()==true){
+                BackGroundWorker b=new BackGroundWorker(context,1);
+                b.execute(caller,receiver);
+            }
+        }
+        else
+        if(haveNetworkConnection()==true){
+        BackGroundWorker b=new BackGroundWorker(context,1);
+        b.execute(caller,receiver);
         }
     }
    @Override
     public void update(Observable observable, Object data) {
        if(((result)observable).getContent()!=null)
         {
-          /*Intent i = new Intent(context1,CustomDialogBox.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
          Intent intentone = new Intent(context1.getApplicationContext(), CustomDialogBox.class);
             intentone.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             CallManager.msg=((result)observable).getContent();

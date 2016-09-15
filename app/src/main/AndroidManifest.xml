@@ -36,6 +36,7 @@
             android:enabled="true">
             <intent-filter android:priority="-1">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
 
