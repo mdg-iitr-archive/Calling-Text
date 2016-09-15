@@ -44,12 +44,12 @@ public class CallManager extends BroadcastReceiver implements Observer{
     public void update(Observable observable, Object data) {
        if(((result)observable).getContent()!=null)
         {
-          Intent i = new Intent(context1,CustomDialogBox.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-           /* Intent intentone = new Intent(context1.getApplicationContext(), CustomDialogBox.class);
-            intentone.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);*/
+          /*Intent i = new Intent(context1,CustomDialogBox.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
+         Intent intentone = new Intent(context1.getApplicationContext(), CustomDialogBox.class);
+            intentone.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             CallManager.msg=((result)observable).getContent();
-            context1.startActivity(i);
+            context1.startActivity(intentone);
         }
     }
   private boolean haveNetworkConnection() {
