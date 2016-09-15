@@ -23,10 +23,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
+
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageButton;
+import pl.droidsonroids.gif.GifImageView;
+import pl.droidsonroids.gif.GifTextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +42,8 @@ private final int REQUEST_CODE=1;
     EditText editText2;
     String yourNumber;
     String receiver;
+    GifImageView img;
+    public static String gifNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +61,7 @@ private final int REQUEST_CODE=1;
                         .setAction("Action", null).show();
             }
         });
-
+        img =(GifImageView)findViewById(R.id.imageView3);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -69,6 +78,11 @@ public void OK(View v)
     intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
     startActivityForResult(intent, REQUEST_CODE);
 }
+    public void custom(View v)
+    {
+        Intent ic =new Intent(MainActivity.this,CustomDialogBox.class);
+        startActivity(ic);
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -93,7 +107,7 @@ public void OK(View v)
         try{
         startActivity(callIntent);}
         catch (android.content.ActivityNotFoundException ex){
-            Toast.makeText(getApplicationContext(),"yourActivity is not founded",Toast.LENGTH_SHORT).show();}
+            Toast.makeText(getApplicationContext(),"yourActivity is not found",Toast.LENGTH_SHORT).show();}
 
     }
     public void send(View v)
@@ -102,11 +116,84 @@ public void OK(View v)
             if(editText2.getText().toString()!=null)
             {
                 BackGroundWorker b=new BackGroundWorker(this,2);
-                b.execute(yourNumber,receiver,editText2.getText().toString());
+                b.execute(yourNumber,editText1.getText().toString(),editText2.getText().toString(),gifNumber);
             }else
                 Toast.makeText(getApplicationContext(),"please type message",Toast.LENGTH_SHORT).show();
            }else
             Toast.makeText(getApplicationContext(),"you have no internet connection",Toast.LENGTH_SHORT).show();
+    }
+    public void gif(View v)
+    {
+        Intent i=new Intent(MainActivity.this,GifActivity.class);
+        startActivityForResult(i, 0);
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0) {
+            Log.e("pul", "pul");
+            switch (MainActivity.gifNumber) {
+                case "1":
+                    img.setImageResource(R.drawable.birthday);
+                    break;
+                case "2":
+                    img.setImageResource(R.drawable.confused);
+                    break;
+                case "3":
+                    img.setImageResource(R.drawable.funny);
+                    break;
+                case "4":
+                    img.setImageResource(R.drawable.embares);
+                    break;
+                case "5":
+                    img.setImageResource(R.drawable.angry);
+                    break;
+                case "6":
+                    img.setImageResource(R.drawable.machau);
+                    break;
+                case "7":
+                    img.setImageResource(R.drawable.sorry);
+                    break;
+                case "8":
+                    img.setImageResource(R.drawable.hii);
+                    break;
+                case "9":
+                    img.setImageResource(R.drawable.hello);
+                    break;
+                case "10":
+                    img.setImageResource(R.drawable.love);
+                    break;
+                case "11":
+                    img.setImageResource(R.drawable.compliment);
+                    break;
+                case "12":
+                    img.setImageResource(R.drawable.happy);
+                    break;
+                case "13":
+                    img.setImageResource(R.drawable.sad);
+                    break;
+                case "14":
+                    img.setImageResource(R.drawable.crying);
+                    break;
+                case "15":
+
+                    break;
+                case "16":
+
+                    break;
+                case "17":
+
+                    break;
+                case "18":
+
+                    break;
+                case "19":
+
+                    break;
+                case "20":
+
+                    break;
+
+            }
+        }
     }
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;
@@ -123,52 +210,6 @@ public void OK(View v)
                     haveConnectedMobile = true;
         }
         return haveConnectedWifi || haveConnectedMobile;
-    }
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent intent) {
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                Uri uri = intent.getData();
-                String[] projection = { ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME };
-
-                Cursor cursor = getContentResolver().query(uri, projection,
-                        null, null, null);
-                cursor.moveToFirst();
-
-                int numberColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                String number = cursor.getString(numberColumnIndex);
-
-                int nameColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-                String name = cursor.getString(nameColumnIndex);
-
-                Log.e( "pulkit","ZZZ number : "+ number + " , name : " + name);
-
-            }
-        }
-    };*/
-    @Override
-    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-      super.onActivityResult(reqCode, resultCode, data);
-        switch (reqCode) {
-            case (REQUEST_CODE) :
-                if (resultCode == Activity.RESULT_OK) {
-                    Log.e("pulkit", "ZZZ number");
-                    Uri contactData = data.getData();
-                    Log.e("pulkit", contactData.toString());
-                   Cursor c =  managedQuery(contactData, null, null, null, null);
-                    startManagingCursor(c);
-                    Log.e("pulkit", c.moveToFirst()+"");
-                    if (c.moveToFirst()) {
-                        Log.e("pulkit", "ZZZ number");
-                        String name = c.getString(c.getColumnIndexOrThrow(Contacts.People.NAME));
-                        String number = c.getString(c.getColumnIndexOrThrow(Contacts.People.NUMBER));
-                        Log.e( "pulkit","ZZZ number : "+ number + " , name : " + name);
-                        Toast.makeText(this,  name + " has number " + number, Toast.LENGTH_LONG).show();
-                    }
-                }
-                break;
-        }
 
     }
     @Override

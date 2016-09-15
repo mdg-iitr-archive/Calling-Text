@@ -1,5 +1,6 @@
 package com.example.thispc.callingtext;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +14,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.Observable;
@@ -23,29 +26,33 @@ import java.util.Observer;
  * Created by this pc on 04-08-2016.
  */
 public class CallManager extends BroadcastReceiver implements Observer{
-    Context context1;
+    public static Context context1;
+    public static String msg;
     @Override
     public void onReceive(Context context, Intent intent) {
-        Bundle bundle = intent.getExtras();
         context1=context;
+        Log.e("pul","in receive");
         Log.e("pulkit", "in received");
-        String caller="7248187747";
-        String receiver="7248187747";
-        if(haveNetworkConnection()==true){
-        BackGroundWorker b=new BackGroundWorker(context,1);
-        b.execute(caller,receiver);}
+        String caller="724818774";
+        String receiver="724818774";
+     if(haveNetworkConnection()==true){
+      BackGroundWorker b=new BackGroundWorker(context,1);
+      b.execute(caller,receiver);
+        }
     }
-    @Override
+   @Override
     public void update(Observable observable, Object data) {
        if(((result)observable).getContent()!=null)
         {
-            PackageManager pm = context1.getPackageManager();
-            Intent launchIntent = pm.getLaunchIntentForPackage("com.example.thispc.callingtext");
-            launchIntent.putExtra("msg", ((result)observable).getContent());
-            context1.startActivity(launchIntent);
+          Intent i = new Intent(context1,CustomDialogBox.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+           /* Intent intentone = new Intent(context1.getApplicationContext(), CustomDialogBox.class);
+            intentone.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);*/
+            CallManager.msg=((result)observable).getContent();
+            context1.startActivity(i);
         }
     }
-    private boolean haveNetworkConnection() {
+  private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;
         boolean haveConnectedMobile = false;
 

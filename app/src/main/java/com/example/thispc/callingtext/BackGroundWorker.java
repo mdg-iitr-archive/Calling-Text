@@ -3,6 +3,7 @@ package com.example.thispc.callingtext;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,13 +24,13 @@ import java.util.Observable;
  */
 public class BackGroundWorker extends AsyncTask<String,Void,String> {
     private Context context;
-    String caller,receiver,msg;
+    String caller,receiver,msg,gifID;
     int n1;
     CallManager cm;
     result r;
     public BackGroundWorker(Context context1,int n) {
         context = context1;n1=n;
-        r=new result();
+       r=new result();
         cm=new CallManager();
         r.addObserver(cm);
     }
@@ -42,15 +43,16 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
         try {
             if(n1==1)
             {
-                url = new URL("http://pulkit123.coolpage.biz/saveMsg.php");
+                url = new URL("http://pulkit123.coolpage.biz/sendMsg.php");
                 caller = params[0];
-            receiver=params[1];}
+                receiver=params[1];}
             else
             {
-                url=new URL("http://pulkit123.coolpage.biz/sendMsg.php");
+                url=new URL("http://pulkit123.coolpage.biz/saveMsg1.php");
                caller = params[0];
               receiver = params[1];
                msg= params[2];
+                gifID=params[3];
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -72,7 +74,7 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
             wr = h.getOutputStream();
             br =new BufferedWriter(new OutputStreamWriter(wr,"UTF-8"));
             if(n1==1)
-            postdata= URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8");
+            postdata= URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8")+"="+URLEncoder.encode(receiver,"UTF-8");
             else
             postdata=URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8")+"="+URLEncoder.encode(receiver,"UTF-8")+"&"+URLEncoder.encode("msg", "UTF-8")+"="+URLEncoder.encode(msg,"UTF-8");
             br.write(postdata);
@@ -97,7 +99,7 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-     r.call(result);
+    r.call(result);
     }
 
     @Override
