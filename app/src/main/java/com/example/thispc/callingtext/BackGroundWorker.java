@@ -29,8 +29,9 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
     CallManager cm;
     result r;
     public BackGroundWorker(Context context1,int n) {
-        context = context1;n1=n;
-       r=new result();
+        context = context1;
+        n1=n;
+        r=new result();
         cm=new CallManager();
         r.addObserver(cm);
     }
@@ -76,7 +77,7 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
             if(n1==1)
             postdata= URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8")+"="+URLEncoder.encode(receiver,"UTF-8");
             else
-            postdata=URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8")+"="+URLEncoder.encode(receiver,"UTF-8")+"&"+URLEncoder.encode("msg", "UTF-8")+"="+URLEncoder.encode(msg,"UTF-8");
+            postdata=URLEncoder.encode("caller", "UTF-8")+"="+URLEncoder.encode(caller,"UTF-8")+"&"+URLEncoder.encode("receiver", "UTF-8")+"="+URLEncoder.encode(receiver,"UTF-8")+"&"+URLEncoder.encode("msg", "UTF-8")+"="+URLEncoder.encode(msg,"UTF-8")+"&"+URLEncoder.encode("gifID","UTF-8")+"="+URLEncoder.encode(gifID,"UTF-8");
             br.write(postdata);
             br.flush();
             br.close();
@@ -99,7 +100,10 @@ public class BackGroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-    r.call(result);
+        if(n1==1)
+        r.call(result);
+        else
+            Toast.makeText(context,result,Toast.LENGTH_LONG).show();
     }
 
     @Override

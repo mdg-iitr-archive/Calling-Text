@@ -34,8 +34,8 @@ public class CallManager extends BroadcastReceiver implements Observer{
         context1=context;
         Log.e("pul","in receive");
         Log.e("pulkit", "in received");
-        String caller="724818774";
-        String receiver="724818774";
+        String caller="7248187747";
+        String receiver="7248187747";
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
         if(state.equals(TelephonyManager.EXTRA_STATE_RINGING))
         {
