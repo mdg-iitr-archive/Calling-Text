@@ -97,9 +97,8 @@ public class CustomDialogBox extends AppCompatActivity {
           }
       t.setText((CallManager.msg).substring(0,CallManager.msg.lastIndexOf(" ")));
     }
-    public void Next(View v)
+    public void ok(View v)
     {
-        Intent i=new Intent(CustomDialogBox.this,MainActivity.class);
-        startActivity(i);
+        finish();
     }
 }
