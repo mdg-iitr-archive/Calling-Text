@@ -53,14 +53,6 @@ private final int REQUEST_CODE=1;
         editText2=(EditText)findViewById(R.id.editText);
         setSupportActionBar(toolbar);
         yourNumber="7248187747";
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         img =(GifImageView)findViewById(R.id.imageView3);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

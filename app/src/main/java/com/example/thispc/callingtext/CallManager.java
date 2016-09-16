@@ -36,16 +36,17 @@ public class CallManager extends BroadcastReceiver implements Observer{
         Log.e("pulkit", "in received");
         String caller="7248187747";
         String receiver="7248187747";
-        String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-        if(state.equals(TelephonyManager.EXTRA_STATE_RINGING))
-        {
-            caller=intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-            caller=caller.substring(caller.length()-11);
-            if(haveNetworkConnection()==true){
-                BackGroundWorker b=new BackGroundWorker(context,1);
-                b.execute(caller,receiver);
+      String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+          if(state!=null) {
+          if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
+            caller = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            caller = caller.substring(caller.length() - 11);
+            if (haveNetworkConnection() == true) {
+                BackGroundWorker b = new BackGroundWorker(context, 1);
+                b.execute(caller, receiver);
             }
         }
+    }
         else
         if(haveNetworkConnection()==true){
         BackGroundWorker b=new BackGroundWorker(context,1);
