@@ -23,9 +23,6 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by this pc on 04-08-2016.
- */
 public class CallManager extends BroadcastReceiver implements Observer{
     public static Context context1;
     public static String msg;

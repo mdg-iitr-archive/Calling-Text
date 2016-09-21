@@ -278,7 +278,7 @@
     <pl.droidsonroids.gif.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/birthday"
+        android:background="@drawable/worried"
         android:id="@+id/view15"
         android:layout_above="@+id/imageButton19"
         android:layout_alignLeft="@+id/imageButton15"
@@ -296,7 +296,7 @@
     <pl.droidsonroids.gif.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/birthday"
+        android:background="@drawable/praying"
         android:id="@+id/view16"
         android:layout_above="@+id/imageButton19"
         android:layout_toRightOf="@+id/imageButton15"
@@ -314,7 +314,7 @@
     <pl.droidsonroids.gif.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/birthday"
+        android:background="@drawable/smoking"
         android:id="@+id/view17"
         android:layout_below="@+id/imageButton13"
         android:layout_toLeftOf="@+id/imageButton14"
@@ -368,7 +368,7 @@
     <pl.droidsonroids.gif.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/birthday"
+        android:background="@drawable/envy"
         android:id="@+id/view21"
         android:layout_below="@+id/imageButton16"
         android:layout_toRightOf="@+id/imageButton15"
