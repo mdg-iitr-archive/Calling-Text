@@ -7,24 +7,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ListAdapter;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by this pc on 21-09-2016.
- */
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListViewHolder> {
-    public static List<String>  contactList=new ArrayList<>();
+    public static List<ArrayList>  contactList=new ArrayList<>();
     Activity parentAct;
-
-    public ContactListAdapter(List<String> contactList, Activity activity){
+    ImageButton b1;
+    public ContactListAdapter(List<ArrayList> contactList, Activity activity){
         this.contactList = contactList;
-        parentAct = activity;
-        Log.e("pulkit","in constructor");
+        parentAct=activity;
     }
 
     @Override
@@ -32,15 +27,23 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         View itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.contact_card, parent, false);
-
         return new ListViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder (ContactListAdapter.ListViewHolder holder, final int position) {
-        Log.e("pulkit","in bind ");
-        holder.name.setText(contactList.get(position));
+        holder.name.setText((String) contactList.get(position).get(0));
+        holder.phoneNumber.setText((String) contactList.get(position).get(1));
+        holder.textsmsLogo.setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View v) {
+               /*ContactList.button1.startAnimation(
+                        AnimationUtils.loadAnimation(parentAct, R.anim.rotation) );*/
+                Intent intent = new Intent(parentAct, MainActivity.class);
+                intent.putExtra("number",(String)contactList.get(position).get(1));
+                parentAct.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -50,9 +53,13 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected TextView name;
+        protected TextView phoneNumber;
+        protected ImageButton textsmsLogo;
         public ListViewHolder(View vi) {
             super(vi);
             name = (TextView) vi.findViewById(R.id.textView6);
+            phoneNumber=(TextView) vi.findViewById(R.id.textView7);
+            textsmsLogo=(ImageButton) vi.findViewById(R.id.imageButton21);
             vi.setOnClickListener(this);
         }
 
@@ -61,7 +68,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
         }
     }
-    public List<String> getContactList() {
+    public List<ArrayList> getContactList() {
         return contactList;
     }
 

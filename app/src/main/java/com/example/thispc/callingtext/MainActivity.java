@@ -10,8 +10,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -30,58 +28,33 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import pl.droidsonroids.gif.GifImageView;
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>
+public class MainActivity extends AppCompatActivity
 {
-    public static RecyclerView recList;
     private final int REQUEST_CODE = 1;
     EditText editText1;
     EditText editText2;
     String yourNumber;
     String receiver;
-   GifImageView img;
+    GifImageView img;
     TextView t1;
     public static String gifNumber;
     private static final int CONTACTS_LOADER_ID = 1;
     private WindowManager windowManager;
-    private ImageView chatHead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
         editText1 = (EditText) findViewById(R.id.editText2);
         editText2 = (EditText) findViewById(R.id.editText);
      //   t1 = (TextView) findViewById(R.id.textView5);
         yourNumber = "7248187747";
        img = (GifImageView) findViewById(R.id.imageView3);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-       // getSupportLoaderManager().initLoader(1, null, this);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        recList = (RecyclerView) findViewById(R.id.questionList_recycler);
-        addToList();
-         //navigationView.setNavigationItemSelectedListener(this);
-      /*  windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-
-        chatHead = new ImageView(this);
-        chatHead.setImageResource(R.drawable.birthday);
-
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                PixelFormat.TRANSLUCENT);
-
-        params.gravity = Gravity.TOP | Gravity.LEFT;
-        params.x = 0;
-        params.y = 100;
-
-        windowManager.addView(chatHead, params);*/
+       // NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
+//       editText1.setText((getIntent().getExtras().getString("number")));
     }
 
     public void OK(View v) {
@@ -121,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         startActivity(callIntent);}
         catch (android.content.ActivityNotFoundException ex){
             Toast.makeText(getApplicationContext(),"yourActivity is not found",Toast.LENGTH_SHORT).show();}
-       // readContacts();
-
     }
 
     public void send(View v) {
@@ -269,59 +240,5 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri CONTENT_URI = ContactsContract.RawContacts.CONTENT_URI;
-        Log.e("pul","in loader");
-        return new CursorLoader(this, CONTENT_URI, null, null, null, null);
-
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        Log.e("pul","in loadFinished");
-        Log.e("pul",cursor.getCount()+" ");
-        cursor.moveToFirst();
-        StringBuilder res = new StringBuilder();
-        while (!cursor.isAfterLast()) {
-            Log.e("pul","in while");
-            res.append("\n" + cursor.getString(21) + "-" + cursor.getString(22));
-
-            cursor.moveToNext();
-        }
-       // t1.setText(res);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
-    private List<String> createList() {
-        List<String> result=new ArrayList<String>();
-        result.add("pulkit");
-        result.add("piyush");
-        result.add("palash");
-        result.add("pramit");
-        result.add("pulkit");
-        result.add("pulkit");
-        result.add("pulkit");
-        result.add("pulkit");
-        result.add("pulkit");
-        result.add("pulkit");
-        result.add("pulkit");
-        result.add("pulkit");
-        result.add("pulkit");
-        return result;
-    }
-    public void addToList(){
-        Log.e("pulkit","pulkit");
-        recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recList.setLayoutManager(llm);
-        ContactListAdapter ca = new ContactListAdapter(createList(),this);
-        recList.setAdapter(ca);
     }
 }

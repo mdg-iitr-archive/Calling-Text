@@ -74,9 +74,9 @@
         android:textColor="#ffffff"
         android:id="@+id/button3"
         android:onClick="send"
-        android:layout_below="@+id/editText2"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_marginTop="71dp"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -88,8 +88,9 @@
         android:textStyle="bold"
         android:onClick="call"
         android:layout_below="@+id/editText2"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_toStartOf="@+id/button2" />
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignStart="@+id/button3"
+        android:layout_marginTop="41dp" />
 
 
     <pl.droidsonroids.gif.GifImageView
@@ -102,14 +103,5 @@
         android:layout_alignTop="@+id/textView3"
         android:layout_alignRight="@+id/button2"
         android:layout_alignEnd="@+id/button2" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/questionList_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#0BAA65"
-        android:overScrollMode="always"
-        android:padding="5dp"
-        android:layout_below="@+id/button3">
-    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
