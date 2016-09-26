@@ -1,8 +1,9 @@
 package com.example.thispc.callingtext;
 
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.v4.content.Loader;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -36,7 +39,10 @@ public class MainActivity extends AppCompatActivity
     String yourNumber;
     String receiver;
     GifImageView img;
+    FragmentManager fragmentManager;
     TextView t1;
+    GIF fragment;
+    View view;
     public static String gifNumber;
     private static final int CONTACTS_LOADER_ID = 1;
     private WindowManager windowManager;
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+         view = findViewById(R.id.my_layout);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
         editText1 = (EditText) findViewById(R.id.editText2);
@@ -55,6 +62,38 @@ public class MainActivity extends AppCompatActivity
        // NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 //       editText1.setText((getIntent().getExtras().getString("number")));
+        view.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view,MotionEvent event) {
+
+
+                Log.e("pul","pul");
+                if ( event.getAction () == MotionEvent.ACTION_UP )
+                {
+                    //and only is the ListFragment shown.
+                    if (fragment.isVisible())
+                    {
+                        // create a rect for storing the fragment window rect
+                        Rect r = new Rect ( 0, 0, 0, 0 );
+
+                        fragment.getView().getHitRect(r);
+                        // check if the event position is inside the window rect
+                        boolean intersects = r.contains ( (int) event.getX (), (int) event.getY () );
+                        // if the event is not inside then we can close the fragment
+
+                            FragmentTransaction fragmentTransaction;
+                            fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.remove(fragment).commit();
+                            Log.e("pulkit","pul");
+                            // notify that we consumed this event
+                            return true;
+                    }
+                }
+                //let the system handle the event
+              return onTouchEvent ( event );
+            }
+        });
     }
 
     public void OK(View v) {
@@ -109,8 +148,42 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void gif(View v) {
-        Intent i = new Intent(MainActivity.this, GifActivity.class);
-        startActivityForResult(i, 0);
+       /* Intent i = new Intent(MainActivity.this, GifActivity.class);
+        startActivityForResult(i, 0);*/
+        fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+         fragment = new GIF();
+        fragmentTransaction.add(R.id.bottom, fragment);
+        fragmentTransaction.commit();
+
+    }
+    @Override
+    public boolean onTouchEvent ( MotionEvent event )
+    {
+        Log.e("pul","pul");
+        if ( event.getAction () == MotionEvent.ACTION_UP )
+        {
+            //and only is the ListFragment shown.
+            if (fragment.isVisible())
+            {
+                // create a rect for storing the fragment window rect
+                Rect r = new Rect ( 0, 0, 0, 0 );
+
+                fragment.getView().getHitRect(r);
+                // check if the event position is inside the window rect
+                boolean intersects = r.contains ( (int) event.getX (), (int) event.getY () );
+                // if the event is not inside then we can close the fragment
+                if ( !intersects ) {
+                    FragmentTransaction fragmentTransaction;
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.remove(fragment).commit();
+                    // notify that we consumed this event
+                    return true;
+                }
+            }
+        }
+        //let the system handle the event
+        return super.onTouchEvent ( event );
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

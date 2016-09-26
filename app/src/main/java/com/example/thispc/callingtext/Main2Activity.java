@@ -25,7 +25,7 @@ public class Main2Activity extends TabActivity implements TabHost.OnTabChangeLis
 
         TabHost.TabSpec spec;
         Intent intent;
-        intent = new Intent().setClass(this, GifActivity.class);
+        intent = new Intent().setClass(this, History.class);
         spec = tabHost.newTabSpec("History").setIndicator("History")
                 .setContent(intent);
         tabHost.addTab(spec);
@@ -76,9 +76,9 @@ public class Main2Activity extends TabActivity implements TabHost.OnTabChangeLis
         Log.i("tabs", "CurrentTab: "+tabHost.getCurrentTab());
 
         if(tabHost.getCurrentTab()==0)
-            tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(0x0000FF00);
+            tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab());
         else if(tabHost.getCurrentTab()==1)
-            tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(0x0000FF00);
+            tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab());
         else if(tabHost.getCurrentTab()==2)
             tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(0x0000FF00);
 

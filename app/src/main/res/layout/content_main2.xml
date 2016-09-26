@@ -19,7 +19,6 @@
     android:background="#0BAA65"
     android:layout_below="@+id/text1"
     >
-
     <LinearLayout
 
         android:orientation="vertical"

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -25,6 +26,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,6 +34,11 @@ import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
+import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 public class ContactList extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -41,12 +48,12 @@ public class ContactList extends AppCompatActivity implements LoaderManager.Load
     public static ImageButton button1;
     EditText et1;
     List<ArrayList> result;
+    WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
         button1=(ImageButton)findViewById(R.id.imageButton21);
-      button=(Button)findViewById(R.id.button5);
         et1=(EditText) findViewById(R.id.editText3);
         et1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,10 +81,35 @@ public class ContactList extends AppCompatActivity implements LoaderManager.Load
 
         // getSupportLoaderManager().initLoader(1, null, this);
         recList = (RecyclerView) findViewById(R.id.questionList_recycler);
+        VerticalRecyclerViewFastScroller fastScroller = (VerticalRecyclerViewFastScroller)findViewById(R.id.fast_scroller);
+
+        // Connect the recycler to the scroller (to let the scroller scroll the list)
+        fastScroller.setRecyclerView(recList);
+
+        // Connect the scroller to the recycler (to let the recycler scroll the scroller's handle)
+        recList.setOnScrollListener(fastScroller.getOnScrollListener());
         addToList();
+        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout)findViewById(R.id.main_swipe);
+        mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
+            @Override public void onRefresh() {
+                // Do work to refresh the list here.
+                new Task().execute();
+            }
+        });
     }
+    private class Task extends AsyncTask<Void, Void, String[]> {
 
+        @Override
+        protected String[] doInBackground(Void... params) {
+            return new String[0];
+        }
 
+        @Override protected void onPostExecute(String[] result) {
+            // Call setRefreshing(false) when the list has been refreshed.
+            mWaveSwipeRefreshLayout.setRefreshing(false);
+            super.onPostExecute(result);
+        }
+    }
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Uri CONTENT_URI = ContactsContract.RawContacts.CONTENT_URI;
@@ -152,16 +184,11 @@ public class ContactList extends AppCompatActivity implements LoaderManager.Load
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
         ContactListAdapter ca = new ContactListAdapter(createList(),this);
-        recList.setAdapter(ca);
-    }
-    public void newcontact(View v)
-    {
-        button.startAnimation(
-                AnimationUtils.loadAnimation(ContactList.this, R.anim.rotation) );
-        Intent intent = new Intent(ContactList.this, MainActivity.class);
-      intent.putExtra("number","");
-        startActivity(intent);
-
+        ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(ca);
+        alphaAdapter.setInterpolator(new OvershootInterpolator());
+        alphaAdapter.setDuration(1000);
+        alphaAdapter.setFirstOnly(false);
+        recList.setAdapter(alphaAdapter);
     }
     public  void searchTtem(String s)
     {

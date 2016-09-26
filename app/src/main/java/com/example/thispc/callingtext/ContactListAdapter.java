@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,6 +18,9 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public static List<ArrayList>  contactList=new ArrayList<>();
     Activity parentAct;
     ImageButton b1;
+    View itemView;
+    ContactListAdapter.ListViewHolder h1;
+    private int lastPosition = -1;
     public ContactListAdapter(List<ArrayList> contactList, Activity activity){
         this.contactList = contactList;
         parentAct=activity;
@@ -24,7 +28,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     @Override
     public ContactListAdapter.ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.
+        itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.contact_card, parent, false);
         return new ListViewHolder(itemView);
@@ -32,22 +36,37 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     @Override
     public void onBindViewHolder (ContactListAdapter.ListViewHolder holder, final int position) {
+        h1=holder;
         holder.name.setText((String) contactList.get(position).get(0));
         holder.phoneNumber.setText((String) contactList.get(position).get(1));
         holder.textsmsLogo.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-               /*ContactList.button1.startAnimation(
-                        AnimationUtils.loadAnimation(parentAct, R.anim.rotation) );*/
+                h1.textsmsLogo.startAnimation(
+                        AnimationUtils.loadAnimation(parentAct, R.anim.rotation) );
                 Intent intent = new Intent(parentAct, MainActivity.class);
                 intent.putExtra("number",(String)contactList.get(position).get(1));
                 parentAct.startActivity(intent);
             }
         });
+        for (int i = 0; i < getItemCount(); i++) {
+
+            //animate(itemView, i);
+
+        }
+    }
+    private void animate(final View view, final int position){
+
+        view.animate();
+        view.setTranslationY(100);
+        view.setAlpha(0);
+        view.animate().alpha(1.0f).translationY(0).setDuration(300).setStartDelay(position * 100);
+
     }
 
     @Override
     public int getItemCount() {
+
         return contactList.size();
     }
 
@@ -65,7 +84,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
         @Override
         public void onClick(View v) {
-
+            Animation animation = AnimationUtils.loadAnimation(parentAct, R.anim.swipe);
+            v.startAnimation(animation);
         }
     }
     public List<ArrayList> getContactList() {
