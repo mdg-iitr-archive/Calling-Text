@@ -22,7 +22,6 @@ public class Main2Activity extends TabActivity implements TabHost.OnTabChangeLis
       setContentView(R.layout.activity_main2);
         tabHost = getTabHost();
         tabHost.setOnTabChangedListener(this);
-
         TabHost.TabSpec spec;
         Intent intent;
         intent = new Intent().setClass(this, History.class);
