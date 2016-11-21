@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.thispc.callingtext.ContactList"
     android:background="#ffffff">
-    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+ <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_swipe">
@@ -23,16 +23,15 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="34dp">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="34dp" />
     </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
-    <xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
+   <!-- <xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
         android:id="@+id/fast_scroller"
         android:layout_width="10dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         recyclerviewfastscroller:rfs_backgroundColor="#0BAA65"
-        />
+        />-->
 
     <EditText
             android:layout_width="wrap_content"

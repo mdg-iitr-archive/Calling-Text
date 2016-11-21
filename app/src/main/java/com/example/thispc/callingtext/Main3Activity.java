@@ -1,47 +1,47 @@
 package com.example.thispc.callingtext;
 
 import android.app.ActionBar;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.net.Uri;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
-import android.widget.TextView;
+import android.widget.Toast;
 
-public class Main2Activity extends FragmentActivity implements ActionBar.TabListener {
+public class Main3Activity extends FragmentActivity implements ActionBar.TabListener {
+
     TabHost tabHost;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
-    private String[] tabs = {"History", "Contacts", "New"};
-
+    FragmentManager fragmentManager;
+    GIF fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_main2);
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+       /* actionBar.setHomeButtonEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);*/
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        //tabLayout.setTabTextColors();
+             tabLayout.setupWithViewPager(viewPager);
         // Adding Tabs
-        for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
-                    .setTabListener(this));
        /* tabHost = getTabHost();
         tabHost.setOnTabChangedListener(this);
+
         TabHost.TabSpec spec;
         Intent intent;
         intent = new Intent().setClass(this, History.class);
@@ -67,7 +67,31 @@ public class Main2Activity extends FragmentActivity implements ActionBar.TabList
         tabHost.getTabWidget().setCurrentTab(0);
         tabHost.getTabWidget().getChildAt(0);*/
         }
+    public void call(View v) {
+        Toast.makeText(Main3Activity.this,"message",Toast.LENGTH_LONG).show();
+        /*if (editText1.getText().toString() != null) {
+            //receiver=editText1.getText().toString();
+            call(editText1.getText().toString());
+        } else
+            Toast.makeText(getActivity(), "Please Enter Number", Toast.LENGTH_SHORT).show();*/
+    }
+    private void call(String s) {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + s));
+        try{
+            startActivity(callIntent);}
+        catch (android.content.ActivityNotFoundException ex){
+            Toast.makeText(Main3Activity.this,"yourActivity is not found",Toast.LENGTH_SHORT).show();}
+    }
+    public void gif(View v) {
+        Log.e("p","in gif");
+        fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = new GIF();
+        fragmentTransaction.add(fragment,null);
+        fragmentTransaction.commit();
 
+    }
     /*@Override
     public void onTabChanged(String tabId) {
         for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
@@ -103,7 +127,6 @@ public class Main2Activity extends FragmentActivity implements ActionBar.TabList
             tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(0x0000FF00);
 
     }*/
-    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {

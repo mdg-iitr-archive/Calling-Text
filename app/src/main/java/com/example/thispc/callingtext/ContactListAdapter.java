@@ -14,28 +14,27 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
-public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListViewHolder> {
-    public static List<ArrayList>  contactList=new ArrayList<>();
-    Activity parentAct;
-    ImageButton b1;
-    View itemView;
-    ContactListAdapter.ListViewHolder h1;
+class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListViewHolder> {
+    private List<ArrayList> contactList;
+    private Activity parentAct;
+    private ContactListAdapter.ListViewHolder h1;
     private int lastPosition = -1;
-    public ContactListAdapter(List<ArrayList> contactList, Activity activity){
-        this.contactList = contactList;
+    ContactListAdapter(List<ArrayList> contactList1, Activity activity){
+        Log.e("pil","in adapter");
+        contactList = contactList1;
         parentAct=activity;
     }
 
     @Override
     public ContactListAdapter.ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        itemView = LayoutInflater.
-                from(parent.getContext()).
-                inflate(R.layout.contact_card, parent, false);
+        Log.e("pil","in adapter");
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_card, parent, false);
         return new ListViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder (ContactListAdapter.ListViewHolder holder, final int position) {
+        Log.e("pil","in adapter");
         h1=holder;
         holder.name.setText((String) contactList.get(position).get(0));
         holder.phoneNumber.setText((String) contactList.get(position).get(1));
@@ -66,7 +65,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     @Override
     public int getItemCount() {
-
+        Log.d("itemCount",contactList.size()+"");
         return contactList.size();
     }
 
@@ -76,6 +75,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         protected ImageButton textsmsLogo;
         public ListViewHolder(View vi) {
             super(vi);
+            Log.e("pil","in adapter");
             name = (TextView) vi.findViewById(R.id.textView6);
             phoneNumber=(TextView) vi.findViewById(R.id.textView7);
             textsmsLogo=(ImageButton) vi.findViewById(R.id.imageButton21);

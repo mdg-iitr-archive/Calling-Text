@@ -374,7 +374,8 @@
         android:text="OK"
         android:onClick="finish"
         android:id="@+id/button2"
-        android:layout_below="@+id/imageButton18"
-        android:layout_centerHorizontal="true" />
+        android:background="#000000"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/view14" />
 
 </RelativeLayout>
