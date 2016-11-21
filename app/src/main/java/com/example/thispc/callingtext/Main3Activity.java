@@ -38,34 +38,6 @@ public class Main3Activity extends FragmentActivity implements ActionBar.TabList
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         //tabLayout.setTabTextColors();
              tabLayout.setupWithViewPager(viewPager);
-        // Adding Tabs
-       /* tabHost = getTabHost();
-        tabHost.setOnTabChangedListener(this);
-
-        TabHost.TabSpec spec;
-        Intent intent;
-        intent = new Intent().setClass(this, History.class);
-        spec = tabHost.newTabSpec("History").setIndicator("History")
-                .setContent(intent);
-        tabHost.addTab(spec);
-        intent = new Intent().setClass(this, ContactList.class);
-        spec = tabHost.newTabSpec("Contacts").setIndicator("Contacts")
-                .setContent(intent);
-        tabHost.addTab(spec);
-        intent = new Intent().setClass(this, MainActivity.class);
-        spec = tabHost.newTabSpec("New").setIndicator("New")
-                .setContent(intent);
-        tabHost.addTab(spec);
-        tabHost.getTabWidget().getChildAt(1);
-        TextView tv = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(android.R.id.title); //Unselected Tabs
-        tv.setTextSize(17);
-        tv.setTextColor(Color.parseColor("#ffffff"));
-        tabHost.getTabWidget().getChildAt(2);
-        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(2).findViewById(android.R.id.title); //Unselected Tabs
-        tv.setTextSize(17);
-        tv.setTextColor(Color.parseColor("#ffffff"));
-        tabHost.getTabWidget().setCurrentTab(0);
-        tabHost.getTabWidget().getChildAt(0);*/
         }
     public void call(View v) {
         Toast.makeText(Main3Activity.this,"message",Toast.LENGTH_LONG).show();
