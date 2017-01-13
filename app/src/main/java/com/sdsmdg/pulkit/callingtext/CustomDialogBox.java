@@ -1,4 +1,4 @@
-package com.example.thispc.callingtext;
+package com.sdsmdg.pulkit.callingtext;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,52 +13,52 @@ public class CustomDialogBox extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.dialog);
-        t = (TextView)findViewById(R.id.textView5);
-       g=(GifImageView)findViewById(R.id.imageView2);
+       setContentView(com.sdsmdg.pulkit.callingtext.R.layout.dialog);
+        t = (TextView)findViewById(com.sdsmdg.pulkit.callingtext.R.id.textView5);
+       g=(GifImageView)findViewById(com.sdsmdg.pulkit.callingtext.R.id.imageView2);
        int id=Integer.parseInt(CallManager.msg.substring(CallManager.msg.lastIndexOf(" ")+1));
           switch (String.valueOf(id)){
               case "1":
-                  g.setImageResource(R.drawable.birthday);
+                  g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.birthday);
                   break;
               case "2":
-                 g.setImageResource(R.drawable.confused);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.confused);
                   break;
               case "3":
-                 g.setImageResource(R.drawable.funny);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.funny);
                   break;
               case "4":
-                  g.setImageResource(R.drawable.embares);
+                  g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.embares);
                   break;
               case "5":
-                  g.setImageResource(R.drawable.angry);
+                  g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.angry);
                   break;
               case "6":
-                  g.setImageResource(R.drawable.machau);
+                  g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.machau);
                   break;
               case "7":
-                 g.setImageResource(R.drawable.sorry);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.sorry);
                   break;
               case "8":
-                 g.setImageResource(R.drawable.hii);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.hii);
                   break;
               case "9":
-                 g.setImageResource(R.drawable.hello);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.hello);
                   break;
               case "10":
-                 g.setImageResource(R.drawable.love);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.love);
                   break;
               case "11":
-                 g.setImageResource(R.drawable.compliment);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.compliment);
                   break;
               case "12":
-                  g.setImageResource(R.drawable.happy);
+                  g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.happy);
                   break;
               case "13":
-                 g.setImageResource(R.drawable.sad);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.sad);
                   break;
               case "14":
-                 g.setImageResource(R.drawable.crying);
+                 g.setImageResource(com.sdsmdg.pulkit.callingtext.R.drawable.crying);
                   break;
               case "15":
 

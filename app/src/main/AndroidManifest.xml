@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.thispc.callingtext">
+    package="com.sdsmdg.pulkit.callingtext">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,12 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.sdsmdg.pulkit.callingtext.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <receiver
-            android:name=".CallManager"
+            android:name="com.sdsmdg.pulkit.callingtext.CallManager"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="-1">
@@ -36,17 +36,17 @@
         </receiver>
 
         <activity
-            android:name=".CustomDialogBox"
+            android:name="com.sdsmdg.pulkit.callingtext.CustomDialogBox"
             android:label="@string/title_activity_custom_dialog_box"
             android:theme="@style/AppDialogTheme" />
         <activity
-            android:name=".GifActivity"
+            android:name="com.sdsmdg.pulkit.callingtext.GifActivity"
             android:label="@string/title_activity_gif"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ContactList">
+        <activity android:name="com.sdsmdg.pulkit.callingtext.ContactList">
         </activity>
         <activity
-            android:name=".Main2Activity"
+            android:name="com.sdsmdg.pulkit.callingtext.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

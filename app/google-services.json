@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "300876252345",
+    "firebase_url": "https://callingtext.firebaseio.com",
+    "project_id": "callingtext",
+    "storage_bucket": "callingtext.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300876252345:android:1f29fe22e8b91739",
+        "android_client_info": {
+          "package_name": "com.sdsmdg.pulkit.callingtext"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300876252345-tr8usfelnf9r92a8cll05k9ldlvmch5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlhFU_MSm-qressIi_9PkXENLGnmqdTOY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

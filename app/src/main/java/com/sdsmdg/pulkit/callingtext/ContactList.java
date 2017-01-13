@@ -1,21 +1,12 @@
-package com.example.thispc.callingtext;
+package com.sdsmdg.pulkit.callingtext;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.TabActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +19,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +34,10 @@ public class ContactList extends AppCompatActivity implements LoaderManager.Load
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_list);
-        button1=(ImageButton)findViewById(R.id.imageButton21);
-      button=(Button)findViewById(R.id.button5);
-        et1=(EditText) findViewById(R.id.editText3);
+        setContentView(com.sdsmdg.pulkit.callingtext.R.layout.activity_contact_list);
+        button1=(ImageButton)findViewById(com.sdsmdg.pulkit.callingtext.R.id.imageButton21);
+      button=(Button)findViewById(com.sdsmdg.pulkit.callingtext.R.id.button5);
+        et1=(EditText) findViewById(com.sdsmdg.pulkit.callingtext.R.id.editText3);
         et1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,7 +63,7 @@ public class ContactList extends AppCompatActivity implements LoaderManager.Load
         });
 
         // getSupportLoaderManager().initLoader(1, null, this);
-        recList = (RecyclerView) findViewById(R.id.questionList_recycler);
+        recList = (RecyclerView) findViewById(com.sdsmdg.pulkit.callingtext.R.id.questionList_recycler);
         addToList();
     }
 
@@ -157,7 +147,7 @@ public class ContactList extends AppCompatActivity implements LoaderManager.Load
     public void newcontact(View v)
     {
         button.startAnimation(
-                AnimationUtils.loadAnimation(ContactList.this, R.anim.rotation) );
+                AnimationUtils.loadAnimation(ContactList.this, com.sdsmdg.pulkit.callingtext.R.anim.rotation) );
         Intent intent = new Intent(ContactList.this, MainActivity.class);
       intent.putExtra("number","");
         startActivity(intent);
