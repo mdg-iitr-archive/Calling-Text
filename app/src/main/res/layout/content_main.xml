@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="100dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.thispc.callingtext.MainActivity"
+    tools:context="com.sdsmdg.pulkit.callingtext.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:layout_marginTop="100dp"
     android:background="#ffffff"
@@ -75,7 +75,6 @@
         android:textColor="#ffffff"
         android:id="@+id/button4"
         android:textStyle="bold"
-        android:onClick="call"
         android:layout_below="@+id/editText2"
         android:layout_alignLeft="@+id/button3"
         android:layout_alignStart="@+id/button3"
@@ -87,7 +86,6 @@
         android:layout_height="80dp"
         android:id="@+id/imageView3"
         android:clickable="true"
-        android:onClick="gif"
         android:src="@drawable/gifimage"
         android:layout_alignTop="@+id/textView3"
         android:layout_alignParentRight="true"
@@ -95,18 +93,12 @@
 
     <FrameLayout
         android:layout_width="600dp"
-        android:layout_height="600dp"
+        android:layout_height="800dp"
         android:id="@+id/bottom"
-        android:layout_below="@+id/editText2"
-        android:layout_centerHorizontal="true"></FrameLayout>
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"></FrameLayout>
 
-    <!-- <fragment
-         android:layout_width="30dp"
-         android:layout_height="30dp"
-         android:name="com.example.thispc.callingtext.GIF"
-         android:id="@+id/fragment"
-         android:layout_below="@+id/button4"
-         android:layout_alignLeft="@+id/button4"
-         android:layout_alignStart="@+id/button4" />-->
 
 </RelativeLayout>

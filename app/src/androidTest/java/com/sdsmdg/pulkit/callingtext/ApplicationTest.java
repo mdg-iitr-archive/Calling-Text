@@ -1,4 +1,4 @@
-package com.example.thispc.callingtext;
+package com.sdsmdg.pulkit.callingtext;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

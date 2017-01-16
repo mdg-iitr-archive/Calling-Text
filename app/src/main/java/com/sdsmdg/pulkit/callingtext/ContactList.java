@@ -1,46 +1,30 @@
-package com.example.thispc.callingtext;
+package com.sdsmdg.pulkit.callingtext;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.support.v4.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.TabActivity;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
-import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
-import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 public class ContactList extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -240,7 +224,7 @@ public class ContactList extends Fragment implements LoaderManager.LoaderCallbac
     }
     public void addToList(){
       // Log.e("pulkit","pulkit");
-     /*  recList.setHasFixedSize(true);
+       recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
@@ -249,7 +233,7 @@ public class ContactList extends Fragment implements LoaderManager.LoaderCallbac
         alphaAdapter.setInterpolator(new OvershootInterpolator());
         alphaAdapter.setDuration(1000);
         alphaAdapter.setFirstOnly(false);
-        recList.setAdapter(ca);*/
+        recList.setAdapter(ca);
     }
     public  void searchTtem(String s)
     {

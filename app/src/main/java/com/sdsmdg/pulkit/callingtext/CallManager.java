@@ -1,24 +1,12 @@
-package com.example.thispc.callingtext;
+package com.sdsmdg.pulkit.callingtext;
 
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.PixelFormat;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;

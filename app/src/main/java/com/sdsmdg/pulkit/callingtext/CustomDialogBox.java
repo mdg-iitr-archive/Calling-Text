@@ -1,4 +1,4 @@
-package com.example.thispc.callingtext;
+package com.sdsmdg.pulkit.callingtext;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

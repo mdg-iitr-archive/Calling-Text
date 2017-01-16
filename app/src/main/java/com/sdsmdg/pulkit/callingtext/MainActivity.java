@@ -1,67 +1,85 @@
-package com.example.thispc.callingtext;
+package com.sdsmdg.pulkit.callingtext;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Rect;
+import android.nfc.Tag;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.Loader;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.List;
+
 import pl.droidsonroids.gif.GifImageView;
-public class MainActivity extends Fragment
-{
+
+public class MainActivity extends Fragment implements View.OnClickListener {
     private final int REQUEST_CODE = 1;
     EditText editText1;
     EditText editText2;
     String yourNumber;
     String receiver;
     GifImageView img;
-    FragmentManager fragmentManager;
+    android.support.v4.app.FragmentManager fragmentManager;
     TextView t1;
     GIF fragment;
     View view;
+    Button call;
+    Button save;
     public static String gifNumber;
     private static final int CONTACTS_LOADER_ID = 1;
     private WindowManager windowManager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
-        View view = inflater.inflate(R.layout.activity_main, container, false);
+        View view = inflater.inflate(R.layout.content_main, container, false);
         editText1 = (EditText) view.findViewById(R.id.editText2);
         editText2 = (EditText) view.findViewById(R.id.editText);
         yourNumber = "7248187747";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
+        img.setOnClickListener(this);
+        call = (Button) view.findViewById(R.id.button4);
+        call.setOnClickListener(this);
+        save=(Button) view.findViewById(R.id.button3);
         return view;
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.button4:
+                 Log.e("call","call");
+                break;
+            case R.id.imageView3:
+                 save.setVisibility(View.INVISIBLE);
+                call.setVisibility(View.INVISIBLE);
+               GIF gif= new GIF();
+                this.getFragmentManager().beginTransaction()
+                        .replace(R.id.bottom, gif,null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            default:
+                break;
+
+        }
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,8 +140,9 @@ public class MainActivity extends Fragment
         }
     }*/
 
-    public void call(View v) {
-        Toast.makeText(getActivity(),"message",Toast.LENGTH_LONG).show();
+    public void call() {
+        Log.e("in call", "in call");
+        Toast.makeText(getActivity(), "message", Toast.LENGTH_LONG).show();
         /*if (editText1.getText().toString() != null) {
             //receiver=editText1.getText().toString();
             call(editText1.getText().toString());
@@ -131,68 +150,56 @@ public class MainActivity extends Fragment
             Toast.makeText(getActivity(), "Please Enter Number", Toast.LENGTH_SHORT).show();*/
     }
 
-   /* private void call(String s) {
-       Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:" + s));
-        try{
-        startActivity(callIntent);}
-        catch (android.content.ActivityNotFoundException ex){
-            Toast.makeText(getActivity(),"yourActivity is not found",Toast.LENGTH_SHORT).show();}
-    }
+    /* private void call(String s) {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+         callIntent.setData(Uri.parse("tel:" + s));
+         try{
+         startActivity(callIntent);}
+         catch (android.content.ActivityNotFoundException ex){
+             Toast.makeText(getActivity(),"yourActivity is not found",Toast.LENGTH_SHORT).show();}
+     }
 
-    public void send(View v) {
-        if (haveNetworkConnection() == true) {
-            if (editText2.getText().toString() != null) {
-                BackGroundWorker b = new BackGroundWorker(getActivity(), 2);
-                b.execute(yourNumber, "7248187747", editText2.getText().toString(), gifNumber);
-            } else
-                Toast.makeText(getActivity(), "please type message", Toast.LENGTH_SHORT).show();
-        } else
-            Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
+     public void send(View v) {
+         if (haveNetworkConnection() == true) {
+             if (editText2.getText().toString() != null) {
+                 BackGroundWorker b = new BackGroundWorker(getActivity(), 2);
+                 b.execute(yourNumber, "7248187747", editText2.getText().toString(), gifNumber);
+             } else
+                 Toast.makeText(getActivity(), "please type message", Toast.LENGTH_SHORT).show();
+         } else
+             Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
 
-    }*/
+     }*/
 
-    public void gif(View v) {
-//        Intent i = new Intent(MainActivity.this, GifActivity.class);
-//        startActivityForResult(i, 0);
-        //fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-         fragment = new GIF();
-        fragmentTransaction.add(R.id.bottom, fragment);
-        fragmentTransaction.commit();
-
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0) {
+    public void setImage(String gifNumber) {
             Log.e("pul", "pul");
-            switch (MainActivity.gifNumber) {
+            switch (gifNumber) {
                 case "1":
-                   img.setImageResource(R.drawable.birthday);
+                    img.setImageResource(R.drawable.birthday);
                     break;
                 case "2":
-                   img.setImageResource(R.drawable.confused);
+                    img.setImageResource(R.drawable.confused);
                     break;
                 case "3":
-                   img.setImageResource(R.drawable.funny);
+                    img.setImageResource(R.drawable.funny);
                     break;
                 case "4":
-                   img.setImageResource(R.drawable.embares);
+                    img.setImageResource(R.drawable.embares);
                     break;
                 case "5":
-                   img.setImageResource(R.drawable.angry);
+                    img.setImageResource(R.drawable.angry);
                     break;
                 case "6":
-                   img.setImageResource(R.drawable.machau);
+                    img.setImageResource(R.drawable.machau);
                     break;
                 case "7":
-                   img.setImageResource(R.drawable.sorry);
+                    img.setImageResource(R.drawable.sorry);
                     break;
                 case "8":
-                   img.setImageResource(R.drawable.hii);
+                    img.setImageResource(R.drawable.hii);
                     break;
                 case "9":
-                   img.setImageResource(R.drawable.hello);
+                    img.setImageResource(R.drawable.hello);
                     break;
                 case "10":
                     img.setImageResource(R.drawable.love);
@@ -204,31 +211,30 @@ public class MainActivity extends Fragment
                     img.setImageResource(R.drawable.happy);
                     break;
                 case "13":
-                   img.setImageResource(R.drawable.sad);
+                    img.setImageResource(R.drawable.sad);
                     break;
                 case "14":
-                  img.setImageResource(R.drawable.crying);
+                    img.setImageResource(R.drawable.crying);
                     break;
                 case "15":
-                   img.setImageResource(R.drawable.worried);
+                    img.setImageResource(R.drawable.worried);
                     break;
                 case "16":
                     img.setImageResource(R.drawable.praying);
                     break;
                 case "17":
-                   img.setImageResource(R.drawable.smoking);
+                    img.setImageResource(R.drawable.smoking);
                     break;
                 case "18":
-                   img.setImageResource(R.drawable.birthday);
+                    img.setImageResource(R.drawable.birthday);
                     break;
                 case "19":
                     img.setImageResource(R.drawable.birthday);
                     break;
                 case "20":
-                   img.setImageResource(R.drawable.envy);
+                    img.setImageResource(R.drawable.envy);
                     break;
 
-            }
         }
     }
 
@@ -249,6 +255,7 @@ public class MainActivity extends Fragment
         return haveConnectedWifi || haveConnectedMobile;
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -260,7 +267,7 @@ public class MainActivity extends Fragment
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-   //@Override
+    //@Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -279,8 +286,7 @@ public class MainActivity extends Fragment
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
