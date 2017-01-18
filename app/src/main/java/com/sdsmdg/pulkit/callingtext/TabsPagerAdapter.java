@@ -15,11 +15,11 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
         switch (index) {
             case 0:
-                return new ContactList();
+                return new ContactListFragment();
             case 1:
-                return new History();
+                return new HistoryFragment();
             case 2:
-                return new MainActivity();
+                return new NewFragment();
         }
 
         return null;
@@ -30,7 +30,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "Contacts";
             case 1:
-                return "History";
+                return "HistoryFragment";
             case 2:
                 return "New";
         }

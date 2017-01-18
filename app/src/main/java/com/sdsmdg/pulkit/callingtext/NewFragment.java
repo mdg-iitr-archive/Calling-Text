@@ -1,9 +1,5 @@
 package com.sdsmdg.pulkit.callingtext;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v4.app.Fragment;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,8 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,7 +17,7 @@ import android.widget.Toast;
 
 import pl.droidsonroids.gif.GifImageView;
 
-public class MainActivity extends Fragment implements View.OnClickListener {
+public class NewFragment extends Fragment implements View.OnClickListener {
     private final int REQUEST_CODE = 1;
     EditText editText1;
     EditText editText2;
@@ -32,7 +26,7 @@ public class MainActivity extends Fragment implements View.OnClickListener {
     GifImageView img;
     android.support.v4.app.FragmentManager fragmentManager;
     TextView t1;
-    GIF fragment;
+    GifFragment fragment;
     View view;
     Button call;
     Button save;
@@ -67,9 +61,9 @@ public class MainActivity extends Fragment implements View.OnClickListener {
             case R.id.imageView3:
                  save.setVisibility(View.INVISIBLE);
                 call.setVisibility(View.INVISIBLE);
-               GIF gif= new GIF();
+               GifFragment gifFragment = new GifFragment();
                 this.getFragmentManager().beginTransaction()
-                        .replace(R.id.bottom, gif,null)
+                        .replace(R.id.bottom, gifFragment,null)
                         .addToBackStack(null)
                         .commit();
                 break;

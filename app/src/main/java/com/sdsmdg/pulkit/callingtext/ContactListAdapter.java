@@ -42,7 +42,7 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
             public void onClick(View v) {
                 h1.textsmsLogo.startAnimation(
                         AnimationUtils.loadAnimation(parentAct, R.anim.rotation) );
-                Intent intent = new Intent(parentAct, MainActivity.class);
+                Intent intent = new Intent(parentAct, NewFragment.class);
                 intent.putExtra("number",(String)contactList.get(position).get(1));
                 parentAct.startActivity(intent);
             }

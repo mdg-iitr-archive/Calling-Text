@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/birthday"
@@ -33,7 +33,7 @@
         android:layout_alignTop="@+id/imageButton"
         android:layout_toRightOf="@+id/imageButton"
         android:layout_toEndOf="@+id/imageButton" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/confused"
@@ -51,7 +51,7 @@
         android:layout_alignTop="@+id/view2"
         android:layout_toRightOf="@+id/view2"
         android:layout_toEndOf="@+id/view2" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/funny"
@@ -69,7 +69,7 @@
         android:layout_alignTop="@+id/imageButton3"
         android:layout_toRightOf="@+id/imageButton3"
         android:layout_toEndOf="@+id/imageButton3" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/embares"
@@ -87,7 +87,7 @@
         android:layout_below="@+id/imageButton"
         android:layout_toLeftOf="@+id/imageButton2"
         android:layout_toStartOf="@+id/imageButton2" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/angry"
@@ -105,7 +105,7 @@
         android:layout_alignTop="@+id/imageButton5"
         android:layout_alignLeft="@+id/imageButton2"
         android:layout_alignStart="@+id/imageButton2" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/machau"
@@ -123,7 +123,7 @@
         android:layout_alignTop="@+id/imageButton6"
         android:layout_toRightOf="@+id/imageButton6"
         android:layout_toEndOf="@+id/imageButton6" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/sorry"
@@ -140,7 +140,7 @@
         android:layout_alignTop="@+id/imageButton7"
         android:layout_toRightOf="@+id/imageButton7"
         android:layout_toEndOf="@+id/imageButton7" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/hii"
@@ -158,7 +158,7 @@
         android:layout_below="@+id/imageButton5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/hello"
@@ -176,7 +176,7 @@
         android:layout_below="@+id/imageButton5"
         android:layout_toRightOf="@+id/imageButton5"
         android:layout_toEndOf="@+id/imageButton5" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/love"
@@ -194,7 +194,7 @@
         android:layout_below="@+id/imageButton6"
         android:layout_toRightOf="@+id/imageButton6"
         android:layout_toEndOf="@+id/imageButton6" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/compliment"
@@ -212,7 +212,7 @@
         android:layout_below="@+id/imageButton8"
         android:layout_toRightOf="@+id/imageButton7"
         android:layout_toEndOf="@+id/imageButton7" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/happy"
@@ -230,7 +230,7 @@
         android:layout_below="@+id/imageButton9"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/sad"
@@ -248,7 +248,7 @@
         android:layout_alignTop="@+id/imageButton13"
         android:layout_alignLeft="@+id/imageButton10"
         android:layout_alignStart="@+id/imageButton10" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/crying"
@@ -266,7 +266,7 @@
         android:layout_alignTop="@+id/imageButton14"
         android:layout_toRightOf="@+id/imageButton6"
         android:layout_toEndOf="@+id/imageButton6" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/worried"
@@ -284,7 +284,7 @@
         android:layout_alignTop="@+id/imageButton15"
         android:layout_alignLeft="@+id/imageButton12"
         android:layout_alignStart="@+id/imageButton12" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/praying"
@@ -302,7 +302,7 @@
         android:layout_below="@+id/imageButton13"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/smoking"
@@ -320,7 +320,7 @@
         android:layout_alignTop="@+id/imageButton17"
         android:layout_alignLeft="@+id/imageButton14"
         android:layout_alignStart="@+id/imageButton14" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/birthday"
@@ -338,7 +338,7 @@
         android:layout_alignTop="@+id/imageButton18"
         android:layout_toRightOf="@+id/imageButton14"
         android:layout_toEndOf="@+id/imageButton14" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/birthday"
@@ -356,7 +356,7 @@
         android:layout_alignTop="@+id/imageButton19"
         android:layout_toRightOf="@+id/imageButton15"
         android:layout_toEndOf="@+id/imageButton15" />
-    <pl.droidsonroids.gif.GifTextView
+    <pl.droidsonroids.gifFragment.GifTextView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/envy"

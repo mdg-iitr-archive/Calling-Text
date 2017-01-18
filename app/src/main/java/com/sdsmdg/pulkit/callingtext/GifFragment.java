@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 
-public class GIF extends DialogFragment implements View.OnClickListener {
+public class GifFragment extends DialogFragment implements View.OnClickListener {
     ImageButton img1;
     ImageButton img2;
     ImageButton img3;

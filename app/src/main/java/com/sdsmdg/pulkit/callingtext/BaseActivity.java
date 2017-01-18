@@ -10,18 +10,17 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-public class Main3Activity extends FragmentActivity implements ActionBar.TabListener,GIF.onImageselectionListener {
+public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageselectionListener {
 
     TabHost tabHost;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     FragmentManager fragmentManager;
-    GIF fragment;
+    GifFragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +42,7 @@ public class Main3Activity extends FragmentActivity implements ActionBar.TabList
         try{
             startActivity(callIntent);}
         catch (android.content.ActivityNotFoundException ex){
-            Toast.makeText(Main3Activity.this,"yourActivity is not found",Toast.LENGTH_SHORT).show();}
+            Toast.makeText(BaseActivity.this,"yourActivity is not found",Toast.LENGTH_SHORT).show();}
     }
 
     @Override
@@ -65,13 +64,13 @@ public class Main3Activity extends FragmentActivity implements ActionBar.TabList
     public void onImageSelection(String position) {
         Log.e("in null","in null");
         Log.e("in null",getSupportFragmentManager().getFragments().get(0).getTag());
-        MainActivity mainActivity = (MainActivity)
+        NewFragment newFragment = (NewFragment)
                 getSupportFragmentManager().getFragments().get(2
                 );
 
-        if (mainActivity != null) {
+        if (newFragment != null) {
           Log.e("in null","in null");
-            mainActivity.setImage(position);
+            newFragment.setImage(position);
         }
     }
 }

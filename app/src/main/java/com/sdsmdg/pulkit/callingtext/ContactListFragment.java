@@ -26,7 +26,7 @@ import java.util.List;
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
-public class ContactList extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ContactListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     public RecyclerView recList;
