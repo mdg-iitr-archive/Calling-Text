@@ -21,20 +21,24 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     String caller, receiver;
     int n1;
     CallManager cm;
-    result r;
-    String value = "";
-    String gifId;
+    public static String value = "";
+    public static String gifId;
     String msg;
+    resultInterface mCallback;
     DatabaseReference callertree = FirebaseDatabase.getInstance().getReference().child("caller");
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
 
     public BackGroundWorker(Context context1, int n) {
+        mCallback=(CallManager)new CallManager();
         context = context1;
         n1 = n;
-        caller = "7248187747";
-        receiver = "7248187747";
-        r=new result();
+
     }
+    public interface resultInterface
+    {
+        public void getContent(String s);
+    }
+
 
     @Override
     protected String doInBackground(String... params) {
@@ -44,39 +48,36 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             dr.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
+                    Log.e("in datachange","in datachange");
 
                     value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
                     gifId=snapshot.child("caller").child(caller).child("gifId").getValue().toString();
-                    msg=snapshot.child("caller").child(caller).child("msg").getValue().toString();
+                    msg=snapshot.child("caller").child(caller).child("message").getValue().toString();
                 }
 
                 @Override
                 public void onCancelled(DatabaseError firebaseError) {
                 }
             });
-            Log.e("json", value);
-            if (value == receiver)
+            if (value.equals(receiver))
             {
-               r.call(msg+" "+gifId);
+                Log.e("in value","in value");
+                mCallback.getContent(msg+" "+gifId);
             }
         } else {
             caller = params[0];
             receiver = params[1];
             msg = params[2];
             gifId = params[3];
-            callertree.child(caller.toString()).child("receiver").setValue(receiver);
-            callertree.child(caller.toString()).child("message").setValue(msg);
-            callertree.child(caller.toString()).child("gifId").setValue(gifId);
+            callertree.child(caller).child("receiver").setValue(receiver);
+            callertree.child(caller).child("message").setValue(msg);
+            callertree.child(caller).child("gifId").setValue(gifId);
         }
         return null;
     }
 
     @Override
     protected void onPostExecute(String result) {
-        if (n1 == 1)
-            r.call(result);
-        else
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -90,16 +91,3 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     }
 }
 
-class result extends Observable {
-    String s1;
-
-    public void call(String s) {
-        this.s1 = s;
-        setChanged();
-        notifyObservers(s);
-    }
-
-    public synchronized String getContent() {
-        return s1;
-    }
-}

@@ -30,7 +30,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "Contacts";
             case 1:
-                return "HistoryFragment";
+                return "History";
             case 2:
                 return "New";
         }

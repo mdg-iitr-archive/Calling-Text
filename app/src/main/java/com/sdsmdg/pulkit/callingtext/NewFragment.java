@@ -30,7 +30,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     View view;
     Button call;
     Button save;
-    public static String gifNumber;
+    public static String gifNumber1;
     private static final int CONTACTS_LOADER_ID = 1;
     private WindowManager windowManager;
 
@@ -38,7 +38,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
-        View view = inflater.inflate(R.layout.content_main, container, false);
+        View view = inflater.inflate(R.layout.new_fragment, container, false);
         editText1 = (EditText) view.findViewById(R.id.editText2);
         editText2 = (EditText) view.findViewById(R.id.editText);
         yourNumber = "7248187747";
@@ -48,6 +48,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         call = (Button) view.findViewById(R.id.button4);
         call.setOnClickListener(this);
         save=(Button) view.findViewById(R.id.button3);
+        save.setOnClickListener(this);
         return view;
     }
 
@@ -55,8 +56,22 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
 
+
             case R.id.button4:
                  Log.e("call","call");
+                break;
+            case R.id.button3:
+                if (haveNetworkConnection() == true) {
+                    if (editText2.getText().toString()!= null) {
+                        Log.e("in if","in if");
+                        BackGroundWorker b = new BackGroundWorker(getActivity(),2);
+                        b.execute(yourNumber, "7248187747", editText2.getText().toString()+"pilkiytt", gifNumber1);
+                    } else {
+                        Log.e("in else","in else");
+                        Toast.makeText(getActivity(), "please type message", Toast.LENGTH_SHORT).show();
+                    }
+                } else
+                    Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageView3:
                  save.setVisibility(View.INVISIBLE);
@@ -77,39 +92,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//       editText1.setText((getIntent().getExtras().getString("number")));
-       /* view.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
-            public boolean onTouch(View view,MotionEvent event) {
-
-
-                Log.e("pul","pul");
-                if ( event.getAction () == MotionEvent.ACTION_UP )
-                {
-                    //and only is the ListFragment shown.
-                    if (fragment.isVisible())
-                    {
-                        // create a rect for storing the fragment window rect
-                        Rect r = new Rect ( 0, 0, 0, 0 );
-
-                        fragment.getView().getHitRect(r);
-                        // check if the event position is inside the window rect
-                        boolean intersects = r.contains ( (int) event.getX (), (int) event.getY () );
-                        // if the event is not inside then we can close the fragment
-
-                            FragmentTransaction fragmentTransaction;
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.remove(fragment).commit();
-                            Log.e("pulkit","pul");
-                            // notify that we consumed this event
-                            return true;
-                    }
-                }
-                //let the system handle the event
-              return onTouchEvent ( event );
-            }
-        });*/
     }
 
    /* public void OK(View v) {
@@ -167,6 +150,9 @@ public class NewFragment extends Fragment implements View.OnClickListener {
 
     public void setImage(String gifNumber) {
             Log.e("pul", "pul");
+        gifNumber1=gifNumber;
+        save.setVisibility(View.VISIBLE);
+        call.setVisibility(View.VISIBLE);
             switch (gifNumber) {
                 case "1":
                     img.setImageResource(R.drawable.birthday);

@@ -62,7 +62,6 @@
         android:background="@drawable/styles1"
         android:textColor="#ffffff"
         android:id="@+id/button3"
-        android:onClick="send"
         android:layout_marginTop="71dp"
         android:layout_below="@+id/button4"
         android:layout_centerHorizontal="true" />
@@ -81,7 +80,7 @@
         android:layout_marginTop="41dp" />
 
 
-    <pl.droidsonroids.gifFragment.GifImageView
+    <pl.droidsonroids.gif.GifImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/imageView3"
