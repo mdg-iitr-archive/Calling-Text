@@ -1,0 +1,369 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="600dp"
+    android:layout_height="700dp"
+    android:id="@+id/gif"
+   >
+
+
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:id="@+id/imageButton"
+        android:onClick="row"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/birthday"
+        android:id="@+id/view1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:id="@+id/imageButton2"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_toRightOf="@+id/imageButton"
+        android:layout_toEndOf="@+id/imageButton" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/confused"
+        android:id="@+id/view2"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/imageButton2"
+        android:layout_alignStart="@+id/imageButton2" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:id="@+id/imageButton3"
+        android:onClick="row"
+        android:layout_alignTop="@+id/view2"
+        android:layout_toRightOf="@+id/view2"
+        android:layout_toEndOf="@+id/view2" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/funny"
+        android:id="@+id/view3"
+        android:layout_alignTop="@+id/imageButton3"
+        android:layout_alignLeft="@+id/imageButton3"
+        android:layout_alignStart="@+id/imageButton3" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:id="@+id/imageButton4"
+        android:layout_alignTop="@+id/imageButton3"
+        android:layout_toRightOf="@+id/imageButton3"
+        android:layout_toEndOf="@+id/imageButton3" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/embares"
+        android:id="@+id/view4"
+        android:layout_alignTop="@+id/imageButton4"
+        android:layout_toRightOf="@+id/imageButton3"
+        android:layout_toEndOf="@+id/imageButton3" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton5"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:layout_below="@+id/imageButton"
+        android:layout_toLeftOf="@+id/imageButton2"
+        android:layout_toStartOf="@+id/imageButton2" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/angry"
+        android:id="@+id/view5"
+        android:layout_alignTop="@+id/imageButton5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:id="@+id/imageButton6"
+        android:layout_alignTop="@+id/imageButton5"
+        android:layout_alignLeft="@+id/imageButton2"
+        android:layout_alignStart="@+id/imageButton2" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/machau"
+        android:id="@+id/view6"
+        android:layout_alignTop="@+id/imageButton6"
+        android:layout_toLeftOf="@+id/imageButton7"
+        android:layout_toStartOf="@+id/imageButton7" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:id="@+id/imageButton7"
+        android:layout_alignTop="@+id/imageButton6"
+        android:layout_toRightOf="@+id/imageButton6"
+        android:layout_toEndOf="@+id/imageButton6" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/sorry"
+        android:id="@+id/view7"
+        android:layout_alignTop="@+id/imageButton7"
+        android:layout_alignLeft="@+id/imageButton7"
+        android:layout_alignStart="@+id/imageButton7" />
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton8"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:layout_alignTop="@+id/imageButton7"
+        android:layout_toRightOf="@+id/imageButton7"
+        android:layout_toEndOf="@+id/imageButton7" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/hii"
+        android:id="@+id/view8"
+        android:layout_alignTop="@+id/imageButton8"
+        android:layout_alignRight="@+id/imageButton8"
+        android:layout_alignEnd="@+id/imageButton8" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton9"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:layout_below="@+id/imageButton5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/hello"
+        android:id="@+id/view9"
+        android:layout_below="@+id/imageButton5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton10"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:layout_below="@+id/imageButton5"
+        android:layout_toRightOf="@+id/imageButton5"
+        android:layout_toEndOf="@+id/imageButton5" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/love"
+        android:id="@+id/view10"
+        android:layout_below="@+id/imageButton6"
+        android:layout_toLeftOf="@+id/imageButton7"
+        android:layout_toStartOf="@+id/imageButton7" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton11"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:layout_below="@+id/imageButton6"
+        android:layout_toRightOf="@+id/imageButton6"
+        android:layout_toEndOf="@+id/imageButton6" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/compliment"
+        android:id="@+id/view11"
+        android:layout_below="@+id/imageButton6"
+        android:layout_toRightOf="@+id/imageButton6"
+        android:layout_toEndOf="@+id/imageButton6" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton12"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:layout_below="@+id/imageButton8"
+        android:layout_toRightOf="@+id/imageButton7"
+        android:layout_toEndOf="@+id/imageButton7" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/happy"
+        android:id="@+id/view12"
+        android:layout_above="@+id/imageButton15"
+        android:layout_toRightOf="@+id/imageButton11"
+        android:layout_toEndOf="@+id/imageButton11" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:id="@+id/imageButton13"
+        android:layout_below="@+id/imageButton9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/sad"
+        android:id="@+id/view13"
+        android:layout_above="@+id/imageButton17"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:id="@+id/imageButton14"
+        android:layout_alignTop="@+id/imageButton13"
+        android:layout_alignLeft="@+id/imageButton10"
+        android:layout_alignStart="@+id/imageButton10" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/crying"
+        android:id="@+id/view14"
+        android:layout_above="@+id/imageButton17"
+        android:layout_toRightOf="@+id/imageButton13"
+        android:layout_toEndOf="@+id/imageButton13" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="row"
+        android:background="#ffffff"
+        android:id="@+id/imageButton15"
+        android:layout_alignTop="@+id/imageButton14"
+        android:layout_toRightOf="@+id/imageButton6"
+        android:layout_toEndOf="@+id/imageButton6" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/worried"
+        android:id="@+id/view15"
+        android:layout_above="@+id/imageButton19"
+        android:layout_alignLeft="@+id/imageButton15"
+        android:layout_alignStart="@+id/imageButton15" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="row"
+        android:background="#ffffff"
+        android:id="@+id/imageButton16"
+        android:layout_alignTop="@+id/imageButton15"
+        android:layout_alignLeft="@+id/imageButton12"
+        android:layout_alignStart="@+id/imageButton12" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/praying"
+        android:id="@+id/view16"
+        android:layout_above="@+id/imageButton19"
+        android:layout_toRightOf="@+id/imageButton15"
+        android:layout_toEndOf="@+id/imageButton15" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton17"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:layout_below="@+id/imageButton13"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/smoking"
+        android:id="@+id/view17"
+        android:layout_below="@+id/imageButton13"
+        android:layout_toLeftOf="@+id/imageButton14"
+        android:layout_toStartOf="@+id/imageButton14" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:id="@+id/imageButton18"
+        android:onClick="row"
+        android:layout_alignTop="@+id/imageButton17"
+        android:layout_alignLeft="@+id/imageButton14"
+        android:layout_alignStart="@+id/imageButton14" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/birthday"
+        android:id="@+id/view19"
+        android:layout_alignTop="@+id/imageButton18"
+        android:layout_toLeftOf="@+id/imageButton19"
+        android:layout_toStartOf="@+id/imageButton19" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="row"
+        android:id="@+id/imageButton19"
+        android:background="#ffffff"
+        android:layout_alignTop="@+id/imageButton18"
+        android:layout_toRightOf="@+id/imageButton14"
+        android:layout_toEndOf="@+id/imageButton14" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/birthday"
+        android:id="@+id/view20"
+        android:layout_below="@+id/imageButton15"
+        android:layout_alignLeft="@+id/imageButton15"
+        android:layout_alignStart="@+id/imageButton15" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:onClick="row"
+        android:id="@+id/imageButton20"
+        android:layout_alignTop="@+id/imageButton19"
+        android:layout_toRightOf="@+id/imageButton15"
+        android:layout_toEndOf="@+id/imageButton15" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/envy"
+        android:id="@+id/view21"
+        android:layout_below="@+id/imageButton16"
+        android:layout_toRightOf="@+id/imageButton15"
+        android:layout_toEndOf="@+id/imageButton15" />
+
+
+</RelativeLayout>
