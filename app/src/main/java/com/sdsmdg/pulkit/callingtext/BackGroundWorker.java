@@ -50,19 +50,23 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                 public void onDataChange(DataSnapshot snapshot) {
                     Log.e("in datachange","in datachange");
                     value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
+                    Log.e("Value : ",value);
+                    Log.e("Receiver : ",receiver);
                     gifId=snapshot.child("caller").child(caller).child("gifId").getValue().toString();
                     msg=snapshot.child("caller").child(caller).child("message").getValue().toString();
+                    if (value.equals(receiver))
+                    {
+                        Log.e("in value","in value");
+                        mCallback.getContent(msg+" "+gifId);
+                    }
                 }
 
                 @Override
                 public void onCancelled(DatabaseError firebaseError) {
                 }
             });
-            if (value.equals(receiver))
-            {
-                Log.e("in value","in value");
-                mCallback.getContent(msg+" "+gifId);
-            }
+
+
         } else {
             caller = params[0];
             receiver = params[1];

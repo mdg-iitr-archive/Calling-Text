@@ -23,7 +23,7 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
         Log.e("pul", "in receive");
         Log.e("pulkit", "in received");
         String caller = "7248187747";
-        String receiver = "7248187747";
+        String receiver = "7253046197";
       String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
           if(state!=null) {
           if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
