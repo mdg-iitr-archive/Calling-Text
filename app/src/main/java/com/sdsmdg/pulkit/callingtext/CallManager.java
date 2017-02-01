@@ -24,32 +24,31 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
         Log.e("pulkit", "in received");
         String caller = "7248187747";
         String receiver = "7248187747";
-//      String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-//          if(state!=null) {
-//          if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
-//            //caller = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-//           // caller = caller.substring(caller.length() - 11);
-//            if (haveNetworkConnection() == true) {
-//                BackGroundWorker b = new BackGroundWorker(context, 1);
-//                b.execute(caller, receiver);
-//            }
-//        }
-//    }
-//        else
-//        if(haveNetworkConnection()==true){
-//        BackGroundWorker b=new BackGroundWorker(context,1);
-//        b.execute(caller,receiver);
-//        }
-//    }
-
-
-        if (intent.getAction() == "android.provider.Telephony.SMS_RECEIVED") {
+      String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+          if(state!=null) {
+          if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
+            caller = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+              Log.e("caller",caller.substring(0));
+            caller = caller.substring(caller.length() - 11);
+              Log.e("caller",caller.substring(1));
+              caller=caller.substring(1);
+              Log.e("receiving number",caller);
             if (haveNetworkConnection() == true) {
                 BackGroundWorker b = new BackGroundWorker(context, 1);
                 b.execute(caller, receiver);
             }
         }
     }
+    }
+
+
+//        if (intent.getAction() == "android.provider.Telephony.SMS_RECEIVED") {
+//            if (haveNetworkConnection() == true) {
+//                BackGroundWorker b = new BackGroundWorker(context, 1);
+//                b.execute(caller, receiver);
+//            }
+//        }
+//    }
 
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;

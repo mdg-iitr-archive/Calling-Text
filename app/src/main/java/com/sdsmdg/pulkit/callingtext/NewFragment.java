@@ -1,5 +1,7 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -58,14 +60,27 @@ public class NewFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.button4:
-                 Log.e("call","call");
+                if (haveNetworkConnection() == true) {
+                    if (editText2.getText().toString()!= null && editText1.getText().toString()!=null) {
+                        BackGroundWorker b = new BackGroundWorker(getActivity(),2);
+                        Log.e("number",editText1.getText().toString());
+                        b.execute(yourNumber, editText1.getText().toString(), editText2.getText().toString(), gifNumber1);
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:7253046197"));
+                        startActivity(callIntent);
+                    } else {
+                        Log.e("in else","in else");
+                        Toast.makeText(getActivity(), "please type your message or number", Toast.LENGTH_SHORT).show();
+                    }
+                } else
+                    Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
+                Log.e("call","call");
                 break;
             case R.id.button3:
                 if (haveNetworkConnection() == true) {
                     if (editText2.getText().toString()!= null) {
-                        Log.e("in if","in if");
                         BackGroundWorker b = new BackGroundWorker(getActivity(),2);
-                        b.execute(yourNumber, "7248187747", editText2.getText().toString()+"pilkiytt", gifNumber1);
+                        b.execute(yourNumber, editText1.getText().toString(), editText2.getText().toString(), gifNumber1);
                     } else {
                         Log.e("in else","in else");
                         Toast.makeText(getActivity(), "please type message", Toast.LENGTH_SHORT).show();
@@ -102,31 +117,6 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         startActivityForResult(intent, REQUEST_CODE);
     }
 
-    public void custom(View v) {
-        Intent ic = new Intent(getActivity(), CustomDialogBox.class);
-        startActivity(ic);
-    }*/
-
-   /* @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
-
-    public void call() {
-        Log.e("in call", "in call");
-        Toast.makeText(getActivity(), "message", Toast.LENGTH_LONG).show();
-        /*if (editText1.getText().toString() != null) {
-            //receiver=editText1.getText().toString();
-            call(editText1.getText().toString());
-        } else
-            Toast.makeText(getActivity(), "Please Enter Number", Toast.LENGTH_SHORT).show();*/
-    }
-
     /* private void call(String s) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
          callIntent.setData(Uri.parse("tel:" + s));
@@ -134,19 +124,8 @@ public class NewFragment extends Fragment implements View.OnClickListener {
          startActivity(callIntent);}
          catch (android.content.ActivityNotFoundException ex){
              Toast.makeText(getActivity(),"yourActivity is not found",Toast.LENGTH_SHORT).show();}
-     }
-
-     public void send(View v) {
-         if (haveNetworkConnection() == true) {
-             if (editText2.getText().toString() != null) {
-                 BackGroundWorker b = new BackGroundWorker(getActivity(), 2);
-                 b.execute(yourNumber, "7248187747", editText2.getText().toString(), gifNumber);
-             } else
-                 Toast.makeText(getActivity(), "please type message", Toast.LENGTH_SHORT).show();
-         } else
-             Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
-
      }*/
+
 
     public void setImage(String gifNumber) {
             Log.e("pul", "pul");
@@ -155,6 +134,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         call.setVisibility(View.VISIBLE);
             switch (gifNumber) {
                 case "1":
+                    Log.e("in 1","in 1");
                     img.setImageResource(R.drawable.birthday);
                     break;
                 case "2":
@@ -214,7 +194,8 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                 case "20":
                     img.setImageResource(R.drawable.envy);
                     break;
-
+                default:
+                    img.setImageResource(R.drawable.birthday);
         }
     }
 

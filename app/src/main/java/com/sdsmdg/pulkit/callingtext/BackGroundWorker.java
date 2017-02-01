@@ -49,7 +49,6 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     Log.e("in datachange","in datachange");
-
                     value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
                     gifId=snapshot.child("caller").child(caller).child("gifId").getValue().toString();
                     msg=snapshot.child("caller").child(caller).child("message").getValue().toString();
