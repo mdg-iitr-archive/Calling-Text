@@ -52,6 +52,8 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                     value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
                     gifId=snapshot.child("caller").child(caller).child("gifId").getValue().toString();
                     msg=snapshot.child("caller").child(caller).child("message").getValue().toString();
+                    Log.e("receiver",receiver);
+                    Log.e("caller",value);
                 }
 
                 @Override
