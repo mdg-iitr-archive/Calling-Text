@@ -8,6 +8,6 @@ public class PopupDialer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_dialer);
+        setContentView(R.layout.popup);
     }
 }
