@@ -1,5 +1,6 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,10 +24,9 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     private final int REQUEST_CODE = 1;
     EditText editText1;
     EditText editText2;
-    String yourNumber;
-    String receiver;
+    public EditText editName;
+    String yourNumber, yourName;
     GifImageView img;
-    android.support.v4.app.FragmentManager fragmentManager;
     TextView t1;
     GifFragment fragment;
     View view;
@@ -43,9 +43,12 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.new_fragment, container, false);
         editText1 = (EditText) view.findViewById(R.id.editText2);
         editText2 = (EditText) view.findViewById(R.id.editText);
+        editName = (EditText) view.findViewById(R.id.editText3);
         yourNumber = "7253046197";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
+
+        editName.setText(BaseActivity.getMname());
         img.setOnClickListener(this);
         call = (Button) view.findViewById(R.id.button4);
         call.setOnClickListener(this);
@@ -250,4 +253,19 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         return true;
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i("NewFragment", "Detached");
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.i("NewFragment", "Attached");
+//        editName.setText(BaseActivity.getMname());
+
+
+    }
 }

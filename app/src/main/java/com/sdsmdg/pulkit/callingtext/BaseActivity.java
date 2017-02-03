@@ -21,6 +21,24 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     private ActionBar actionBar;
     FragmentManager fragmentManager;
     GifFragment fragment;
+    public static String mname,mnumber;
+
+    public static String getMname() {
+        return mname;
+    }
+
+    public static void setMname(String mname) {
+        BaseActivity.mname = mname;
+    }
+
+    public static String getMnumber() {
+        return mnumber;
+    }
+
+    public static void setMnumber(String mnumber) {
+        BaseActivity.mnumber = mnumber;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

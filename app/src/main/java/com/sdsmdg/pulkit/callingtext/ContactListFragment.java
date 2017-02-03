@@ -1,10 +1,13 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -16,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,12 +40,16 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
     List<ArrayList> result;
     View view;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
 
         view = inflater.inflate(R.layout.activity_contact_list, container, false);
         button1=(ImageButton) view.findViewById(R.id.imageButton21);
@@ -78,7 +86,22 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
         Log.e("p",createList()+"");
-        ContactListAdapter ca = new ContactListAdapter(createList(),getActivity());
+        ContactListAdapter ca = new ContactListAdapter(createList(), getActivity(),new ContactListAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick() {
+                Log.i("OnClick","vosidjgosigioseg");
+
+//                Intent intent = new Intent(getContext(), NewFragment.class);
+//                startActivity(intent);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment f = new NewFragment() ;
+                ft.replace(R.id.contact_layout,f);
+                ft.commit();
+
+
+
+            }
+        });
         ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(ca);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
         alphaAdapter.setDuration(1000);
@@ -131,96 +154,26 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
+
+
     private List<ArrayList> createList() {
-       result=new ArrayList<ArrayList>();
-        ArrayList<String> a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("karira");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("palash");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("rohit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("aman");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("tim");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("namit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("karira");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("palash");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("rohit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("aman");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("tim");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("namit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        return result;
+        result = new ArrayList<ArrayList>();
+        ArrayList<String> a = new ArrayList<String>();
+        Cursor phones = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+        while (phones.moveToNext()) {
+            String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            a.add(name);
+            a.add(phoneNumber);
+            result.add(a);
+            a = new ArrayList<String>();
+
+        }
+        phones.close();
+        return  result;
+
+
     }
     public void addToList(){
       // Log.e("pulkit","pulkit");
@@ -228,7 +181,16 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-        ContactListAdapter ca = new ContactListAdapter(createList(),getActivity());
+        ContactListAdapter ca = new ContactListAdapter(createList(), getActivity(),new ContactListAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick() {
+                Log.i("OnClick","vosidjgosigioseg");
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment f = new NewFragment() ;
+                ft.replace(R.id.contact_layout,f);
+                ft.commit();
+            }
+        });
        ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(ca);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
         alphaAdapter.setDuration(1000);
@@ -244,7 +206,18 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
                 result.remove(i);
             }
         }
-        ContactListAdapter ca = new ContactListAdapter(result,getActivity());
+        ContactListAdapter ca = new ContactListAdapter(result, getActivity(), new ContactListAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick() {
+                Log.i("OnClick","vosidjgosigioseg");
+                Fragment f = new NewFragment() ;
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.contact_layout,f);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
         recList.setAdapter(ca);
     }
 }
