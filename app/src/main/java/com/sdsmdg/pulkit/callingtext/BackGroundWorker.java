@@ -23,9 +23,10 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     CallManager cm;
     public static String value = "";
     public static String gifId;
-    String msg;
+    public static String msg;
     resultInterface mCallback;
     DatabaseReference callertree = FirebaseDatabase.getInstance().getReference().child("caller");
+    DatabaseReference receivertree = FirebaseDatabase.getInstance().getReference().child("receiver");
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
 
     public BackGroundWorker(Context context1, int n) {
@@ -66,8 +67,12 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                 public void onCancelled(DatabaseError firebaseError) {
                 }
             });
-
-
+            
+            if(value.equals(caller))
+            {
+                Log.e("in value","in value");
+               mCallback.getContent(msg+" "+gifId);
+            }
         } else {
             caller = params[0];
             receiver = params[1];
@@ -76,6 +81,9 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             callertree.child(caller).child("receiver").setValue(receiver);
             callertree.child(caller).child("message").setValue(msg);
             callertree.child(caller).child("gifId").setValue(gifId);
+            receivertree.child(receiver).child("caller").setValue(caller);
+            receivertree.child(receiver).child("message").setValue(msg);
+            receivertree.child(receiver).child("gifId").setValue(gifId);
         }
         return null;
     }

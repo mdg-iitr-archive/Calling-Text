@@ -53,6 +53,10 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         //tabLayout.setTabTextColors();
              tabLayout.setupWithViewPager(viewPager);
+
+
+//        Intent intent = new Intent(this, BackGroundWorker.class);
+//        startService(intent);
         }
     private void call(String s) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);

@@ -11,6 +11,7 @@ import android.util.Log;
 public class CallManager extends BroadcastReceiver implements BackGroundWorker.resultInterface {
     public static Context context1;
     public static String msg;
+    public static String receiver;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -32,6 +33,7 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
                     BackGroundWorker b = new BackGroundWorker(context, 1);
                     b.execute(caller, receiver);
                 }
+
             }
         }
     }
