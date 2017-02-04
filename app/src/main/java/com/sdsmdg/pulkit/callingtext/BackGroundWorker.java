@@ -71,7 +71,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             if(value.equals(caller))
             {
                 Log.e("in value","in value");
-               mCallback.getContent(msg+" "+gifId);
+                mCallback.getContent(msg+" "+gifId);
             }
         } else {
             caller = params[0];
