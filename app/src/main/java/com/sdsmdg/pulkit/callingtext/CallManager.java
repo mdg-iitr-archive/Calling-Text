@@ -16,6 +16,7 @@ import java.util.Observer;
 public class CallManager extends BroadcastReceiver implements BackGroundWorker.resultInterface {
     public static Context context1;
     public static String msg;
+    public static String receiver;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,7 +24,7 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
         Log.e("pul", "in receive");
         Log.e("pulkit", "in received");
         String caller = "7248187747";
-        String receiver = "7248187747";
+        receiver = "7248187747";
       String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
           if(state!=null) {
           if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {

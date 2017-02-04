@@ -23,9 +23,10 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     CallManager cm;
     public static String value = "";
     public static String gifId;
-    String msg;
+    public static String msg;
     resultInterface mCallback;
     DatabaseReference callertree = FirebaseDatabase.getInstance().getReference().child("caller");
+    DatabaseReference receivertree = FirebaseDatabase.getInstance().getReference().child("receiver");
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
 
     public BackGroundWorker(Context context1, int n) {
@@ -45,25 +46,32 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         if (n1 == 1) {
             caller = params[0];
             receiver = params[1];
-            dr.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    Log.e("in datachange","in datachange");
-                    value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
-                    gifId=snapshot.child("caller").child(caller).child("gifId").getValue().toString();
-                    msg=snapshot.child("caller").child(caller).child("message").getValue().toString();
-                    Log.e("receiver",receiver);
-                    Log.e("caller",value);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError firebaseError) {
-                }
-            });
-            if (value.equals(receiver))
+//            dr.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot snapshot) {
+//                    Log.e("in datachange","in datachange");
+//                    if(snapshot.child("caller").child(caller)!=null) {
+//                        value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
+//                        gifId = snapshot.child("caller").child(caller).child("gifId").getValue().toString();
+//                        msg = snapshot.child("caller").child(caller).child("message").getValue().toString();
+//                        Log.e("receiver", receiver);
+//                        Log.e("caller", value);
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError firebaseError) {
+//                }
+//            });
+//            if (value.equals(receiver))
+//            {
+//                Log.e("in value","in value");
+//                mCallback.getContent(msg+" "+gifId);
+//            }
+            if(value.equals(caller))
             {
                 Log.e("in value","in value");
-                mCallback.getContent(msg+" "+gifId);
+               mCallback.getContent(msg+" "+gifId);
             }
         } else {
             caller = params[0];
@@ -73,6 +81,9 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             callertree.child(caller).child("receiver").setValue(receiver);
             callertree.child(caller).child("message").setValue(msg);
             callertree.child(caller).child("gifId").setValue(gifId);
+            receivertree.child(receiver).child("caller").setValue(caller);
+            receivertree.child(receiver).child("message").setValue(msg);
+            receivertree.child(receiver).child("gifId").setValue(gifId);
         }
         return null;
     }
