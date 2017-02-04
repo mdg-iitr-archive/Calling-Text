@@ -59,6 +59,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                         Log.e("in value","in value");
                         mCallback.getContent(msg+" "+gifId);
                     }
+
                 }
 
                 @Override

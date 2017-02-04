@@ -66,7 +66,8 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                         Log.e("number", editText1.getText().toString());
                         b.execute(yourNumber, editText1.getText().toString(), editText2.getText().toString(), gifNumber1);
                         Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:7253046197"));
+                        callIntent.setData(Uri.parse("tel:"+editText1.getText().toString()));
+                        Log.e("receiver","tel:"+editText1.getText().toString());
                         startActivity(callIntent);
                     } else {
                         Log.e("in else", "in else");
