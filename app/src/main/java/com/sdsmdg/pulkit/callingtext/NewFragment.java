@@ -41,9 +41,9 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
         View view = inflater.inflate(R.layout.new_fragment, container, false);
-        editText1 = (EditText) view.findViewById(R.id.editText2);
-        editText2 = (EditText) view.findViewById(R.id.editText);
-        editName = (EditText) view.findViewById(R.id.editText3);
+        editText1 = (EditText) view.findViewById(R.id.editText2); //number
+        editText2 = (EditText) view.findViewById(R.id.editText);//message
+        editName = (EditText) view.findViewById(R.id.editText3); //name
         yourNumber = "7253046197";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);

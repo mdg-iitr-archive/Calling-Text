@@ -12,7 +12,7 @@ public class CustomDialogBox extends AppCompatActivity {
     GifImageView g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
        setContentView(R.layout.dialog);
        t = (TextView)findViewById(R.id.textView5);
        g=(GifImageView)findViewById(R.id.imageView2);

@@ -43,6 +43,7 @@
             android:exported="true">
             <intent-filter android:priority="100">
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+
             </intent-filter>
         </receiver>
 
@@ -62,14 +63,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PopupDialer">
+        <activity
+            android:name=".PopupDialer"
+            android:label="@string/title_activity_custom_dialog_box"
+            android:theme="@style/AppDialogTheme">
             <intent-filter>
                 <action android:name="android.intent.action.CALL_PRIVILEGED" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:scheme="tel" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
