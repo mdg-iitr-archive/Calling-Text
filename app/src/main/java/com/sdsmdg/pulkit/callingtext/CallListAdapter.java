@@ -21,7 +21,7 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
     List<CallerDetails> callerList;
     Activity parentAct;
 
-    public CallListAdapter(List<CallerDetails> historyList, Activity activity){
+    public CallListAdapter(List<CallerDetails> historyList, Activity activity) {
         this.callerList = historyList;
         parentAct = activity;
     }
@@ -42,6 +42,11 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
         holder.vNumber.setText(hd.getCaller_name());
         holder.vMsg.setText(hd.getCaller_msg());
         holder.time.setText(hd.getCall_time());
+        if (hd.getCall_type().equals("outgoing")) {
+            holder.type.setImageResource(R.drawable.call_made);
+        } else if (hd.getCall_type().equals("incoming")) {
+            holder.type.setImageResource(R.drawable.call_received);
+        }
 
     }
 
@@ -63,10 +68,10 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
             super(vi);
             vName = (TextView) vi.findViewById(R.id.name);
             vNumber = (TextView) vi.findViewById(R.id.number);
-            vMsg=(TextView) vi.findViewById(R.id.message);
-            type=(ImageView) vi.findViewById(R.id.call_type);
-            time=(TextView)vi.findViewById(R.id.time);
-            call=(ImageView)vi.findViewById(R.id.call);
+            vMsg = (TextView) vi.findViewById(R.id.message);
+            type = (ImageView) vi.findViewById(R.id.call_type);
+            time = (TextView) vi.findViewById(R.id.time);
+            call = (ImageView) vi.findViewById(R.id.call);
             vi.setOnClickListener(this);
         }
 

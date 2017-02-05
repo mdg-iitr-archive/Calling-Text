@@ -54,11 +54,11 @@ public class BackgroundService extends IntentService {
                         name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
                     }
                     number = BackGroundWorker.value;
-                    type = "received";
+                    type = "incoming";
                     time = DateFormat.getDateTimeInstance().format(new Date());
                     msg=BackGroundWorker.msg;
                     CallerDetails cd =new CallerDetails(name,number,msg,type,time);
-                    dbh= new DataBaseHandler(getBaseContext());
+                    dbh= DataBaseHandler.getInstance(getBaseContext());
                     dbh.addCaller(cd);
                 }
             }
