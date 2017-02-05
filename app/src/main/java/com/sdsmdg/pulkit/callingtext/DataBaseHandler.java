@@ -39,7 +39,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    public void addUser(CallerDetails cd) {
+    public void addCaller(CallerDetails cd) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -52,7 +52,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         db.insert(TABLE_CALLERS, null, values);
         db.close();
     }
-    public List<CallerDetails> getAllUsers() {
+    public List<CallerDetails> getAllCallers() {
         List<CallerDetails> userList = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_CALLERS;
         SQLiteDatabase db = this.getReadableDatabase();
