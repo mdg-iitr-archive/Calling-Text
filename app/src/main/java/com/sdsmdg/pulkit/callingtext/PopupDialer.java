@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -35,14 +34,18 @@ public class PopupDialer extends AppCompatActivity {
         message = et_message.getText().toString();
         number = getIntent().getExtras().getString("number");
         Log.i("number and message ", message + ":" + number);
+        yourNumber = "7253046197";
+
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("CALLL CLICK ", yourNumber + "" + number + "" + message);
                 if (haveNetworkConnection() == true) {
                     if (message != null && number != null) {
-                        Log.i("REACHED HERe","YEAAA !!");
+                        Log.i("REACHED HERe", "YEAAA !!");
                         BackGroundWorker b = new BackGroundWorker(PopupDialer.this, 2);
+
                         Log.e("number", number);
                         b.execute(yourNumber, number, message, gifNumber1);
                         Intent callIntent = new Intent(Intent.ACTION_CALL);

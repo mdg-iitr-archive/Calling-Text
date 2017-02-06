@@ -30,7 +30,7 @@ public class BackgroundService extends IntentService {
         dr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if(snapshot.child("receiver").child(CallManager.receiver)!=null) {
+                if (snapshot.child("receiver").child(CallManager.receiver) != null) {
                     BackGroundWorker.value = snapshot.child("receiver").child(CallManager.receiver).child("caller").getValue().toString();
                     BackGroundWorker.gifId = snapshot.child("receiver").child(CallManager.receiver).child("gifId").getValue().toString();
                     BackGroundWorker.msg = snapshot.child("receiver").child(CallManager.receiver).child("message").getValue().toString();
@@ -46,7 +46,7 @@ public class BackgroundService extends IntentService {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String s) {
 
-                if(snapshot.child("receiver").child(CallManager.receiver)!=null) {
+                if (snapshot.child("receiver").child(CallManager.receiver) != null) {
                     BackGroundWorker.value = snapshot.child("receiver").child(CallManager.receiver).child("caller").getValue().toString();
                     BackGroundWorker.gifId = snapshot.child("receiver").child(CallManager.receiver).child("gifId").getValue().toString();
                     BackGroundWorker.msg = snapshot.child("receiver").child(CallManager.receiver).child("message").getValue().toString();
@@ -57,7 +57,7 @@ public class BackgroundService extends IntentService {
             @Override
             public void onChildChanged(DataSnapshot snapshot, String s) {
 
-                if(snapshot.child("receiver").child(CallManager.receiver)!=null) {
+                if (snapshot.child("receiver").child(CallManager.receiver) != null) {
                     BackGroundWorker.value = snapshot.child("receiver").child(CallManager.receiver).child("caller").getValue().toString();
                     BackGroundWorker.gifId = snapshot.child("receiver").child(CallManager.receiver).child("gifId").getValue().toString();
                     BackGroundWorker.msg = snapshot.child("receiver").child(CallManager.receiver).child("message").getValue().toString();
@@ -84,8 +84,9 @@ public class BackgroundService extends IntentService {
 
 
     }
+
     @Override
-    public void onTaskRemoved(Intent rootIntent){
+    public void onTaskRemoved(Intent rootIntent) {
         Intent restartServiceIntent = new Intent(getApplicationContext(), this.getClass());
         restartServiceIntent.setPackage(getPackageName());
 
