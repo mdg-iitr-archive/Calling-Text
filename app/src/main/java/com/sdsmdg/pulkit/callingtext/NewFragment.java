@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     String receiver;
     String name;
     GifImageView img;
+    FrameLayout fl;
     android.support.v4.app.FragmentManager fragmentManager;
     TextView t1;
     GifFragment fragment;
@@ -51,9 +53,11 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         yourNumber = "7248187747";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
+        fl=(FrameLayout)view.findViewById(R.id.color);
         img.setOnClickListener(this);
         call = (Button) view.findViewById(R.id.button4);
         call.setOnClickListener(this);
+        fl.setAlpha(0);
         return view;
     }
 
@@ -89,6 +93,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                 Log.e("call", "call");
                 break;
             case R.id.imageView3:
+                fl.setAlpha(0.5f);
                 call.setVisibility(View.INVISIBLE);
                 GifFragment gifFragment = new GifFragment();
                 this.getFragmentManager().beginTransaction()
@@ -110,6 +115,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setImage(String gifNumber) {
+        fl.setAlpha(0);
         Log.e("pul", "pul");
         gifNumber1 = gifNumber;
         call.setVisibility(View.VISIBLE);

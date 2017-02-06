@@ -39,14 +39,6 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
 //        Intent intent = new Intent(this, BackGroundWorker.class);
 //        startService(intent);
         }
-    private void call(String s) {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:" + s));
-        try{
-            startActivity(callIntent);}
-        catch (android.content.ActivityNotFoundException ex){
-            Toast.makeText(BaseActivity.this,"yourActivity is not found",Toast.LENGTH_SHORT).show();}
-    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {

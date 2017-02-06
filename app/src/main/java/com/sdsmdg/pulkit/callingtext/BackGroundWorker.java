@@ -46,6 +46,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         if (n1 == 1) {
             caller = params[0];
             receiver = params[1];
+            Log.e("second","second");
 //            dr.addListenerForSingleValueEvent(new ValueEventListener() {
 //                @Override
 //                public void onDataChange(DataSnapshot snapshot) {

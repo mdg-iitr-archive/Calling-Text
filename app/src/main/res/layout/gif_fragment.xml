@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="600dp"
-    android:layout_height="700dp"
+    android:layout_width="320dp"
+    android:layout_height="400dp"
     android:id="@+id/gif"
+    android:background="@color/colorPrimary"
    >
 
 
