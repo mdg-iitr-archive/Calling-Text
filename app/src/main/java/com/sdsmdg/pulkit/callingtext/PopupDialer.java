@@ -1,6 +1,8 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -27,7 +29,7 @@ public class PopupDialer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_dialer);
+        setContentView(R.layout.popup);
         et_message = (EditText) findViewById(R.id.message);
         call = (Button) findViewById(R.id.btn_call);
         g = (GifImageView) findViewById(R.id.gif_image);
@@ -40,24 +42,68 @@ public class PopupDialer extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Log.i("CALLL CLICK ", yourNumber + "" + number + "" + message);
                 if (haveNetworkConnection() == true) {
+                    final  ComponentName component = new ComponentName(getBaseContext(), CallManager.class);
+                    int status = getBaseContext().getPackageManager().getComponentEnabledSetting(component);
+                    Log.e("INTSTATUS", status + "nknks");
+                    if (status == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                        Log.e("POPOp", "receiver is enabled");
+                    } else if (status == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                        Log.e("POPop", "receiver is disabled");
+                    } else {
+                        Log.e("POPop", "receiver is nooooone");
+
+                    }
+                    //to disable
+                    getBaseContext().getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+                    Log.e("POPop", "disable receiver");
+
                     if (message != null && number != null) {
                         Log.i("REACHED HERe", "YEAAA !!");
                         BackGroundWorker b = new BackGroundWorker(PopupDialer.this, 2);
-
                         Log.e("number", number);
                         b.execute(yourNumber, number, message, gifNumber1);
                         Intent callIntent = new Intent(Intent.ACTION_CALL);
                         callIntent.setData(Uri.parse("tel:" + number));
                         Log.e("receiver", "tel:" + number);
-//                        startActivity(callIntent);
+                        try {
+                            startActivity(callIntent);
+
+                        } catch (SecurityException s) {
+                            Log.e("exception", s.toString());
+
+                        }
                     } else {
                         Log.e("in else", "in else");
                         Toast.makeText(PopupDialer.this, "please type your message or number", Toast.LENGTH_SHORT).show();
+
                     }
-                } else
+                    //to enable
+                    new java.util.Timer().schedule(
+                            new java.util.TimerTask() {
+                                @Override
+                                public void run() {
+                                    // your code here
+                                    getBaseContext().getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+                                    Log.e("POPop", "enabled receiver");
+                                }
+                            },
+                            10000
+                    );
+
+                    finish();
+                    Log.e("FINSIHSSS", "FINNNSHS HIIm");
+
+                } else {
                     Toast.makeText(PopupDialer.this, "you have no internet connection", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Log.e("FINSIHSSS", "FINNNSIISHS HIIm");
+
+                }
+
+
                 Log.e("call", "call");
             }
         });

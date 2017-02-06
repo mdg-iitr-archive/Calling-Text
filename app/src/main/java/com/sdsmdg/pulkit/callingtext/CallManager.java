@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import java.lang.reflect.Method;
+
 public class CallManager extends BroadcastReceiver implements BackGroundWorker.resultInterface {
     public static Context context1;
     public static String msg;
@@ -20,6 +22,22 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
         Log.e("pulkit", "in received");
         String caller = "7248187747";
         String receiver = "7253046197";
+
+
+        if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
+            if (!BaseActivity.calledByapp) {
+                String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+                Log.i("inside", "yes" + number);
+                killCall(context);
+                // If it is to call (outgoing)
+                Intent i = new Intent(context, PopupDialer.class);
+                i.putExtra("number", number);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            }
+            BaseActivity.calledByapp = false;
+        }
+
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
         if (state != null) {
             if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
@@ -35,6 +53,7 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
                 }
 
             }
+
         }
     }
 
@@ -46,6 +65,39 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
 //            }
 //        }
 //    }
+
+    public boolean killCall(Context context) {
+        Log.i("INside", "killcallll");
+        try {
+            // Get the boring old TelephonyManager
+            TelephonyManager telephonyManager =
+                    (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
+            // Get the getITelephony() method
+            Class classTelephony = Class.forName(telephonyManager.getClass().getName());
+            Method methodGetITelephony = classTelephony.getDeclaredMethod("getITelephony");
+
+            // Ignore that the method is supposed to be private
+            methodGetITelephony.setAccessible(true);
+
+            // Invoke getITelephony() to get the ITelephony interface
+            Object telephonyInterface = methodGetITelephony.invoke(telephonyManager);
+
+            // Get the endCall method from ITelephony
+            Class telephonyInterfaceClass =
+                    Class.forName(telephonyInterface.getClass().getName());
+            Method methodEndCall = telephonyInterfaceClass.getDeclaredMethod("endCall");
+
+            // Invoke endCall()
+            methodEndCall.invoke(telephonyInterface);
+
+        } catch (Exception ex) { // Many things can go wrong with reflection calls
+            Log.d("uyfukkyvhggv", "PhoneStateReceiver **" + ex.toString());
+            return false;
+        }
+        return true;
+    }
+
 
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;

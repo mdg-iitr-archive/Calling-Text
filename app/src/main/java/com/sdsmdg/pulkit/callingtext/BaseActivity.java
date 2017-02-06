@@ -22,6 +22,7 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     FragmentManager fragmentManager;
     GifFragment fragment;
     public static String mname,mnumber;
+    public static Boolean calledByapp = false;
 
     public static String getMname() {
         return mname;
@@ -46,7 +47,6 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-
         viewPager.setAdapter(mAdapter);
        /* actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);*/

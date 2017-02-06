@@ -3,15 +3,12 @@ package com.sdsmdg.pulkit.callingtext;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Observable;
 
 /**
  * Created by this pc on 08-08-2016.
@@ -30,13 +27,13 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
 
     public BackGroundWorker(Context context1, int n) {
-        mCallback=(CallManager)new CallManager();
+        mCallback = (CallManager) new CallManager();
         context = context1;
         n1 = n;
 
     }
-    public interface resultInterface
-    {
+
+    public interface resultInterface {
         public void getContent(String s);
     }
 
@@ -49,16 +46,15 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             dr.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
-                    Log.e("in datachange","in datachange");
+                    Log.e("in datachange", "in datachange");
                     value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
-                    Log.e("Value : ",value);
-                    Log.e("Receiver : ",receiver);
-                    gifId=snapshot.child("caller").child(caller).child("gifId").getValue().toString();
-                    msg=snapshot.child("caller").child(caller).child("message").getValue().toString();
-                    if (value.equals(receiver))
-                    {
-                        Log.e("in value","in value");
-                        mCallback.getContent(msg+" "+gifId);
+                    Log.e("Value : ", value);
+                    Log.e("Receiver : ", receiver);
+                    gifId = snapshot.child("caller").child(caller).child("gifId").getValue().toString();
+                    msg = snapshot.child("caller").child(caller).child("message").getValue().toString();
+                    if (value.equals(receiver)) {
+                        Log.e("in value", "in value");
+                        mCallback.getContent(msg + " " + gifId);
                     }
                 }
 
@@ -67,10 +63,9 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                 }
             });
 
-            if(value.equals(caller))
-            {
-                Log.e("in value","in value");
-               mCallback.getContent(msg+" "+gifId);
+            if (value.equals(caller)) {
+                Log.e("in value", "in value");
+                mCallback.getContent(msg + " " + gifId);
             }
         } else {
             caller = params[0];

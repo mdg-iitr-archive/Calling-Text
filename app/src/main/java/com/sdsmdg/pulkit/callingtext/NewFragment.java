@@ -2,11 +2,13 @@ package com.sdsmdg.pulkit.callingtext;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,20 +20,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import pl.droidsonroids.gif.GifImageView;
 
 public class NewFragment extends Fragment implements View.OnClickListener {
     private final int REQUEST_CODE = 1;
     EditText editText1;
     EditText editText2;
-    public EditText editName;
+//    public EditText editName;
     String yourNumber, yourName;
+    String receiver;
+    String name;
     GifImageView img;
     TextView t1;
     GifFragment fragment;
     View view;
     Button call;
-    Button save;
     public static String gifNumber1;
     private static final int CONTACTS_LOADER_ID = 1;
     private WindowManager windowManager;
@@ -43,17 +49,16 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.new_fragment, container, false);
         editText1 = (EditText) view.findViewById(R.id.editText2); //number
         editText2 = (EditText) view.findViewById(R.id.editText);//message
-        editName = (EditText) view.findViewById(R.id.editText3); //name
+//        editName = (EditText) view.findViewById(R.id.editText3); //name
         yourNumber = "7253046197";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
 
-        editName.setText(BaseActivity.getMname());
+//        editName.setText(BaseActivity.getMname());
         img.setOnClickListener(this);
         call = (Button) view.findViewById(R.id.button4);
         call.setOnClickListener(this);
-        save = (Button) view.findViewById(R.id.button3);
-        save.setOnClickListener(this);
+
         return view;
     }
 
@@ -69,8 +74,18 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                         Log.e("number", editText1.getText().toString());
                         b.execute(yourNumber, editText1.getText().toString(), editText2.getText().toString(), gifNumber1);
                         Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:"+editText1.getText().toString()));
-                        Log.e("receiver","tel:"+editText1.getText().toString());
+                        BaseActivity.calledByapp = true;
+                        callIntent.setData(Uri.parse("tel:" + editText1.getText().toString()));
+                        Log.e("receiver", "tel:" + editText1.getText().toString());
+//                        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
+//                        Cursor phones = getActivity().getContentResolver().query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+////                        while (phones.moveToNext()) {
+////                            name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+////                        }
+//                        name = "ABC";
+//                        CallerDetails cd = new CallerDetails(name,editText1.getText().toString(),editText2.getText().toString(),"outgoing", DateFormat.getDateTimeInstance().format(new Date()));
+//                        DataBaseHandler dbh=DataBaseHandler.getInstance(getContext());
+//                        dbh.addCaller(cd);
                         startActivity(callIntent);
                     } else {
                         Log.e("in else", "in else");
@@ -79,21 +94,9 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                 } else
                     Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
                 Log.e("call", "call");
-                break;
-            case R.id.button3:
-                if (haveNetworkConnection() == true) {
-                    if (editText2.getText().toString() != null) {
-                        BackGroundWorker b = new BackGroundWorker(getActivity(), 2);
-                        b.execute(yourNumber, editText1.getText().toString(), editText2.getText().toString(), gifNumber1);
-                    } else {
-                        Log.e("in else", "in else");
-                        Toast.makeText(getActivity(), "please type message", Toast.LENGTH_SHORT).show();
-                    }
-                } else
-                    Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.imageView3:
-                save.setVisibility(View.INVISIBLE);
                 call.setVisibility(View.INVISIBLE);
                 GifFragment gifFragment = new GifFragment();
                 this.getFragmentManager().beginTransaction()
@@ -114,27 +117,10 @@ public class NewFragment extends Fragment implements View.OnClickListener {
 
     }
 
-   /* public void OK(View v) {
-        Uri uri = Uri.parse("content://contacts");
-        Intent intent = new Intent(Intent.ACTION_PICK, uri);
-        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-        startActivityForResult(intent, REQUEST_CODE);
-    }
-
-    /* private void call(String s) {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-         callIntent.setData(Uri.parse("tel:" + s));
-         try{
-         startActivity(callIntent);}
-         catch (android.content.ActivityNotFoundException ex){
-             Toast.makeText(getActivity(),"yourActivity is not found",Toast.LENGTH_SHORT).show();}
-     }*/
-
-
     public void setImage(String gifNumber) {
         Log.e("pul", "pul");
         gifNumber1 = gifNumber;
-        save.setVisibility(View.VISIBLE);
+
         call.setVisibility(View.VISIBLE);
         switch (gifNumber) {
             case "1":
