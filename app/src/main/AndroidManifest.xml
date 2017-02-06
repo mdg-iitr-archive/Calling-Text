@@ -37,6 +37,10 @@
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
+        <service
+            android:name=".BackgroundService"
+            android:enabled="true"
+            android:exported="false"/>
         <receiver
             android:name=".PopupDialerReceiver"
             android:enabled="true"

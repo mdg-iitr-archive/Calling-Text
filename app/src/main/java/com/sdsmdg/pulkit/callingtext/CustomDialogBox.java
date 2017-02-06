@@ -1,8 +1,12 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -13,6 +17,16 @@ public class CustomDialogBox extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
+        ShapeDrawable rectShapeDrawable = new ShapeDrawable();
+        Paint paint = rectShapeDrawable.getPaint();
+        paint.setColor(Color.parseColor("#388FF5"));
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(3);
+        layout.setBackgroundDrawable(rectShapeDrawable);
+
+
        setContentView(R.layout.dialog);
        t = (TextView)findViewById(R.id.textView5);
        g=(GifImageView)findViewById(R.id.imageView2);

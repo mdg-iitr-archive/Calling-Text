@@ -15,12 +15,10 @@ import android.widget.Toast;
 
 public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageselectionListener {
 
-    TabHost tabHost;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
-    FragmentManager fragmentManager;
-    GifFragment fragment;
+    public static String receiver="7248187747";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +27,9 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
-       /* actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);*/
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        //tabLayout.setTabTextColors();
-             tabLayout.setupWithViewPager(viewPager);
-
-
-//        Intent intent = new Intent(this, BackGroundWorker.class);
-//        startService(intent);
+        tabLayout.setupWithViewPager(viewPager);
+        startService(new Intent(this, BackgroundService.class));
         }
 
     @Override
