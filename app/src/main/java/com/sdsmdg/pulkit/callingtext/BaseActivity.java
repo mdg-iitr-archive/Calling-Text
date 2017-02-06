@@ -47,7 +47,13 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        int pg_number = 0;
         viewPager.setAdapter(mAdapter);
+        if(getIntent().getExtras()!= null){
+            pg_number = Integer.parseInt(getIntent().getExtras().getString("pagenumber"));
+        }
+        viewPager.setCurrentItem(pg_number);
+
        /* actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);*/
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

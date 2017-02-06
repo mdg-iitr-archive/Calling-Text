@@ -53,6 +53,10 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         yourNumber = "7253046197";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
+        if(BaseActivity.mnumber!=null){
+            Log.i("Number selected ",BaseActivity.mnumber);
+            editText1.setText(BaseActivity.mnumber);
+        }
 
 //        editName.setText(BaseActivity.getMname());
         img.setOnClickListener(this);

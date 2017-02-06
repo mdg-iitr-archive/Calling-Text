@@ -60,9 +60,6 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
 //                intent.putExtra("name",(String)contactList.get(position).get(0));
 //                intent.putExtra("number",(String)contactList.get(position).get(1));
 //                v.getContext().startActivity(intent);
-                BaseActivity.setMname(holder.name.getText().toString());
-                BaseActivity.setMnumber(holder.phoneNumber.getText().toString());
-                Log.i("CLICK ", "OVER HERE BITCH!"+BaseActivity.getMname()+" "+BaseActivity.getMnumber());
 
 
             }
@@ -71,6 +68,10 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
             @Override
             public void onClick(View v) {
                 listener.onItemClick();
+                BaseActivity.setMname(holder.name.getText().toString());
+                BaseActivity.setMnumber(holder.phoneNumber.getText().toString());
+                Log.i("CLICK ", "OVER HERE BITCH!"+BaseActivity.getMname()+" "+BaseActivity.getMnumber());
+
             }
         });
 
@@ -110,11 +111,7 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
             textsmsLogo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent i = new Intent(vi.getContext(),NewFragment.class);
-//                    i.putExtra("name",name.toString());
-//                    i.putExtra("number",phoneNumber.toString());
-//                    vi.getContext().startActivity(i);
-//                    Log.i("CLICK " ,"HERE BITCH!");
+
 
                 }
             });
