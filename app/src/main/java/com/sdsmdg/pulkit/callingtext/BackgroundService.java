@@ -30,11 +30,6 @@ public class BackgroundService extends Service {
     DatabaseReference callertree = FirebaseDatabase.getInstance().getReference().child("caller");
     DatabaseReference receivertree = FirebaseDatabase.getInstance().getReference().child("receiver");
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
-    String name;
-    String number;
-    String type;
-    String time;
-    String msg;
     public static int count=0;
     DataBaseHandler dbh;
 
@@ -50,21 +45,8 @@ public class BackgroundService extends Service {
                     Log.e("on data change listener", "on data change listener");
                     BackGroundWorker.value = snapshot.child("receiver").child(BaseActivity.receiver).child("caller").getValue().toString();
                     BackGroundWorker.gifId = snapshot.child("receiver").child(BaseActivity.receiver).child("gifId").getValue().toString();
-                    BackGroundWorker.msg = snapshot.child("receiver").child(BaseActivity.receiver
-                    ).child("message").getValue().toString();
+                    BackGroundWorker.msg = snapshot.child("receiver").child(BaseActivity.receiver).child("message").getValue().toString();
                     Log.e("gif",BackGroundWorker.gifId );
-                    Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
-                    Cursor phones = getContentResolver().query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
-                    while (phones.moveToNext()) {
-                        name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-                    }
-                    number = BackGroundWorker.value;
-                    type = "incoming";
-                    time = DateFormat.getDateTimeInstance().format(new Date());
-                    msg=BackGroundWorker.msg;
-                    CallerDetails cd =new CallerDetails(name,number,msg,type,time);
-                    dbh= DataBaseHandler.getInstance(getBaseContext());
-                    dbh.addCaller(cd);
                 }
             }
 

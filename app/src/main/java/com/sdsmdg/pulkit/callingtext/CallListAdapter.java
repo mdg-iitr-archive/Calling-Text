@@ -4,9 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
+import android.transition.TransitionManager;
+import android.util.Log;
+import android.util.LongSparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +25,13 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
 
     List<CallerDetails> callerList;
     Activity parentAct;
+    int mExpandedPosition=-1;
+    RecyclerView recyclerView;
+    Long timeDiff;
 
-    public CallListAdapter(List<CallerDetails> historyList, Activity activity) {
+    public CallListAdapter(List<CallerDetails> historyList, Activity activity,RecyclerView recyclerView1) {
         this.callerList = historyList;
+        this.recyclerView=recyclerView1;
         parentAct = activity;
     }
 
@@ -36,17 +45,76 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
     }
 
     @Override
-    public void onBindViewHolder(CallListAdapter.ListViewHolder holder, int position) {
+    public void onBindViewHolder(final CallListAdapter.ListViewHolder holder, final int position) {
         CallerDetails hd = callerList.get(position);
-        holder.vName.setText(hd.getCaller_name());
-        holder.vNumber.setText(hd.getCaller_name());
+        holder.vNumber.setText(hd.getCaller_number());
         holder.vMsg.setText(hd.getCaller_msg());
-        holder.time.setText(hd.getCall_time());
+        timeDiff = (Long.valueOf(System.currentTimeMillis())-Long.parseLong(hd.getCall_time()))/1000;
+        holder.time.setText(getTime(timeDiff));
+        final boolean isExpanded = position==mExpandedPosition;
+       /* holder.vMsg.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.itemView.setActivated(isExpanded);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("on click","on click");
+                mExpandedPosition = isExpanded ? -1:position;
+                TransitionManager.beginDelayedTransition(recyclerView);
+                holder.vMsg.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
+            }
+        });*/
         if (hd.getCall_type().equals("outgoing")) {
             holder.type.setImageResource(R.drawable.call_made);
         } else if (hd.getCall_type().equals("incoming")) {
             holder.type.setImageResource(R.drawable.call_received);
         }
+
+    }
+    public String getTime(Long timeDiff)
+    {
+        String time;
+        Long minutes = timeDiff/60;
+        Integer hours = minutes.intValue()/60;
+        Integer days = hours/24;
+        if(timeDiff<60){
+            if(timeDiff==1){
+                time = " "+timeDiff.toString() + " second ago";
+            } else {
+                time = " "+timeDiff.toString() + " seconds ago";
+            }
+        }else {
+            if (minutes < 60) {
+                if(minutes==1){
+                    time = " "+minutes.toString() + " minute ago";
+                } else {
+                    time = " "+minutes.toString() + " minutes ago";
+                }
+
+
+            } else {
+                if (hours < 25) {
+                    if(hours==1){
+                        time = " "+hours.toString() + " hour ago";
+
+                    }else {
+                        time = " "+hours.toString() + " hours ago";
+
+                    }
+
+                } else {
+                    if(days==1){
+                        time = " "+days.toString() + " day ago";
+
+                    }else {
+                        time = " "+days.toString() + " days ago";
+
+                    }
+                }
+            }
+
+        }
+return time;
 
     }
 
@@ -66,7 +134,6 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
 
         public ListViewHolder(View vi) {
             super(vi);
-            vName = (TextView) vi.findViewById(R.id.name);
             vNumber = (TextView) vi.findViewById(R.id.number);
             vMsg = (TextView) vi.findViewById(R.id.message);
             type = (ImageView) vi.findViewById(R.id.call_type);
@@ -77,7 +144,8 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
 
         @Override
         public void onClick(View v) {
-
+            Animation animation = AnimationUtils.loadAnimation(parentAct, R.anim.swipe);
+            v.startAnimation(animation);
         }
     }
 

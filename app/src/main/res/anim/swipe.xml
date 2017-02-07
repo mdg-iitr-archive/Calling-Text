@@ -8,12 +8,12 @@
         android:toYDelta="0"/>
 
     <alpha
-        android:duration="75"
-        android:fromAlpha="0.0"
+        android:duration="200"
+        android:fromAlpha="1.0"
         android:toAlpha="1.0"/>
 
     <rotate
-        android:duration="75"
+        android:duration="200"
         android:fromDegrees="-25"
         android:pivotX="100%"
         android:pivotY="0"

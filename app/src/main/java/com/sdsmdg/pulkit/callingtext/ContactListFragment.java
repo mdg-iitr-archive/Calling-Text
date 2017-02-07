@@ -98,6 +98,11 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
 
         @Override
         protected String[] doInBackground(Void... params) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return new String[0];
         }
 

@@ -17,17 +17,15 @@ public class CustomDialogBox extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.dialog);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
         ShapeDrawable rectShapeDrawable = new ShapeDrawable();
         Paint paint = rectShapeDrawable.getPaint();
         paint.setColor(Color.parseColor("#388FF5"));
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(3);
+        paint.setStrokeWidth(10);
         layout.setBackgroundDrawable(rectShapeDrawable);
-
-
-       setContentView(R.layout.dialog);
        t = (TextView)findViewById(R.id.textView5);
        g=(GifImageView)findViewById(R.id.imageView2);
        int id=Integer.parseInt(CallManager.msg.substring(CallManager.msg.lastIndexOf(" ")+1));
