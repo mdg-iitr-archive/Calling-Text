@@ -1,8 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="600dp"
-    android:layout_height="700dp"
+    android:layout_width="320dp"
+    android:layout_height="400dp"
     android:id="@+id/gif"
+    android:background="@drawable/border_fl"
    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+
 
     <ImageButton
         android:layout_width="80dp"
@@ -363,5 +370,5 @@
         android:layout_toRightOf="@+id/imageButton15"
         android:layout_toEndOf="@+id/imageButton15" />
 
-
+    </RelativeLayout>
 </RelativeLayout>

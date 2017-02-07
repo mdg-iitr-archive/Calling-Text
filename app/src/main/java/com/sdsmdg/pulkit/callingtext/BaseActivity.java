@@ -50,7 +50,12 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         int pg_number = 0;
         viewPager.setAdapter(mAdapter);
         if(getIntent().getExtras()!= null){
-            pg_number = Integer.parseInt(getIntent().getExtras().getString("pagenumber"));
+            try {
+                pg_number = Integer.parseInt(getIntent().getExtras().getString("pagenumber"));
+
+            }catch (NumberFormatException num){
+                Log.i("EXCEpTION",num.toString());
+            }
         }
         viewPager.setCurrentItem(pg_number);
 
@@ -101,4 +106,5 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
             newFragment.setImage(position);
         }
     }
+
 }

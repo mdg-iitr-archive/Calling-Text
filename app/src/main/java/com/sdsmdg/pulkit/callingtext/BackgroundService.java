@@ -44,6 +44,7 @@ public class BackgroundService extends IntentService {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.child("receiver").child(CallManager.receiver) != null) {
+                    Log.e("first","first");
                     Log.e("on data change listener", "on data change listener");
                     BackGroundWorker.value = snapshot.child("receiver").child(CallManager.receiver).child("caller").getValue().toString();
                     BackGroundWorker.gifId = snapshot.child("receiver").child(CallManager.receiver).child("gifId").getValue().toString();

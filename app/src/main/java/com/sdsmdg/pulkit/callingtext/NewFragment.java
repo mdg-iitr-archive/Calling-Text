@@ -2,13 +2,11 @@ package com.sdsmdg.pulkit.callingtext;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,11 +15,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.DateFormat;
-import java.util.Date;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -29,11 +26,15 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     private final int REQUEST_CODE = 1;
     EditText editText1;
     EditText editText2;
-//    public EditText editName;
+    //    public EditText editName;
     String yourNumber, yourName;
     String receiver;
     String name;
     GifImageView img;
+    public static FrameLayout fl, fl2;
+    RelativeLayout rl;
+    Boolean press = false;
+    android.support.v4.app.FragmentManager fragmentManager;
     TextView t1;
     GifFragment fragment;
     View view;
@@ -53,16 +54,18 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         yourNumber = "7253046197";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
-        if(BaseActivity.mnumber!=null){
-            Log.i("Number selected ",BaseActivity.mnumber);
+        if (BaseActivity.mnumber != null) {
+            Log.i("Number selected ", BaseActivity.mnumber);
             editText1.setText(BaseActivity.mnumber);
         }
 
-//        editName.setText(BaseActivity.getMname());
+        fl = (FrameLayout) view.findViewById(R.id.color);
+        fl2 = (FrameLayout) view.findViewById(R.id.bottom);
+        rl = (RelativeLayout) view.findViewById(R.id.my_layout);
         img.setOnClickListener(this);
         call = (Button) view.findViewById(R.id.button4);
         call.setOnClickListener(this);
-
+        fl.setAlpha(0);
         return view;
     }
 
@@ -101,12 +104,25 @@ public class NewFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.imageView3:
-                call.setVisibility(View.INVISIBLE);
                 GifFragment gifFragment = new GifFragment();
-                this.getFragmentManager().beginTransaction()
-                        .replace(R.id.bottom, gifFragment, null)
-                        .addToBackStack(null)
-                        .commit();
+//                if (press) {
+                    fl.setAlpha(0.5f);
+                    call.setVisibility(View.INVISIBLE);
+                    this.getFragmentManager().beginTransaction()
+                            .replace(R.id.bottom, gifFragment, null)
+                            .addToBackStack(null)
+                            .commit();
+                    press = !press;
+//                } else {
+//                    fl.setAlpha(0);
+//                    this.getFragmentManager().beginTransaction()
+//                            .detach(gifFragment)
+//                            .addToBackStack(null)
+//                            .commit();
+//                    press = !press;
+//                }
+
+
                 break;
             default:
                 break;
@@ -122,6 +138,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setImage(String gifNumber) {
+        fl.setAlpha(0);
         Log.e("pul", "pul");
         gifNumber1 = gifNumber;
 
