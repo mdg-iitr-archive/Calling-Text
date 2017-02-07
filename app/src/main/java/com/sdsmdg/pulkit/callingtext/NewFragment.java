@@ -84,15 +84,14 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                         BaseActivity.calledByapp = true;
                         callIntent.setData(Uri.parse("tel:" + editText1.getText().toString()));
                         Log.e("receiver", "tel:" + editText1.getText().toString());
-//                        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
-//                        Cursor phones = getActivity().getContentResolver().query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
-////                        while (phones.moveToNext()) {
-////                            name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-////                        }
-//                        name = "ABC";
-//                        CallerDetails cd = new CallerDetails(name,editText1.getText().toString(),editText2.getText().toString(),"outgoing", DateFormat.getDateTimeInstance().format(new Date()));
-//                        DataBaseHandler dbh=DataBaseHandler.getInstance(getContext());
-//                        dbh.addCaller(cd);
+                        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
+                        Cursor phones = getActivity().getContentResolver().query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+                        while (phones.moveToNext()) {
+                            name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                        }
+                        CallerDetails cd = new CallerDetails(name,editText1.getText().toString(),editText2.getText().toString(),"outgoing", String.valueOf(new Date().getTime()));
+                        DataBaseHandler dbh=DataBaseHandler.getInstance(getContext());
+                        dbh.addCaller(cd);
                         startActivity(callIntent);
                     } else {
                         Log.e("in else", "in else");

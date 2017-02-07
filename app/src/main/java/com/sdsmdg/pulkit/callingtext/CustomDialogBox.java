@@ -27,8 +27,6 @@ public class CustomDialogBox extends AppCompatActivity {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
         layout.setBackgroundDrawable(rectShapeDrawable);
-
-
        t = (TextView)findViewById(R.id.textView5);
        g=(GifImageView)findViewById(R.id.imageView2);
        int id=Integer.parseInt(CallManager.msg.substring(CallManager.msg.lastIndexOf(" ")+1));

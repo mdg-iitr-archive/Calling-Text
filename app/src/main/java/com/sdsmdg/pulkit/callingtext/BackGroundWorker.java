@@ -1,7 +1,10 @@
 package com.sdsmdg.pulkit.callingtext;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.Observable;
 
 /**
@@ -21,9 +25,14 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     String caller, receiver;
     int n1;
     CallManager cm;
+    String name;
+    String number;
+    String type;
+    String time;
     public static String value = "";
     public static String gifId;
     public static String msg;
+    DataBaseHandler dbh;
     resultInterface mCallback;
     DatabaseReference callertree = FirebaseDatabase.getInstance().getReference().child("caller");
     DatabaseReference receivertree = FirebaseDatabase.getInstance().getReference().child("receiver");
@@ -46,8 +55,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         if (n1 == 1) {
             caller = params[0];
             receiver = params[1];
-            Log.e("second","second");
-            if(BackgroundService.count>=2) {
+            if(BackgroundService.count<=2) {
                 dr.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
@@ -58,6 +66,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                             msg = snapshot.child("caller").child(caller).child("message").getValue().toString();
                             Log.e("receiver", receiver);
                             Log.e("caller", value);
+
                         }
                     }
 
@@ -66,15 +75,37 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                     }
                 });
                 if (value.equals(receiver)) {
-                    Log.e("in value", "in value");
+                    Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
+                    Cursor phones = context.getContentResolver().query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+                    while (phones.moveToNext()) {
+                        name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                    }
+                    number = BackGroundWorker.value;
+                    type = "incoming";
+                    time = String.valueOf(new Date().getTime());
+                    CallerDetails cd =new CallerDetails(name,number,msg,type,time);
+                    dbh= DataBaseHandler.getInstance(context);
+                    dbh.addCaller(cd);
                     mCallback.getContent(msg + " " + gifId);
                 }
             }else {
                 if (value.equals(caller)) {
                     Log.e("in value", "in value");
+                    Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
+                    Cursor phones = context.getContentResolver().query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+                    while (phones.moveToNext()) {
+                        name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                    }
+                    number = BackGroundWorker.value;
+                    type = "incoming";
+                    time = String.valueOf(new Date().getTime());
+                    CallerDetails cd =new CallerDetails(name,number,msg,type,time);
+                    dbh= DataBaseHandler.getInstance(context);
+                    dbh.addCaller(cd);
+
                     mCallback.getContent(msg + " " + gifId);
                 }
-                BackgroundService.count--;
+                BackgroundService.count=1;
             }
         } else {
             caller = params[0];

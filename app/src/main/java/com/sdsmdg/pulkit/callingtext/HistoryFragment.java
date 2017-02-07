@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 
+import java.util.Date;
 import java.util.List;
 
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
@@ -31,36 +32,11 @@ public class HistoryFragment extends Fragment {
         view=inflater.inflate(R.layout.activity_history, container, false);
         recList = (RecyclerView) view.findViewById(R.id.history_recycler);
         dbh = DataBaseHandler.getInstance(getContext());
-        dbh.clear();
-        CallerDetails cd =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd);
-        CallerDetails cd1 =new CallerDetails("name","number","message","incoming","time");
-        dbh.addCaller(cd1);
-        CallerDetails cd2 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd2);
-        CallerDetails cd3 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd3);
-        CallerDetails cd4 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd4);
-        CallerDetails cd5 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd5);
-        CallerDetails cd6 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd6);
-        CallerDetails cd7 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd7);
-        CallerDetails cd8 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd8);
-        CallerDetails cd9 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd9);
-        CallerDetails cd10 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd10);
-        CallerDetails cd11 =new CallerDetails("name","number","message","outgoing","time");
-        dbh.addCaller(cd11);
         addToList();
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) view.findViewById(R.id.main_swipe);
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
             @Override public void onRefresh() {
-                // Do work to refresh the list here.
+                addToList();
                 new HistoryFragment.Task().execute();
             }
         });
@@ -70,7 +46,12 @@ public class HistoryFragment extends Fragment {
 
         @Override
         protected String[] doInBackground(Void... params) {
-            return new String[0];
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }return new String[0];
         }
 
         @Override protected void onPostExecute(String[] result) {
@@ -92,7 +73,7 @@ public class HistoryFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-        CallListAdapter ca = new CallListAdapter(createList(),getActivity());
+        CallListAdapter ca = new CallListAdapter(createList(),getActivity(),recList);
         ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(ca);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
         alphaAdapter.setDuration(1000);

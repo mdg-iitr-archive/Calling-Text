@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -96,6 +97,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
                 userList.add(cd);
             } while (cursor.moveToNext());
         }
+        Collections.reverse(userList);
         return userList;
     }
     public String getUser(String name) {
