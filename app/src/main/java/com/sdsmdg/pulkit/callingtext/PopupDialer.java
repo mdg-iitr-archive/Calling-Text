@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -24,6 +25,7 @@ public class PopupDialer extends AppCompatActivity implements GifFragment.onImag
     GifImageView g;
     GifFragment fragment;
     Button call;
+    RelativeLayout rl;
     public static String gifNumber1 = "1";
     String number, message, yourNumber;
     public String TAG = "POPUP";
@@ -37,6 +39,7 @@ public class PopupDialer extends AppCompatActivity implements GifFragment.onImag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup);
+        rl = (RelativeLayout)findViewById(R.id.popup_rl);
         et_message = (EditText) findViewById(R.id.message);
         call = (Button) findViewById(R.id.btn_call);
         g = (GifImageView) findViewById(R.id.gif_image);
@@ -118,6 +121,12 @@ public class PopupDialer extends AppCompatActivity implements GifFragment.onImag
         g.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                params.width =320;
+//                params.height =500;
+//                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//                rl.setLayoutParams(params);
+
                 call.setVisibility(View.INVISIBLE);
                 GifFragment gifFragment = new GifFragment();
 //                FragmentManager fm = getFragmentManager();

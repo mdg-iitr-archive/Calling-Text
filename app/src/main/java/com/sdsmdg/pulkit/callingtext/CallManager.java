@@ -45,8 +45,11 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
             if (!BaseActivity.calledByapp) {
                 String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
                 Log.i("inside", "yes" + number);
-                number = number.substring(number.length()-11);
-                number = number.substring(1);
+                if(number.length()>11){
+                    number = number.substring(number.length()-11);
+                    number = number.substring(1);
+                }
+
                 killCall(context);
                 // If it is to call (outgoing)
                 Intent i = new Intent(context, PopupDialer.class);

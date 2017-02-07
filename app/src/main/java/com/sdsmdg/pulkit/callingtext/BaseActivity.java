@@ -6,12 +6,15 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     private ActionBar actionBar;
     FragmentManager fragmentManager;
     GifFragment fragment;
+    Button btn_settings;
     public static String mname,mnumber;
     public static Boolean calledByapp = false;
 
@@ -46,6 +50,14 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        btn_settings = (Button)findViewById(R.id.btn_settings);
+        btn_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent o = new Intent(BaseActivity.this,Settings.class);
+                startActivity(o);
+            }
+        });
         TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         String mPhoneNumber = tMgr.getLine1Number();
         Log.e("MY BA NO.","PHONE NO."+mPhoneNumber);
@@ -54,6 +66,10 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         int pg_number = 0;
         viewPager.setAdapter(mAdapter);
+//        if(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "7248187747")!=null){
+//            receiver = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "7248187747");
+//        }
+
         if(getIntent().getExtras()!= null){
             try {
                 pg_number = Integer.parseInt(getIntent().getExtras().getString("pagenumber"));

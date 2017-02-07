@@ -29,6 +29,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+    </FrameLayout>
+
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="90dp"
@@ -45,13 +55,5 @@
         android:layout_alignRight="@+id/textView5"
         android:layout_alignEnd="@+id/textView5" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
 
-    </FrameLayout>
 </RelativeLayout>
