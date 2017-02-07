@@ -3,19 +3,20 @@ package com.sdsmdg.pulkit.callingtext;
 import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.TabHost;
 import android.widget.Toast;
 
 public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageselectionListener {
 
-    TabHost tabHost;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
@@ -40,10 +41,14 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         BaseActivity.mnumber = mnumber;
     }
 
+    public static String receiver="7248187747";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        String mPhoneNumber = tMgr.getLine1Number();
+        Log.e("MY BA NO.","PHONE NO."+mPhoneNumber);
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
@@ -61,13 +66,10 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
 
        /* actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);*/
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        //tabLayout.setTabTextColors();
-             tabLayout.setupWithViewPager(viewPager);
-
-
-//        Intent intent = new Intent(this, BackGroundWorker.class);
-//        startService(intent);
+        tabLayout.setupWithViewPager(viewPager);
+        startService(new Intent(this, BackgroundService.class));
         }
     private void call(String s) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -95,7 +97,7 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
 
     @Override
     public void onImageSelection(String position) {
-        Log.e("in null","in null");
+        Log.e("in Imageselection","in !!!!");
         Log.e("in null",getSupportFragmentManager().getFragments().get(0).getTag());
         NewFragment newFragment = (NewFragment)
                 getSupportFragmentManager().getFragments().get(2

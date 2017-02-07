@@ -1,5 +1,7 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,15 +18,20 @@ import android.widget.Toast;
 
 import pl.droidsonroids.gif.GifImageView;
 
-public class PopupDialer extends AppCompatActivity {
+public class PopupDialer extends AppCompatActivity implements GifFragment.onImageselectionListener{
 
     EditText et_message;
     GifImageView g;
     GifFragment fragment;
     Button call;
-    public static String gifNumber1;
+    public static String gifNumber1 = "1";
     String number, message, yourNumber;
+    public String TAG = "POPUP";
 
+    @Override
+    public void onImageSelection(String position) {
+            setImage(position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +40,6 @@ public class PopupDialer extends AppCompatActivity {
         et_message = (EditText) findViewById(R.id.message);
         call = (Button) findViewById(R.id.btn_call);
         g = (GifImageView) findViewById(R.id.gif_image);
-        message = et_message.getText().toString();
         number = getIntent().getExtras().getString("number");
         Log.i("number and message ", message + ":" + number);
         yourNumber = "7253046197";
@@ -59,16 +65,17 @@ public class PopupDialer extends AppCompatActivity {
                     //to disable
                     getBaseContext().getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
                     Log.e("POPop", "disable receiver");
-
+                    message = et_message.getText().toString();
                     if (message != null && number != null) {
                         Log.i("REACHED HERe", "YEAAA !!");
                         BackGroundWorker b = new BackGroundWorker(PopupDialer.this, 2);
-                        Log.e("number", number);
+                        Log.e("number", number+"message:"+message);
                         b.execute(yourNumber, number, message, gifNumber1);
                         Intent callIntent = new Intent(Intent.ACTION_CALL);
                         callIntent.setData(Uri.parse("tel:" + number));
                         Log.e("receiver", "tel:" + number);
                         try {
+                            Log.i("Reached Here!","YES inside try");
                             startActivity(callIntent);
 
                         } catch (SecurityException s) {
@@ -113,16 +120,96 @@ public class PopupDialer extends AppCompatActivity {
             public void onClick(View v) {
                 call.setVisibility(View.INVISIBLE);
                 GifFragment gifFragment = new GifFragment();
+//                FragmentManager fm = getFragmentManager();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.bottom, gifFragment)
+                        .replace(R.id.bottom2, gifFragment)
                         .addToBackStack(null)
                         .commit();
+//                gifFragment.show(getSupportFragmentManager(),TAG);
+
+
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.add(gifFragment, null);
+//                ft.commit();
 
             }
         });
 
 
     }
+
+    public void setImage(String gifNumber) {
+        Log.e("aj", "aj");
+        gifNumber1 = gifNumber;
+
+        call.setVisibility(View.VISIBLE);
+        switch (gifNumber) {
+            case "1":
+                Log.e("in 1", "in 1");
+                g.setImageResource(R.drawable.birthday);
+                break;
+            case "2":
+                g.setImageResource(R.drawable.confused);
+                break;
+            case "3":
+                g.setImageResource(R.drawable.funny);
+                break;
+            case "4":
+                g.setImageResource(R.drawable.embares);
+                break;
+            case "5":
+                g.setImageResource(R.drawable.angry);
+                break;
+            case "6":
+                g.setImageResource(R.drawable.machau);
+                break;
+            case "7":
+                g.setImageResource(R.drawable.sorry);
+                break;
+            case "8":
+                g.setImageResource(R.drawable.hii);
+                break;
+            case "9":
+                g.setImageResource(R.drawable.hello);
+                break;
+            case "10":
+                g.setImageResource(R.drawable.love);
+                break;
+            case "11":
+                g.setImageResource(R.drawable.compliment);
+                break;
+            case "12":
+                g.setImageResource(R.drawable.happy);
+                break;
+            case "13":
+                g.setImageResource(R.drawable.sad);
+                break;
+            case "14":
+                g.setImageResource(R.drawable.crying);
+                break;
+            case "15":
+                g.setImageResource(R.drawable.worried);
+                break;
+            case "16":
+                g.setImageResource(R.drawable.praying);
+                break;
+            case "17":
+                g.setImageResource(R.drawable.smoking);
+                break;
+            case "18":
+                g.setImageResource(R.drawable.birthday);
+                break;
+            case "19":
+                g.setImageResource(R.drawable.birthday);
+                break;
+            case "20":
+                g.setImageResource(R.drawable.envy);
+                break;
+            default:
+                g.setImageResource(R.drawable.birthday);
+        }
+    }
+
 
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;

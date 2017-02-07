@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -13,6 +14,7 @@ import java.lang.reflect.Method;
 public class CallManager extends BroadcastReceiver implements BackGroundWorker.resultInterface {
     public static Context context1;
     public static String msg;
+    String caller;
     public static String receiver;
 
     @Override
@@ -20,14 +22,31 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
         context1 = context;
         Log.e("pul", "in receive");
         Log.e("pulkit", "in received");
-        String caller = "7248187747";
         String receiver = "7253046197";
+
+        TelephonyManager tMgr = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        String mPhoneNumber = tMgr.getLine1Number();
+        Log.e("MY NO.","PHONE NO."+mPhoneNumber);
+
+        TelephonyManager telephony = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        telephony.listen(new PhoneStateListener(){
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                super.onCallStateChanged(state, incomingNumber);
+                System.out.println("incomingNumber : "+incomingNumber);
+                caller = incomingNumber;
+            }
+        },PhoneStateListener.LISTEN_CALL_STATE);
+
 
 
         if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
+            Log.i("CALLING SOMEONE ? ","YEEAAAHHAHAH");
             if (!BaseActivity.calledByapp) {
                 String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
                 Log.i("inside", "yes" + number);
+                number = number.substring(number.length()-11);
+                number = number.substring(1);
                 killCall(context);
                 // If it is to call (outgoing)
                 Intent i = new Intent(context, PopupDialer.class);

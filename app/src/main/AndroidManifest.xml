@@ -32,14 +32,18 @@
             android:name=".CallManager"
             android:enabled="true"
             android:exported="true">
-            <intent-filter android:priority="-1">
+            <intent-filter android:priority="10">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
 
+
             </intent-filter>
         </receiver>
-
+        <service
+            android:name=".BackgroundService"
+            android:enabled="true"
+            android:exported="false" />
 
         <activity
             android:name=".CustomDialogBox"
@@ -50,7 +54,8 @@
         <!-- android:name=".HistoryFragment" -->
         <!-- android:label="@string/title_activity_history" -->
         <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
-        <activity android:name=".BaseActivity"
+        <activity
+            android:name=".BaseActivity"
             android:label="Calling-Text">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

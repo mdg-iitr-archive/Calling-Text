@@ -3,12 +3,15 @@ package com.sdsmdg.pulkit.callingtext;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Observable;
 
 /**
  * Created by this pc on 08-08-2016.
@@ -27,13 +30,13 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
 
     public BackGroundWorker(Context context1, int n) {
-        mCallback = (CallManager) new CallManager();
+        mCallback=(CallManager)new CallManager();
         context = context1;
         n1 = n;
 
     }
-
-    public interface resultInterface {
+    public interface resultInterface
+    {
         public void getContent(String s);
     }
 
@@ -43,29 +46,35 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         if (n1 == 1) {
             caller = params[0];
             receiver = params[1];
-            dr.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    Log.e("in datachange", "in datachange");
-                    value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
-                    Log.e("Value : ", value);
-                    Log.e("Receiver : ", receiver);
-                    gifId = snapshot.child("caller").child(caller).child("gifId").getValue().toString();
-                    msg = snapshot.child("caller").child(caller).child("message").getValue().toString();
-                    if (value.equals(receiver)) {
-                        Log.e("in value", "in value");
-                        mCallback.getContent(msg + " " + gifId);
+            Log.e("second","second");
+            if(BackgroundService.count>=2) {
+                dr.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        Log.e("in datachange", "in datachange");
+                        if (snapshot.child("caller").child(caller) != null) {
+                            value = snapshot.child("caller").child(caller).child("receiver").getValue().toString();
+                            gifId = snapshot.child("caller").child(caller).child("gifId").getValue().toString();
+                            msg = snapshot.child("caller").child(caller).child("message").getValue().toString();
+                            Log.e("receiver", receiver);
+                            Log.e("caller", value);
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(DatabaseError firebaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError firebaseError) {
+                    }
+                });
+                if (value.equals(receiver)) {
+                    Log.e("in value", "in value");
+                    mCallback.getContent(msg + " " + gifId);
                 }
-            });
-
-            if (value.equals(caller)) {
-                Log.e("in value", "in value");
-                mCallback.getContent(msg + " " + gifId);
+            }else {
+                if (value.equals(caller)) {
+                    Log.e("in value", "in value");
+                    mCallback.getContent(msg + " " + gifId);
+                }
+                BackgroundService.count--;
             }
         } else {
             caller = params[0];
@@ -96,4 +105,3 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         super.onProgressUpdate(values);
     }
 }
-

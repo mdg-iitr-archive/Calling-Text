@@ -40,4 +40,13 @@
         android:textColor="#ffffff"
         android:textStyle="bold" />
 
+    <FrameLayout
+        android:layout_marginLeft="25dp"
+        android:layout_width="320dp"
+        android:layout_height="400dp"
+        android:id="@+id/bottom2"
+       >
+    </FrameLayout>
+
+
 </RelativeLayout>
