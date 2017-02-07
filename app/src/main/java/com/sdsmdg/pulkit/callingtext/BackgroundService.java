@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -35,7 +36,8 @@ public class BackgroundService extends Service {
 
     public void onCreate()
     {
-        Log.e("Background service","service started");
+        receiver = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "7248187747");
+        Log.e("Background service","service started"+BaseActivity.receiver);
         dr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

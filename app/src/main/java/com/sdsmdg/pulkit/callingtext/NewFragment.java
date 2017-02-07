@@ -1,27 +1,24 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.DateFormat;
-import java.util.Date;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -29,11 +26,14 @@ public class NewFragment extends Fragment implements View.OnClickListener {
     private final int REQUEST_CODE = 1;
     EditText editText1;
     EditText editText2;
-    String yourNumber;
+    //    public EditText editName;
+    String yourNumber, yourName;
     String receiver;
     String name;
     GifImageView img;
-    FrameLayout fl;
+    public static FrameLayout fl, fl2;
+    RelativeLayout rl;
+    Boolean press = false;
     android.support.v4.app.FragmentManager fragmentManager;
     TextView t1;
     GifFragment fragment;
@@ -48,12 +48,20 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
         View view = inflater.inflate(R.layout.new_fragment, container, false);
-        editText1 = (EditText) view.findViewById(R.id.editText2);
-        editText2 = (EditText) view.findViewById(R.id.editText);
-        yourNumber = "7248187747";
+        editText1 = (EditText) view.findViewById(R.id.editText2); //number
+        editText2 = (EditText) view.findViewById(R.id.editText);//message
+//        editName = (EditText) view.findViewById(R.id.editText3); //name
+        yourNumber = "7253046197";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
-        fl=(FrameLayout)view.findViewById(R.id.color);
+        if (BaseActivity.mnumber != null) {
+            Log.i("Number selected ", BaseActivity.mnumber);
+            editText1.setText(BaseActivity.mnumber);
+        }
+
+        fl = (FrameLayout) view.findViewById(R.id.color);
+        fl2 = (FrameLayout) view.findViewById(R.id.bottom);
+        rl = (RelativeLayout) view.findViewById(R.id.my_layout);
         img.setOnClickListener(this);
         call = (Button) view.findViewById(R.id.button4);
         call.setOnClickListener(this);
@@ -73,6 +81,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                         Log.e("number", editText1.getText().toString());
                         b.execute(yourNumber, editText1.getText().toString(), editText2.getText().toString(), gifNumber1);
                         Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        BaseActivity.calledByapp = true;
                         callIntent.setData(Uri.parse("tel:" + editText1.getText().toString()));
                         Log.e("receiver", "tel:" + editText1.getText().toString());
                         Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
@@ -91,15 +100,28 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                 } else
                     Toast.makeText(getActivity(), "you have no internet connection", Toast.LENGTH_SHORT).show();
                 Log.e("call", "call");
+
                 break;
             case R.id.imageView3:
-                fl.setAlpha(0.5f);
-                call.setVisibility(View.INVISIBLE);
                 GifFragment gifFragment = new GifFragment();
-                this.getFragmentManager().beginTransaction()
-                        .replace(R.id.bottom, gifFragment, null)
-                        .addToBackStack(null)
-                        .commit();
+//                if (press) {
+                    fl.setAlpha(0.5f);
+                    call.setVisibility(View.INVISIBLE);
+                    this.getFragmentManager().beginTransaction()
+                            .replace(R.id.bottom, gifFragment, null)
+                            .addToBackStack(null)
+                            .commit();
+                    press = !press;
+//                } else {
+//                    fl.setAlpha(0);
+//                    this.getFragmentManager().beginTransaction()
+//                            .detach(gifFragment)
+//                            .addToBackStack(null)
+//                            .commit();
+//                    press = !press;
+//                }
+
+
                 break;
             default:
                 break;
@@ -118,6 +140,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         fl.setAlpha(0);
         Log.e("pul", "pul");
         gifNumber1 = gifNumber;
+
         call.setVisibility(View.VISIBLE);
         switch (gifNumber) {
             case "1":
@@ -237,4 +260,19 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         return true;
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i("NewFragment", "Detached");
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.i("NewFragment", "Attached");
+//        editName.setText(BaseActivity.getMname());
+
+
+    }
 }

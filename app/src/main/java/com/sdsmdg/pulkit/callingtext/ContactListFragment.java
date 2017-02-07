@@ -1,14 +1,16 @@
 package com.sdsmdg.pulkit.callingtext;
 
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,16 +38,20 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
     List<ArrayList> result;
     View view;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
         view = inflater.inflate(R.layout.activity_contact_list, container, false);
-        button1=(ImageButton) view.findViewById(R.id.imageButton21);
-        et1=(EditText) view.findViewById(R.id.editText3);
+        button1 = (ImageButton) view.findViewById(R.id.imageButton21);
+        et1 = (EditText) view.findViewById(R.id.editText3);
         recList = (RecyclerView) view.findViewById(R.id.questionList_recycler);
       /*  et1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,8 +83,21 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
         LinearLayoutManager llm = new LinearLayoutManager(getActivity().getBaseContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-        Log.e("p",createList()+"");
-        ContactListAdapter ca = new ContactListAdapter(createList(),getActivity());
+        Log.e("p", createList() + "");
+        ContactListAdapter ca = new ContactListAdapter(createList(), getActivity(), new ContactListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+                Log.i("OnClick", "inside the onclick of the adapter");
+                Intent i = new Intent(getContext(), BaseActivity.class);
+                i.putExtra("pagenumber", "2");
+                Log.e("OnClick", "internt set !! ");
+                startActivity(i);
+                Log.e("OnClick", "finisherererer");
+                getActivity().finish();
+
+
+            }
+        });
         ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(ca);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
         alphaAdapter.setDuration(1000);
@@ -87,13 +106,15 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
 
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) view.findViewById(R.id.main_swipe);
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
-            @Override public void onRefresh() {
+            @Override
+            public void onRefresh() {
                 // Do work to refresh the list here.
                 new Task().execute();
             }
         });
         return view;
     }
+
     private class Task extends AsyncTask<Void, Void, String[]> {
 
         @Override
@@ -106,27 +127,29 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
             return new String[0];
         }
 
-        @Override protected void onPostExecute(String[] result) {
+        @Override
+        protected void onPostExecute(String[] result) {
             // Call setRefreshing(false) when the list has been refreshed.
             mWaveSwipeRefreshLayout.setRefreshing(false);
             super.onPostExecute(result);
         }
     }
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Uri CONTENT_URI = ContactsContract.RawContacts.CONTENT_URI;
-        Log.e("pul","in loader");
+        Log.e("pul", "in loader");
         return new CursorLoader(getActivity(), CONTENT_URI, null, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        Log.e("pul","in loadFinished");
-        Log.e("pul",cursor.getCount()+" ");
+        Log.e("pul", "in loadFinished");
+        Log.e("pul", cursor.getCount() + " ");
         cursor.moveToFirst();
         StringBuilder res = new StringBuilder();
         while (!cursor.isAfterLast()) {
-            Log.e("pul","in while");
+            Log.e("pul", "in while");
             res.append("\n" + cursor.getString(21) + "-" + cursor.getString(22));
             cursor.moveToNext();
         }
@@ -136,120 +159,71 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
+
     private List<ArrayList> createList() {
-       result=new ArrayList<ArrayList>();
-        ArrayList<String> a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("karira");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("palash");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("rohit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("aman");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("tim");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("namit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("karira");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("palash");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("rohit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("aman");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("tim");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("namit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
-        a=new ArrayList<String>();
-        a.add("pulkit");
-        a.add("7248187747");
-        result.add(a);
+        result = new ArrayList<ArrayList>();
+        ArrayList<String> a = new ArrayList<String>();
+        Cursor phones = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+        while (phones.moveToNext()) {
+            String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            a.add(name);
+            a.add(phoneNumber);
+            result.add(a);
+            a = new ArrayList<String>();
+
+        }
+        phones.close();
         return result;
+
+
     }
-    public void addToList(){
-      // Log.e("pulkit","pulkit");
-       recList.setHasFixedSize(true);
+
+    public void addToList() {
+        // Log.e("pulkit","pulkit");
+        recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-        ContactListAdapter ca = new ContactListAdapter(createList(),getActivity());
-       ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(ca);
+        ContactListAdapter ca = new ContactListAdapter(createList(), getActivity(), new ContactListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+                Log.i("OnClick", "inside the onclick of the adapter");
+                Intent i = new Intent(getContext(), BaseActivity.class);
+                i.putExtra("pagenumber", "2");
+                Log.e("OnClick", "internt set !! ");
+                startActivity(i);
+                Log.e("OnClick", "finisherererer");
+                getActivity().finish();
+            }
+        });
+        ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(ca);
         alphaAdapter.setInterpolator(new OvershootInterpolator());
         alphaAdapter.setDuration(1000);
         alphaAdapter.setFirstOnly(false);
         recList.setAdapter(ca);
     }
-    public  void searchTtem(String s)
-    {
-        for(int i=0;i<result.size();i++)
-        {
-            if(!((result.get(i)).get(0)).toString().contains(s))
-            {
+
+    public void searchTtem(String s) {
+        for (int i = 0; i < result.size(); i++) {
+            if (!((result.get(i)).get(0)).toString().contains(s)) {
                 result.remove(i);
             }
         }
-        ContactListAdapter ca = new ContactListAdapter(result,getActivity());
+        ContactListAdapter ca = new ContactListAdapter(result, getActivity(), new ContactListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+                Log.i("OnClick", "inside the onclick of the adapter");
+                Intent i = new Intent(getContext(), BaseActivity.class);
+                i.putExtra("pagenumber", "2");
+                Log.e("OnClick", "internt set !! ");
+                startActivity(i);
+                Log.e("OnClick", "finisherererer");
+                getActivity().finish();
+
+            }
+        });
         recList.setAdapter(ca);
     }
 }
