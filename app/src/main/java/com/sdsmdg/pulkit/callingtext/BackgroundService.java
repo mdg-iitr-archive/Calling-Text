@@ -2,10 +2,14 @@ package com.sdsmdg.pulkit.callingtext;
 
 import android.app.IntentService;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
@@ -22,44 +26,29 @@ import java.util.Date;
  * Created by pulkit on 4/2/17.
  */
 
-public class BackgroundService extends IntentService {
+public class BackgroundService extends Service {
 
     DatabaseReference callertree = FirebaseDatabase.getInstance().getReference().child("caller");
     DatabaseReference receivertree = FirebaseDatabase.getInstance().getReference().child("receiver");
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
-    String name;
-    String number;
-    String type;
-    String time;
-    String msg;
+    public static int count=0;
     DataBaseHandler dbh;
 
-    public BackgroundService(String name) {
-        super(name);
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
+    public void onCreate()
+    {
+        receiver = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "7248187747");
+        Log.e("Background service","service started"+BaseActivity.receiver);
         dr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot.child("receiver").child(CallManager.receiver) != null) {
+                if (snapshot.child("receiver").child(BaseActivity.receiver) != null) {
+                    count++;
+                    Log.e("count",count+"");
                     Log.e("on data change listener", "on data change listener");
-                    BackGroundWorker.value = snapshot.child("receiver").child(CallManager.receiver).child("caller").getValue().toString();
-                    BackGroundWorker.gifId = snapshot.child("receiver").child(CallManager.receiver).child("gifId").getValue().toString();
-                    BackGroundWorker.msg = snapshot.child("receiver").child(CallManager.receiver).child("message").getValue().toString();
-                    Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(BackGroundWorker.value));
-                    Cursor phones = getContentResolver().query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
-                    while (phones.moveToNext()) {
-                        name = phones.getString(phones.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-                    }
-                    number = BackGroundWorker.value;
-                    type = "received";
-                    time = DateFormat.getDateTimeInstance().format(new Date());
-                    msg=BackGroundWorker.msg;
-                    CallerDetails cd =new CallerDetails(name,number,msg,type,time);
-                    dbh= new DataBaseHandler(getBaseContext());
-                    dbh.addCaller(cd);
+                    BackGroundWorker.value = snapshot.child("receiver").child(BaseActivity.receiver).child("caller").getValue().toString();
+                    BackGroundWorker.gifId = snapshot.child("receiver").child(BaseActivity.receiver).child("gifId").getValue().toString();
+                    BackGroundWorker.msg = snapshot.child("receiver").child(BaseActivity.receiver).child("message").getValue().toString();
+                    Log.e("gif",BackGroundWorker.gifId );
                 }
             }
 
@@ -68,47 +57,14 @@ public class BackgroundService extends IntentService {
 
             }
         });
-        receivertree.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String s) {
+    }
 
-                if (snapshot.child("receiver").child(CallManager.receiver) != null) {
-                    BackGroundWorker.value = snapshot.child("receiver").child(CallManager.receiver).child("caller").getValue().toString();
-                    BackGroundWorker.gifId = snapshot.child("receiver").child(CallManager.receiver).child("gifId").getValue().toString();
-                    BackGroundWorker.msg = snapshot.child("receiver").child(CallManager.receiver).child("message").getValue().toString();
-                }
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.e("Background service","service started");
 
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot snapshot, String s) {
-
-                if (snapshot.child("receiver").child(CallManager.receiver) != null) {
-                    BackGroundWorker.value = snapshot.child("receiver").child(CallManager.receiver).child("caller").getValue().toString();
-                    BackGroundWorker.gifId = snapshot.child("receiver").child(CallManager.receiver).child("gifId").getValue().toString();
-                    BackGroundWorker.msg = snapshot.child("receiver").child(CallManager.receiver).child("message").getValue().toString();
-                }
-
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
+        return null;
     }
 
     @Override
