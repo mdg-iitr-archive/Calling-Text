@@ -142,75 +142,9 @@ public class NewFragment extends Fragment implements View.OnClickListener {
 
     public void setImage(String gifNumber) {
         fl.setAlpha(0);
-        Log.e("pul", "pul");
         gifNumber1 = gifNumber;
-
+        img.setImageResource(BaseActivity.imageIds.get(gifNumber));
         call.setVisibility(View.VISIBLE);
-        switch (gifNumber) {
-            case "1":
-                Log.e("in 1", "in 1");
-                img.setImageResource(R.drawable.birthday);
-                break;
-            case "2":
-                img.setImageResource(R.drawable.confused);
-                break;
-            case "3":
-                img.setImageResource(R.drawable.funny);
-                break;
-            case "4":
-                img.setImageResource(R.drawable.embares);
-                break;
-            case "5":
-                img.setImageResource(R.drawable.angry);
-                break;
-            case "6":
-                img.setImageResource(R.drawable.machau);
-                break;
-            case "7":
-                img.setImageResource(R.drawable.sorry);
-                break;
-            case "8":
-                img.setImageResource(R.drawable.hii);
-                break;
-            case "9":
-                img.setImageResource(R.drawable.hello);
-                break;
-            case "10":
-                img.setImageResource(R.drawable.love);
-                break;
-            case "11":
-                img.setImageResource(R.drawable.compliment);
-                break;
-            case "12":
-                img.setImageResource(R.drawable.happy);
-                break;
-            case "13":
-                img.setImageResource(R.drawable.sad);
-                break;
-            case "14":
-                img.setImageResource(R.drawable.crying);
-                break;
-            case "15":
-                img.setImageResource(R.drawable.worried);
-                break;
-            case "16":
-                img.setImageResource(R.drawable.praying);
-                break;
-            case "17":
-                img.setImageResource(R.drawable.smoking);
-                break;
-            case "18":
-                img.setImageResource(R.drawable.birthday);
-                break;
-            case "19":
-                img.setImageResource(R.drawable.birthday);
-                break;
-            case "20":
-                img.setImageResource(R.drawable.envy);
-                break;
-            default:
-                img.setImageResource(R.drawable.birthday);
-        }
     }
 
     private boolean haveNetworkConnection() {
