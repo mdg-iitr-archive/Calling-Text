@@ -2,10 +2,12 @@ package com.sdsmdg.pulkit.callingtext;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,8 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Date;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -51,7 +55,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         editText1 = (EditText) view.findViewById(R.id.editText2); //number
         editText2 = (EditText) view.findViewById(R.id.editText);//message
 //        editName = (EditText) view.findViewById(R.id.editText3); //name
-        yourNumber = "7253046197";
+        yourNumber = "7248187747";
         t1 = (TextView) view.findViewById(R.id.textView5);
         img = (GifImageView) view.findViewById(R.id.imageView3);
         if (BaseActivity.mnumber != null) {
