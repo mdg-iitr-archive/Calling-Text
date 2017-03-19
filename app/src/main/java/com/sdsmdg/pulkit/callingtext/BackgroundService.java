@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.Date;
 
+import static com.sdsmdg.pulkit.callingtext.CallManager.receiver;
+
 /**
  * Created by pulkit on 4/2/17.
  */

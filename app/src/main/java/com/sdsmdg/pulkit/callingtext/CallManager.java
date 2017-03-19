@@ -139,7 +139,8 @@ public class CallManager extends BroadcastReceiver implements BackGroundWorker.r
     }
 
     @Override
-    public void getContent(String s) {
+    public void getContent(String s)
+    {
         Log.e("in content", "in content");
         Intent intentone = new Intent(context1.getApplicationContext(), CustomDialogBox.class);
         intentone.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
