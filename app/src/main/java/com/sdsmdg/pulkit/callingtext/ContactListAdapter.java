@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+
 class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListViewHolder> {
     private List<ArrayList> contactList;
     private Activity parentAct;
