@@ -84,7 +84,4 @@ public class HistoryFragment extends Fragment {
         alphaAdapter.setFirstOnly(false);
         recList.setAdapter(alphaAdapter);
     }
-
-
-
 }

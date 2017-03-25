@@ -22,6 +22,7 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
     private ContactListAdapter.ListViewHolder h1;
     private int lastPosition = -1;
     private final OnItemClickListener listener;
+    private final AdapterView.OnItemLongClickListener longListener;
 
     public interface OnItemClickListener {
         public void onItemClick();
@@ -30,11 +31,12 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
 
 
 
-    ContactListAdapter(List<ArrayList> contactList1, Activity activity, OnItemClickListener listener) {
+    ContactListAdapter(List<ArrayList> contactList1, Activity activity, OnItemClickListener listener, AdapterView.OnItemLongClickListener longListener) {
         Log.e("pil", "in adapter");
         contactList = contactList1;
         parentAct = activity;
         this.listener = listener;
+        this.longListener = longListener;
     }
 
 
@@ -74,13 +76,15 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
 
             }
         });
-//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//              details();
-//                return true;
-//            }
-//        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                longListener.onItemLongClick((AdapterView<?>) contactList,v,position,1);
+                BaseActivity.setMname(holder.name.getText().toString());
+                BaseActivity.setMnumber(holder.phoneNumber.getText().toString());
+                return true;
+            }
+        });
         //above code is to go to a new activity to show selected caller details
 
 

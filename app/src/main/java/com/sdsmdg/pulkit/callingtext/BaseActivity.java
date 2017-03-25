@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageselectionListener {
+import static com.sdsmdg.pulkit.callingtext.R.layout.activity_base;
+
+public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageselectionListener,HistoryFragment.onCardselectionListener{
 
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
@@ -49,7 +52,7 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        setContentView(activity_base);
         btn_settings = (Button)findViewById(R.id.btn_settings);
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,4 +128,18 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         }
     }
 
+    @Override
+    public void onCardSelection(String cPosition) {
+        Log.e("inOnCardSelection", "in it");
+        CallDetails callDetails=new CallDetails();
+        if (callDetails!=null){
+           // callDetails.setData(cPosition);
+            callDetails.setCallerName(mname);
+            callDetails.setCallerNumber(mnumber);
+            Fragment newFragment = new CallDetails();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+          //  ft.add(R.layout.content_base, newFragment);
+          //  ft.commit();
+        }
+    }
 }

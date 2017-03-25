@@ -217,7 +217,7 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
                 Log.i("OnClick", "inside the onclick of the adapter");
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("pagenumber", "2");
-                Log.e("OnClick", "internt set !! ");
+                Log.e("OnClick", "internet set !! ");
                 startActivity(i);
                 Log.e("OnClick", "finisherererer");
                 getActivity().finish();
