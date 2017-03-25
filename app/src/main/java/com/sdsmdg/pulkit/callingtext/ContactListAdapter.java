@@ -74,8 +74,17 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
 
             }
         });
+//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//              details();
+//                return true;
+//            }
+//        });
+        //above code is to go to a new activity to show selected caller details
 
-        for (int i = 0; i < getItemCount(); i++) {
+
+        for(int i = 0; i < getItemCount(); i++) {
             //animate(itemView, i);
         }
     }
@@ -84,7 +93,7 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
         view.animate();
         view.setTranslationY(100);
         view.setAlpha(0);
-        view.animate().alpha(1.0f).translationY(0).setDuration(300).setStartDelay(position * 100);
+        view.animate().alpha(1.0f   ).translationY(0).setDuration(300).setStartDelay(position * 100);
 
     }
 
@@ -123,6 +132,9 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
             v.startAnimation(animation);
         }
     }
+//     public void details(){
+//        startActivity(i);
+//    }
 
     public List<ArrayList> getContactList() {
         return contactList;

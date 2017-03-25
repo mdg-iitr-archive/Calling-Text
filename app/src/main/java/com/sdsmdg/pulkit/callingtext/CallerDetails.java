@@ -12,6 +12,8 @@ public class CallerDetails {
     String call_type;
     String call_time;
 
+
+
     CallerDetails(String name,String number , String msg, String type,String time)
    {
     this.call_time=time;

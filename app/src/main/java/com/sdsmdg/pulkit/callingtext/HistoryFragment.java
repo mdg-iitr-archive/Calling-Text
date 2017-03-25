@@ -22,6 +22,10 @@ import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
 public class HistoryFragment extends Fragment {
 
+    public interface onCardselectionListener {
+        public void onCardSelection(String cPosition);
+    }
+
     RecyclerView recList;
     DataBaseHandler dbh;
     View view;

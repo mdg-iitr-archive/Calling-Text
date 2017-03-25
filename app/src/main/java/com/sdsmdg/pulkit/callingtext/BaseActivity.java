@@ -54,8 +54,8 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent o = new Intent(BaseActivity.this,Settings.class);
-                startActivity(o);
+                Intent intent = new Intent(BaseActivity.this,Settings.class);
+                startActivity(intent);
             }
         });
         TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
