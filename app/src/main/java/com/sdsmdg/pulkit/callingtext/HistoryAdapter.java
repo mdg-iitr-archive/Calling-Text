@@ -45,8 +45,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ListView
     public void onBindViewHolder(final HistoryAdapter.ListViewHolder holder, int position) {
 
         hold=holder;
-        holder.number.setText((String) historyList.get(position).get(1));
-        holder.message.setText((String) historyList.get(position).get(3));
+        holder.number.setText(historyList.get(position).getCaller_number());
+        holder.message.setText(historyList.get(position).getCaller_msg());
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

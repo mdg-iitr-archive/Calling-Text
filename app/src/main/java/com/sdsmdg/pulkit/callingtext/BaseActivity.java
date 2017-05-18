@@ -23,7 +23,8 @@ import java.util.HashMap;
 
 import static com.sdsmdg.pulkit.callingtext.R.layout.activity_base;
 
-public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageSelectionListener {
+public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageSelectionListener
+{
 
 
     private ViewPager viewPager;
@@ -58,7 +59,9 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
 
     public static String receiver="7248187747";
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
         setContentView(activity_base);
         btn_settings = (Button)findViewById(R.id.btn_settings);
@@ -69,6 +72,19 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
                 startActivity(intent);
             }
         });
+        if(getIntent().getExtras()!=null && getIntent().getExtras().getString("gotocalldetails")=="1"){
+           CallDetailsFragment callDetailsFragment =new CallDetailsFragment();
+            Bundle args= new Bundle();
+            args.putString("call_number",getMnumber());
+            args.putString("Call_text", getMmessage());
+            callDetailsFragment.setArguments(args);
+
+            android.support.v4.app.FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.mycontainer,callDetailsFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
         TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         String mPhoneNumber = tMgr.getLine1Number();
         Log.e("MY BA NO.","PHONE NO."+mPhoneNumber);
@@ -113,15 +129,17 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         startService(new Intent(this, BackgroundService.class));
-        }
-    private void call(String s) {
+    }
+
+        private void call(String s) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + s));
         try{
             startActivity(callIntent);}
         catch (android.content.ActivityNotFoundException ex){
             Toast.makeText(BaseActivity.this,"yourActivity is not found",Toast.LENGTH_SHORT).show();}
-    }
+
+        }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
