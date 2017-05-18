@@ -12,9 +12,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListViewHolder> {
     private List<ArrayList> contactList;

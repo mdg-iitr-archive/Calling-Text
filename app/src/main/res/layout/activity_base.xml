@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,13 +14,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="bottom">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
+
                 android:text="Calling Text"
                 android:textColor="#FFFFFF"
                 android:textSize="23dp"
@@ -35,6 +38,7 @@
                 android:textSize="10dp"
                 android:layout_marginRight="15dp"
                 android:text="Settings"
+                android:visibility="visible"
 
 
                 style="@style/Widget.AppCompat.Button.Small" />
@@ -45,7 +49,9 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/content_base" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_base" />
 
 
 </android.support.design.widget.CoordinatorLayout>

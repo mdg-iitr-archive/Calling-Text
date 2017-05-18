@@ -19,9 +19,12 @@ import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import static com.sdsmdg.pulkit.callingtext.R.layout.activity_base;
 
-public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageselectionListener,HistoryFragment.onCardselectionListener{
+public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageSelectionListener {
+
 
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
@@ -29,8 +32,9 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     FragmentManager fragmentManager;
     GifFragment fragment;
     Button btn_settings;
-    public static String mname,mnumber;
+    public static String mname,mnumber, mmessage;
     public static Boolean calledByapp = false;
+    public static HashMap<String,Integer> imageIds;
 
     public static String getMname() {
         return mname;
@@ -47,6 +51,10 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     public static void setMnumber(String mnumber) {
         BaseActivity.mnumber = mnumber;
     }
+
+    public static  String getMmessage(){return mmessage;}
+
+    public static void setMmessage(String mmessage){BaseActivity.mmessage=mmessage;}
 
     public static String receiver="7248187747";
     @Override
@@ -82,6 +90,22 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
             }
         }
         viewPager.setCurrentItem(pg_number);
+
+        imageIds=new HashMap<>();
+        imageIds.put("1",R.drawable.birthday);
+        imageIds.put("2",R.drawable.confused);
+        imageIds.put("3",R.drawable.funny);
+        imageIds.put("4",R.drawable.embares);
+        imageIds.put("5",R.drawable.angry);
+        imageIds.put("6",R.drawable.machau);
+        imageIds.put("7",R.drawable.sorry);
+        imageIds.put("8",R.drawable.hii);
+        imageIds.put("9",R.drawable.hello);
+        imageIds.put("10",R.drawable.love);
+        imageIds.put("11",R.drawable.compliment);
+        imageIds.put("12",R.drawable.happy);
+        imageIds.put("13",R.drawable.sad);
+        imageIds.put("14",R.drawable.crying);
 
        /* actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);*/
@@ -128,18 +152,5 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         }
     }
 
-    @Override
-    public void onCardSelection(String cPosition) {
-        Log.e("inOnCardSelection", "in it");
-        CallDetails callDetails=new CallDetails();
-        if (callDetails!=null){
-           // callDetails.setData(cPosition);
-            callDetails.setCallerName(mname);
-            callDetails.setCallerNumber(mnumber);
-            Fragment newFragment = new CallDetails();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-          //  ft.add(R.layout.content_base, newFragment);
-          //  ft.commit();
-        }
-    }
+
 }

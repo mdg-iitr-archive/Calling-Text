@@ -13,6 +13,8 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +36,7 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
     public RecyclerView recList;
     Button button;
     public ImageButton button1;
-    EditText et1;
+    EditText searchEditText;
     List<ArrayList> result;
     View view;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
@@ -51,9 +53,9 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
 
         view = inflater.inflate(R.layout.activity_contact_list, container, false);
         button1 = (ImageButton) view.findViewById(R.id.imageButton21);
-        et1 = (EditText) view.findViewById(R.id.editText3);
+        searchEditText = (EditText) view.findViewById(R.id.editText3);
         recList = (RecyclerView) view.findViewById(R.id.questionList_recycler);
-      /*  et1.addTextChangedListener(new TextWatcher() {
+        searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -61,13 +63,10 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(et1.getText().toString().equals(""))
-                {
+                if (searchEditText.getText().toString().equals("")) {
                     addToList();
-                }
-                else
-                {
-                    searchTtem(et1.getText().toString());
+                } else {
+                    searchTtem(searchEditText.getText().toString());
                 }
             }
 
@@ -75,7 +74,7 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
             public void afterTextChanged(Editable s) {
 
             }
-        });*/
+        });
       /*  VerticalRecyclerViewFastScroller fastScroller = (VerticalRecyclerViewFastScroller)view.findViewById(R.id.fast_scroller);
         fastScroller.setRecyclerView(recList);
         recList.setOnScrollListener(fastScroller.getOnScrollListener());*/
@@ -162,8 +161,8 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
 
 
     private List<ArrayList> createList() {
-        result = new ArrayList<ArrayList>();
-        ArrayList<String> a = new ArrayList<String>();
+        result = new ArrayList<>();
+        ArrayList<String> a = new ArrayList<>();
         Cursor phones = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
         while (phones.moveToNext()) {
             String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
@@ -171,17 +170,14 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
             a.add(name);
             a.add(phoneNumber);
             result.add(a);
-            a = new ArrayList<String>();
+            a = new ArrayList<>();
 
         }
         phones.close();
         return result;
-
-
     }
 
     public void addToList() {
-        // Log.e("pulkit","pulkit");
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -206,12 +202,18 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
     }
 
     public void searchTtem(String s) {
+        ArrayList<ArrayList> contactList = new ArrayList<>();
+        ArrayList<String> contact = new ArrayList<>();
         for (int i = 0; i < result.size(); i++) {
-            if (!((result.get(i)).get(0)).toString().contains(s)) {
-                result.remove(i);
+            if (result.get(i).get(0).toString().startsWith(s)) {
+                contact.add(result.get(i).get(0).toString());
+                contact.add(result.get(i).get(1).toString());
+                contactList.add(contact);
+                contact = new ArrayList<>();
             }
         }
-        ContactListAdapter ca = new ContactListAdapter(result, getActivity(), new ContactListAdapter.OnItemClickListener() {
+        Log.e("result", contactList + "");
+        ContactListAdapter ca = new ContactListAdapter(contactList, getActivity(), new ContactListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick() {
                 Log.i("OnClick", "inside the onclick of the adapter");

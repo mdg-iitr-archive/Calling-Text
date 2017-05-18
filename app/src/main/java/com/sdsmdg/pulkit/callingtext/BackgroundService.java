@@ -35,10 +35,10 @@ public class BackgroundService extends Service {
     DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
     public static int count=0;
     DataBaseHandler dbh;
-
+    String receiver;
     public void onCreate()
     {
-        receiver = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "7248187747");
+//      receiver = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "8791286328");
         Log.e("Background service","service started"+BaseActivity.receiver);
         dr.addValueEventListener(new ValueEventListener() {
             @Override

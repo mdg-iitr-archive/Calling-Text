@@ -64,6 +64,13 @@ public class CallListAdapter extends RecyclerView.Adapter<CallListAdapter.ListVi
                 notifyDataSetChanged();
             }
         });*/
+       holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+           @Override
+           public boolean onLongClick(View v) {
+
+               return false;
+           }
+       });
         if (hd.getCall_type().equals("outgoing")) {
             holder.type.setImageResource(R.drawable.call_made);
         } else if (hd.getCall_type().equals("incoming")) {

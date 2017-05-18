@@ -1,133 +1,44 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sdsmdg.pulkit.callingtext.CallDetails">
+    android:orientation="vertical"
+    tools:context="com.sdsmdg.pulkit.callingtext.CallDetailsFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView"
+        android:layout_width="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_height="100dp"
+        android:src="@drawable/con1"
+        android:paddingBottom="4dp"
+        android:layout_gravity="center_horizontal"
+        />
+    <TextView
+        android:id="@+id/CallerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Contact Name"/>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recent Calls"
+        android:textStyle="italic"
+        android:paddingTop="4dp"
+        android:paddingLeft="8dp"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:onClick="letscall"
-            android:id="@+id/callcard">
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_caller_details"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                app:srcCompat="@drawable/call3"
-                android:id="@+id/call_image" />
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:paddingTop="15dp"
-                android:textSize="18dp"
-                android:paddingLeft="5dp"
-                android:id="@+id/cname"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:id="@+id/msgcard"
-            android:layout_marginTop="0dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                app:srcCompat="@drawable/msg"
-                android:id="@+id/msg_image" />
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:paddingTop="15dp"
-                android:textSize="18dp"
-                android:paddingLeft="5dp"
-                android:id="@+id/msg_text"
-                android:layout_weight="1" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:id="@+id/concard"
-            android:layout_marginTop="0dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                app:srcCompat="@drawable/contact"
-                android:id="@+id/con_image" />
-
-            <TextView
-                android:text="View Contact"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:paddingTop="15dp"
-                android:textSize="18dp"
-                android:paddingLeft="5dp"
-                android:id="@+id/con_text"
-                android:layout_weight="1" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:id="@+id/delcard"
-            android:layout_marginTop="0dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                app:srcCompat="@drawable/cross"
-                android:id="@+id/del_image" />
-
-            <TextView
-                android:text="Delete from log"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:paddingTop="15dp"
-                android:textSize="18dp"
-                android:paddingLeft="5dp"
-                android:id="@+id/del_text"
-                android:layout_weight="1" />
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:textSize="12dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:text="DURATION"/>
-        <View
-            android:layout_width="365dp"
-            android:layout_gravity="center"
-            android:layout_height="2dp"
-            android:layout_marginTop="1dp"
-            android:background="@android:color/darker_gray"/>
-
-    </LinearLayout>
-</FrameLayout>
