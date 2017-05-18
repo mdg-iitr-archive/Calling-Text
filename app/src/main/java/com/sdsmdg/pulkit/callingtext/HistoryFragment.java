@@ -1,6 +1,7 @@
 package com.sdsmdg.pulkit.callingtext;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CallLog;
@@ -27,7 +28,7 @@ public class HistoryFragment extends Fragment {
     View view;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.activity_history, container, false);
         recList = (RecyclerView) view.findViewById(R.id.history_recycler);
@@ -40,6 +41,17 @@ public class HistoryFragment extends Fragment {
                 new HistoryFragment.Task().execute();
             }
         });
+
+        HistoryAdapter historyAdapter=new HistoryAdapter(createList(), getActivity(), new HistoryAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick() {
+                Intent intent=new Intent(getContext(),BaseActivity.class);
+                intent.putExtra("gotocalldetails","1");
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
         return view;
     }
     private class Task extends AsyncTask<Void, Void, String[]> {

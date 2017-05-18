@@ -28,7 +28,7 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     FragmentManager fragmentManager;
     GifFragment fragment;
     Button btn_settings;
-    public static String mname,mnumber;
+    public static String mname,mnumber, mmessage;
     public static Boolean calledByapp = false;
     public static HashMap<String,Integer> imageIds;
 
@@ -47,6 +47,10 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     public static void setMnumber(String mnumber) {
         BaseActivity.mnumber = mnumber;
     }
+
+    public static  String getMmessage(){return mmessage;}
+
+    public static void setMmessage(String mmessage){BaseActivity.mmessage=mmessage;}
 
     public static String receiver="7248187747";
     @Override

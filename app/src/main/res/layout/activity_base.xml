@@ -14,13 +14,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="bottom">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
+                android:gravity="bottom"
                 android:text="Calling Text"
                 android:textColor="#FFFFFF"
                 android:textSize="25dp"
@@ -32,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="40dp"
+                android:foregroundGravity="bottom"
                 android:gravity="center"
                 android:text="Settings"
                 android:visibility="visible"
@@ -46,9 +47,9 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/content_base"
-        android:id="@+id/include" />
-
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_base" />
 
 
 </android.support.design.widget.CoordinatorLayout>
