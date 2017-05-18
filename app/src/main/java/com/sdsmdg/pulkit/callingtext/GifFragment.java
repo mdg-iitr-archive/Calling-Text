@@ -21,9 +21,9 @@ public class GifFragment extends DialogFragment implements View.OnClickListener 
     ImageButton img8;
     ImageButton img9;
     ImageButton img10;
-    onImageselectionListener mCallback;
+    onImageSelectionListener mCallback;
 
-    public interface onImageselectionListener {
+    public interface onImageSelectionListener {
         public void onImageSelection(String position);
     }
 
@@ -65,7 +65,7 @@ public class GifFragment extends DialogFragment implements View.OnClickListener 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mCallback = (onImageselectionListener) activity;
+            mCallback = (onImageSelectionListener) activity;
         } catch (ClassCastException e) {
             Log.i("Error", e.getMessage());
             throw new ClassCastException(activity.toString()

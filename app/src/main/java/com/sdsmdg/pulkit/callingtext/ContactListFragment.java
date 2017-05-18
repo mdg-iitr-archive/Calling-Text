@@ -36,7 +36,7 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
     public RecyclerView recList;
     Button button;
     public ImageButton button1;
-    EditText et1;
+    EditText searchEditText;
     List<ArrayList> result;
     View view;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
@@ -53,9 +53,9 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
 
         view = inflater.inflate(R.layout.activity_contact_list, container, false);
         button1 = (ImageButton) view.findViewById(R.id.imageButton21);
-        et1 = (EditText) view.findViewById(R.id.editText3);
+        searchEditText = (EditText) view.findViewById(R.id.editText3);
         recList = (RecyclerView) view.findViewById(R.id.questionList_recycler);
-        et1.addTextChangedListener(new TextWatcher() {
+        searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -63,10 +63,10 @@ public class ContactListFragment extends Fragment implements LoaderManager.Loade
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (et1.getText().toString().equals("")) {
+                if (searchEditText.getText().toString().equals("")) {
                     addToList();
                 } else {
-                    searchTtem(et1.getText().toString());
+                    searchTtem(searchEditText.getText().toString());
                 }
             }
 

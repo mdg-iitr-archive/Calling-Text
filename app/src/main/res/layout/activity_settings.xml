@@ -21,18 +21,19 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp">
+
         <EditText
+            android:id="@+id/et_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageView3"
+            android:layout_marginStart="50dp"
             android:ems="10"
             android:hint="Enter your Phone Number"
-            android:layout_marginStart="50dp"
-            android:textColorHint="@color/colorPrimary"
-            android:id="@+id/et_number"
-            android:layout_below="@+id/imageView3"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:inputType="phone"
+            android:textColorHint="@color/colorPrimary" />
     </android.support.design.widget.TextInputLayout>
 
     <Button

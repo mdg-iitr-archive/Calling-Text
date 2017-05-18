@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import pl.droidsonroids.gif.GifImageView;
 
-public class PopupDialer extends AppCompatActivity implements GifFragment.onImageselectionListener{
+public class PopupDialer extends AppCompatActivity implements GifFragment.onImageSelectionListener{
 
     EditText et_message;
     GifImageView g;

@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageselectionListener {
+public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageSelectionListener {
 
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
