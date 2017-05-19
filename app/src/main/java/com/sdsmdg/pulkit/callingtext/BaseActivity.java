@@ -12,12 +12,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.HashMap;
 
@@ -58,6 +62,14 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
     public static void setMmessage(String mmessage){BaseActivity.mmessage=mmessage;}
 
     public static String receiver="7248187747";
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.options_menu,menu);
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -72,6 +84,9 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
                 startActivity(intent);
             }
         });
+
+        //Toolbar toolbar= (Toolbar) findViewById(R.id.my_toolbar);
+        //((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         if(getIntent().getExtras()!=null && getIntent().getExtras().getString("gotocalldetails")=="1"){
            CallDetailsFragment callDetailsFragment =new CallDetailsFragment();
             Bundle args= new Bundle();

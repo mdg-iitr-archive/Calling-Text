@@ -9,9 +9,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay"></android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_history" />
 </android.support.design.widget.CoordinatorLayout>
