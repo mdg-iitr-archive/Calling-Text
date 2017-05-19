@@ -76,7 +76,7 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
            CallDetailsFragment callDetailsFragment =new CallDetailsFragment();
             Bundle args= new Bundle();
             args.putString("call_number",getMnumber());
-            args.putString("Call_text", getMmessage());
+            args.putString("call_text", getMmessage());
             callDetailsFragment.setArguments(args);
 
             android.support.v4.app.FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
