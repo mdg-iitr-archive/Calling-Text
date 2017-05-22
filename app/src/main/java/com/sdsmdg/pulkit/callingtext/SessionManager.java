@@ -1,5 +1,6 @@
 package com.sdsmdg.pulkit.callingtext;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -90,7 +91,12 @@ public class SessionManager {
 
             // Staring Login Activity
             context.startActivity(i);
+
+            //finish current activity
+            ((Activity)context).finish();
+
         }
+
     }
     /**
      * clear session details to logout the user
