@@ -16,7 +16,7 @@ public class SessionManager {
     //Editor for shared preferences
     SharedPreferences.Editor editor;
     //Context
-    Context _context;
+    Context context;
     //Shared pref mode
     int PRIVATE_MODE = 0;
     //Sharedpref filename
@@ -33,8 +33,8 @@ public class SessionManager {
     public static final String KEY_NUMBER = "number";
     //constructor
     public SessionManager(Context context){
-        this._context = context;
-        preferences = _context.getSharedPreferences(PREF_NAME,PRIVATE_MODE);
+        this.context = context;
+        preferences = this.context.getSharedPreferences(PREF_NAME,PRIVATE_MODE);
         editor = preferences.edit();
     }
 
@@ -81,7 +81,7 @@ public class SessionManager {
         // Check login status
         if(!this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(_context, LoginActivity.class);
+            Intent i = new Intent(context, LoginActivity.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -89,7 +89,7 @@ public class SessionManager {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             // Staring Login Activity
-            _context.startActivity(i);
+            context.startActivity(i);
         }
     }
     /**
@@ -102,13 +102,13 @@ public class SessionManager {
         editor.clear();
         editor.commit();
         //after logging out the user must be directed to the login activity
-        Intent intent = new Intent(_context,LoginActivity.class);
+        Intent intent = new Intent(context,LoginActivity.class);
         //after this close all the running activities and background services
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         //add new flag to start new activity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //starting login activity
-        _context.startActivity(intent);
+        context.startActivity(intent);
     }
 
     /**

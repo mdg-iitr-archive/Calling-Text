@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 public class BaseActivity extends FragmentActivity implements ActionBar.TabListener, GifFragment.onImageselectionListener {
 
-
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
@@ -66,12 +65,12 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent o = new Intent(BaseActivity.this, Settings.class);
-                startActivity(o);
+                Intent settingsIntent = new Intent(BaseActivity.this, Settings.class);
+                startActivity(settingsIntent);
             }
         });
-        TelephonyManager tMgr = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        String mPhoneNumber = tMgr.getLine1Number();
+        TelephonyManager telephoneManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        String mPhoneNumber = telephoneManager.getLine1Number();
         Log.e("MY BA NO.", "PHONE NO." + mPhoneNumber);
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
