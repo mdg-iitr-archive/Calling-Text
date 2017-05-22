@@ -307,8 +307,6 @@
             android:id="@+id/view16"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_above="@+id/imageButton19"
-            android:layout_toEndOf="@+id/imageButton15"
             android:layout_toRightOf="@+id/imageButton15"
             android:background="@drawable/praying" />
 
