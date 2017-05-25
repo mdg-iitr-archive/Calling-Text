@@ -78,15 +78,15 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
 
             }
         });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
+//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
 //                longListener.onItemLongClick((AdapterView<?>) contactList,v,position,1);
-                BaseActivity.setMname(holder.name.getText().toString());
-                BaseActivity.setMnumber(holder.phoneNumber.getText().toString());
-                return true;
-            }
-        });
+//                BaseActivity.setMname(holder.name.getText().toString());
+//                BaseActivity.setMnumber(holder.phoneNumber.getText().toString());
+//                return true;
+//            }
+//        });
         //above code is to go to a new activity to show selected caller details
 
 

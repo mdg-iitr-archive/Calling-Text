@@ -6,6 +6,7 @@
     android:paddingTop="1dp"
     android:background="#ffffff"
     android:clickable="true"
+    android:longClickable="true"
     android:elevation="13dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:transitionName="qwerty2">

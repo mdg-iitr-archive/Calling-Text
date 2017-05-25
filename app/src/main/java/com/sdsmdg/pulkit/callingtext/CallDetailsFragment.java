@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class CallDetailsFragment extends Fragment implements View.OnClickListener{
 
 
-    OnCallerSelectionListener mCallback;
+   // OnCallerSelectionListener mCallback;
     TextView tv_name;
 
 
@@ -22,8 +22,8 @@ public class CallDetailsFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_call_details,container,false);
-        tv_name= (TextView) v.findViewById(R.id.CallerName);
-        tv_name.setText(getString((Integer) savedInstanceState.get("caller_name")));
+        tv_name= (TextView) v.findViewById(R.id.callerName);
+        tv_name.setText(BaseActivity.getMname());
         return v;
     }
 
@@ -32,7 +32,7 @@ public class CallDetailsFragment extends Fragment implements View.OnClickListene
 
     }
 
-    public interface OnCallerSelectionListener{
-        public void onCallerSelected(String position);
-    }
+//    public interface OnCallerSelectionListener{
+//        public void onCallerSelected(String position);
+//    }
 }

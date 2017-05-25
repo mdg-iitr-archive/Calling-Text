@@ -27,7 +27,7 @@ import java.util.HashMap;
 
 import static com.sdsmdg.pulkit.callingtext.R.layout.activity_base;
 
-public class BaseActivity extends FragmentActivity implements ActionBar.TabListener,GifFragment.onImageSelectionListener
+public class BaseActivity extends AppCompatActivity implements ActionBar.TabListener,GifFragment.onImageSelectionListener
 {
 
 
@@ -85,9 +85,11 @@ public class BaseActivity extends FragmentActivity implements ActionBar.TabListe
             }
         });
 
-        //Toolbar toolbar= (Toolbar) findViewById(R.id.my_toolbar);
-        //((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        if(getIntent().getExtras()!=null && getIntent().getExtras().getString("gotocalldetails")=="1"){
+        android.support.v7.widget.Toolbar toolbar= (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
+
+        if(getIntent().getExtras()!=null && getIntent().getExtras().getString("gotocalldetails").equals("1")){
            CallDetailsFragment callDetailsFragment =new CallDetailsFragment();
             Bundle args= new Bundle();
             args.putString("call_number",getMnumber());
