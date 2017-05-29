@@ -41,16 +41,25 @@ public class HistoryFragment extends Fragment {
                 new HistoryFragment.Task().execute();
             }
         });
-
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity().getBaseContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
         HistoryAdapter historyAdapter=new HistoryAdapter(createList(), getActivity(), new HistoryAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick() {
                 Intent intent=new Intent(getContext(),BaseActivity.class);
+                Log.i("onLongClick", "inside long click of adapter");
                 intent.putExtra("gotocalldetails","1");
                 startActivity(intent);
                 getActivity().finish();
             }
         });
+        ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(historyAdapter);
+        alphaAdapter.setInterpolator(new OvershootInterpolator());
+        alphaAdapter.setDuration(1000);
+        alphaAdapter.setFirstOnly(false);
+        recList.setAdapter(alphaAdapter);
 
         return view;
     }

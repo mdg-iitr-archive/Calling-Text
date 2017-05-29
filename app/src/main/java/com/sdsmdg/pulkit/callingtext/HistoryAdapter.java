@@ -69,11 +69,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ListView
         protected TextView number;
 
 
-        public ListViewHolder(View itemView) {
+        public ListViewHolder(final View itemView) {
             super(itemView);
 
             message=(TextView)itemView.findViewById(R.id.message);
             number=(TextView)itemView.findViewById(R.id.number);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override

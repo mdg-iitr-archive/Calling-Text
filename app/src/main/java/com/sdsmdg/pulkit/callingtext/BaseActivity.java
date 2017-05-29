@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,9 +15,11 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
@@ -25,6 +28,7 @@ import android.widget.Toolbar;
 
 import java.util.HashMap;
 
+import static com.sdsmdg.pulkit.callingtext.R.id.prime_layout;
 import static com.sdsmdg.pulkit.callingtext.R.layout.activity_base;
 
 public class BaseActivity extends AppCompatActivity implements ActionBar.TabListener,GifFragment.onImageSelectionListener
@@ -40,6 +44,8 @@ public class BaseActivity extends AppCompatActivity implements ActionBar.TabList
     public static String mname,mnumber, mmessage;
     public static Boolean calledByapp = false;
     public static HashMap<String,Integer> imageIds;
+
+    public static View view, tab, toolbar;
 
     public static String getMname() {
         return mname;
@@ -70,83 +76,105 @@ public class BaseActivity extends AppCompatActivity implements ActionBar.TabList
         return true;
     }
 
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch(item.getItemId()){
+//            case R.id.search:
+//          under progress
+//        }
+//    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        //  if(!(getIntent().getExtras()!=null && getIntent().getExtras().getString("gotocalldetails").equals("1")))
         setContentView(activity_base);
-        btn_settings = (Button)findViewById(R.id.btn_settings);
+        btn_settings = (Button) findViewById(R.id.btn_settings);
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BaseActivity.this,Settings.class);
+                Intent intent = new Intent(BaseActivity.this, Settings.class);
                 startActivity(intent);
             }
         });
 
-        android.support.v7.widget.Toolbar toolbar= (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
 
 
-        if(getIntent().getExtras()!=null && getIntent().getExtras().getString("gotocalldetails").equals("1")){
-           CallDetailsFragment callDetailsFragment =new CallDetailsFragment();
-            Bundle args= new Bundle();
-            args.putString("call_number",getMnumber());
+        view = findViewById(R.id.pager);
+        tab = findViewById(R.id.tabs);
+        toolbar=findViewById(R.id.my_toolbar);
+//  android.support.v7.widget.Toolbar toolbar= (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
+//        setSupportActionBar(toolbar);
+
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().getString("gotocalldetails").equals("1")) {
+            CallDetailsFragment callDetailsFragment = new CallDetailsFragment();
+            Bundle args = new Bundle();
+            args.putString("call_number", getMnumber());
             args.putString("call_text", getMmessage());
             callDetailsFragment.setArguments(args);
+//            CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.prime_layout);
+//            layout.removeAllViewsInLayout();
+            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            Log.i("pulkonet", "in fragment transation");
+            transaction.replace(R.id.mycontainer, callDetailsFragment);
 
-            android.support.v4.app.FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-
-            transaction.replace(R.id.mycontainer,callDetailsFragment);
+            view.setVisibility(View.GONE);
+            toolbar.setVisibility(View.GONE);
+            tab.setVisibility(View.GONE);
+            //transaction.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             transaction.addToBackStack(null);
             transaction.commit();
         }
-        TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        String mPhoneNumber = tMgr.getLine1Number();
-        Log.e("MY BA NO.","PHONE NO."+mPhoneNumber);
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-        int pg_number = 0;
-        viewPager.setAdapter(mAdapter);
+
+
+            TelephonyManager tMgr = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+            String mPhoneNumber = tMgr.getLine1Number();
+            Log.e("MY BA NO.", "PHONE NO." + mPhoneNumber);
+            viewPager = (ViewPager) findViewById(R.id.pager);
+            actionBar = getActionBar();
+            mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+            int pg_number = 0;
+            viewPager.setAdapter(mAdapter);
 //        if(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "7248187747")!=null){
 //            receiver = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("NUMBER", "7248187747");
 //        }
 
-        if(getIntent().getExtras()!= null){
-            try {
-                pg_number = Integer.parseInt(getIntent().getExtras().getString("pagenumber"));
+            if (getIntent().getExtras() != null) {
+                try {
+                    pg_number = Integer.parseInt(getIntent().getExtras().getString("pagenumber"));
 
-            }catch (NumberFormatException num){
-                Log.i("EXCEpTION",num.toString());
+                } catch (NumberFormatException num) {
+                    Log.i("EXCEpTION", num.toString());
+                }
             }
-        }
-        viewPager.setCurrentItem(pg_number);
+            viewPager.setCurrentItem(pg_number);
 
-        imageIds=new HashMap<>();
-        imageIds.put("1",R.drawable.birthday);
-        imageIds.put("2",R.drawable.confused);
-        imageIds.put("3",R.drawable.funny);
-        imageIds.put("4",R.drawable.embares);
-        imageIds.put("5",R.drawable.angry);
-        imageIds.put("6",R.drawable.machau);
-        imageIds.put("7",R.drawable.sorry);
-        imageIds.put("8",R.drawable.hii);
-        imageIds.put("9",R.drawable.hello);
-        imageIds.put("10",R.drawable.love);
-        imageIds.put("11",R.drawable.compliment);
-        imageIds.put("12",R.drawable.happy);
-        imageIds.put("13",R.drawable.sad);
-        imageIds.put("14",R.drawable.crying);
+            imageIds = new HashMap<>();
+            imageIds.put("1", R.drawable.birthday);
+            imageIds.put("2", R.drawable.confused);
+            imageIds.put("3", R.drawable.funny);
+            imageIds.put("4", R.drawable.embares);
+            imageIds.put("5", R.drawable.angry);
+            imageIds.put("6", R.drawable.machau);
+            imageIds.put("7", R.drawable.sorry);
+            imageIds.put("8", R.drawable.hii);
+            imageIds.put("9", R.drawable.hello);
+            imageIds.put("10", R.drawable.love);
+            imageIds.put("11", R.drawable.compliment);
+            imageIds.put("12", R.drawable.happy);
+            imageIds.put("13", R.drawable.sad);
+            imageIds.put("14", R.drawable.crying);
 
        /* actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);*/
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        startService(new Intent(this, BackgroundService.class));
-    }
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(viewPager);
+            startService(new Intent(this, BackgroundService.class));
+        }
+
 
         private void call(String s) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);

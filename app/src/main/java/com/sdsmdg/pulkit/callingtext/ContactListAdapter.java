@@ -105,7 +105,7 @@ class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ListVie
 
     @Override
     public int getItemCount() {
-        Log.d("itemCount", contactList.size() + "");
+       // Log.d("itemCount", contactList.size() + "");
         return contactList.size();
     }
 
